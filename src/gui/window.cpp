@@ -244,7 +244,7 @@ void Window::SetupGUI()
             {
                 if (ImGui::MenuItem("Cup and Saucer"))
                 {
-                    sceneManager.LoadScene("res/scenes/usd/cupandsaucer.usdz");
+                    sceneManager.LoadScene("/home/lba42/Documents/testRenderers/tracer/res/scenes/cupandsaucer.usdz");
                     camera.Init();
 
                     renderReset = true;
@@ -252,7 +252,7 @@ void Window::SetupGUI()
 
                 if (ImGui::MenuItem("Stormtroopers"))
                 {
-                    sceneManager.LoadScene("res/scenes/usd/stormtroopers.usdc");
+                    sceneManager.LoadScene("/home/lba42/Documents/testRenderers/tracer/res/scenes/stormtroopers.usdc");
                     camera.Init();
 
                     renderReset = true;

@@ -1,20 +1,31 @@
 cmake_minimum_required(VERSION 3.1.0)
 project(tracer)
 
-set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/api/cmake)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+set(CMAKE_MODULE_PATH
+    ${CMAKE_MODULE_PATH}
+    ${CMAKE_SOURCE_DIR}/api/cmake
+)
 
 option(GLFW_BUILD_DOCS OFF)
 option(GLFW_BUILD_EXAMPLES OFF)
 option(GLFW_BUILD_TESTS OFF)
 add_subdirectory(api/glfw)
 
-find_package(USD 19.05 REQUIRED)
+find_package(USD REQUIRED)
 find_package(PythonLibs 2.7 REQUIRED)
+
+set(Boost_NO_BOOST_CMAKE ON)
 find_package(
     Boost REQUIRED
-    COMPONENTS regex system filesystem thread date_time atomic python)
+    COMPONENTS regex system filesystem thread date_time atomic python27)
+
 find_package(embree 3.0 REQUIRED)
 find_package(TBB REQUIRED)
+
+message(STATUS "Embree library:: ${EMBREE_LIBRARY}")
+message(STATUS "USBBBSDSD library:: ${USD_LIBRARY_DIR}")
 
 set(USD_LIBS
     ${USD_LIBRARIES}
@@ -122,6 +133,40 @@ source_group("Scenes" FILES ${PROJECT_SCENES})
 add_definitions(-DGLFW_INCLUDE_NONE
     -DPROJECT_SOURCE_DIR=\"${PROJECT_SOURCE_DIR}\")
 
+link_directories(${USD_LIBRARY_DIR})
+
+set (USD_COMP
+    usdImagingGL
+    usdImaging
+    usdHydra
+    hdx
+    hdSt
+    hd
+    glf
+    garch
+    pxOsd
+    usdRi
+    usdUI
+    usdShade
+    usdGeom
+    usd
+    usdUtils
+    trace
+    pcp
+    sdf
+    plug
+    js
+    ar
+    work
+    tf
+    kind
+    arch
+    vt
+    gf
+    hf
+    cameraUtil
+    usdLux)
+
 add_executable(${PROJECT_NAME} ${API_SOURCES}
     ${PROJECT_SOURCES}
     ${PROJECT_HEADERS}
@@ -135,7 +180,8 @@ target_link_libraries(${PROJECT_NAME}
     ${GLAD_LIBRARIES}
     ${USD_LIBS}
     ${EMBREE_LIBRARY}
-    ${TBB_LIBRARIES})
+    ${TBB_LIBRARIES}
+    ${USD_COMP})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})

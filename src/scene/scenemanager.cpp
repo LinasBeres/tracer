@@ -35,6 +35,11 @@ bool SceneManager::LoadScene(const std::string& scenePath)
     _device = rtcNewDevice("");
     _scene = rtcNewScene(_device);
 
+    if (_stage)
+        std::cerr << "GOT STAGE\n";
+    else
+        std::cerr << "HAVEN'T GOT STAGE\n";
+
     // LoadCamera();
     // LoadMaterials();
     LoadGeometry();
