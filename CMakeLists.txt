@@ -48,30 +48,6 @@ else()
     endif()
 endif()
 
-include_directories(
-    api/embree/include/
-    api/glad/include/
-    api/glfw/include/
-    api/imgui/
-    api/stb/
-    api/tinyexr/
-    src/bsdf/
-    src/camera/
-    src/gui/
-    src/integrator/
-    src/material/
-    src/math/
-    src/object/
-    src/opengl/
-    src/render/
-    src/sampling/
-    src/scene/
-    src/utility/
-    ${USD_INCLUDE_DIR}
-    ${PYTHON_INCLUDE_PATH}
-    ${EMBREE_INCLUDE_DIRS}
-    ${TBB_INCLUDE_DIRS})
-
 file(GLOB API_SOURCES
     api/glad/src/glad.c
     api/imgui/*.cpp)
@@ -167,12 +143,38 @@ set (USD_COMP
     cameraUtil
     usdLux)
 
+
 add_executable(${PROJECT_NAME} ${API_SOURCES}
     ${PROJECT_SOURCES}
     ${PROJECT_HEADERS}
     ${PROJECT_SHADERS}
     ${PROJECT_SCENES}
     ${PROJECT_CONFIGS})
+
+target_include_directories(${PROJECT_NAME} PRIVATE
+    api/embree/include/
+    api/glad/include/
+    api/glfw/include/
+    api/imgui/
+    api/stb/
+    api/tinyexr/
+    src/bsdf/
+    src/camera/
+    src/gui/
+    src/integrator/
+    src/material/
+    src/math/
+    src/object/
+    src/opengl/
+    src/render/
+    src/sampling/
+    src/scene/
+    src/utility/
+    ${USD_INCLUDE_DIR}
+    ${PYTHON_INCLUDE_PATH}
+    ${EMBREE_INCLUDE_DIRS}
+    ${TBB_INCLUDE_DIRS}
+)
 
 target_link_libraries(${PROJECT_NAME}
     glfw

@@ -32,13 +32,12 @@ bool SceneManager::LoadScene(const std::string& scenePath)
     }
 
     _stage = pxr::UsdStage::Open(scenePath);
+
+    if (!_stage)
+        return false;
+
     _device = rtcNewDevice("");
     _scene = rtcNewScene(_device);
-
-    if (_stage)
-        std::cerr << "GOT STAGE\n";
-    else
-        std::cerr << "HAVEN'T GOT STAGE\n";
 
     // LoadCamera();
     // LoadMaterials();

@@ -26,7 +26,7 @@ int Window::RenderWindow()
 
     ImGui_ImplGlfwGL3_Init(window, true);
 
-    sceneManager.LoadScene("res/scenes/cupandsaucer.usdz");
+    sceneManager.LoadScene("/home/lba42/Documents/testRenderers/tracer/res/scenes/cupandsaucer.usdz");
 
     camera._resolution = embree::Vec2fa(renderGlobals.width, renderGlobals.height);
     camera.Init();

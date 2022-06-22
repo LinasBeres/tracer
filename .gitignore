@@ -13,3 +13,4 @@ CMakeLists.txt.user
 
 # For vim
 compile_commands.json
+.cache
