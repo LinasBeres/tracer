@@ -26,7 +26,7 @@ int Window::RenderWindow()
 
     ImGui_ImplGlfwGL3_Init(window, true);
 
-    sceneManager.LoadScene("/home/lba42/Documents/testRenderers/tracer/res/scenes/cupandsaucer.usdz");
+    sceneManager.LoadScene("/home/lba42/Documents/testRenderers/tracer-hold/res/scenes/cupandsaucer.usdz");
 
     camera._resolution = embree::Vec2fa(renderGlobals.width, renderGlobals.height);
     camera.Init();
@@ -244,7 +244,7 @@ void Window::SetupGUI()
             {
                 if (ImGui::MenuItem("Cup and Saucer"))
                 {
-                    sceneManager.LoadScene("/home/lba42/Documents/testRenderers/tracer/res/scenes/cupandsaucer.usdz");
+                    sceneManager.LoadScene("/home/lba42/Documents/testRenderers/tracer-hold/res/scenes/cupandsaucer.usdz");
                     camera.Init();
 
                     renderReset = true;
@@ -252,7 +252,7 @@ void Window::SetupGUI()
 
                 if (ImGui::MenuItem("Stormtroopers"))
                 {
-                    sceneManager.LoadScene("/home/lba42/Documents/testRenderers/tracer/res/scenes/stormtroopers.usdc");
+                    sceneManager.LoadScene("/home/lba42/Documents/testRenderers/tracer-hold/res/scenes/stormtroopers.usdc");
                     camera.Init();
 
                     renderReset = true;
