@@ -92,9 +92,6 @@ add_executable(${PROJECT_NAME}
     ${PROJECT_CONFIGS})
 
 target_include_directories(${PROJECT_NAME} PRIVATE
-    thirdparty/embree/include/
-    thirdparty/glfw/include/
-    thirdparty/tinyexr/
     src/bsdf/
     src/camera/
     src/gui/
@@ -107,14 +104,15 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     src/sampling/
     src/scene/
     src/utility/
-    ${EMBREE_INCLUDE_DIRS}
 )
 
 target_link_libraries(${PROJECT_NAME}
+    embree_common
     glfw
     ${GLFW_LIBRARIES}
     glad
     imgui
+    tinyexr
     ${Boost_LIBRARIES}
     ${EMBREE_LIBRARY}
     ${TBB_LIBRARIES}
