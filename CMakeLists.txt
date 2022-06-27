@@ -20,6 +20,12 @@ set(CMAKE_MODULE_PATH
 include(Options)
 include(CXX)
 
+
+add_subdirectory(thirdparty)
+
+
+# OLD !!!!!!!!!!!!!!!
+
 option(GLFW_BUILD_DOCS OFF)
 option(GLFW_BUILD_EXAMPLES OFF)
 option(GLFW_BUILD_TESTS OFF)
@@ -49,7 +55,6 @@ set(USD_LIBS
     ${Boost_REGEX_LIBRARY})
 
 file(GLOB THIRDPARTY_SOURCES
-    thirdparty/glad/src/glad.c
     thirdparty/imgui/*.cpp)
 
 file(GLOB PROJECT_HEADERS
@@ -152,7 +157,6 @@ add_executable(${PROJECT_NAME} ${THIRDPARTY_SOURCES}
 
 target_include_directories(${PROJECT_NAME} PRIVATE
     thirdparty/embree/include/
-    thirdparty/glad/include/
     thirdparty/glfw/include/
     thirdparty/imgui/
     thirdparty/stb/
@@ -178,7 +182,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 target_link_libraries(${PROJECT_NAME}
     glfw
     ${GLFW_LIBRARIES}
-    ${GLAD_LIBRARIES}
+    glad
     ${USD_LIBS}
     ${EMBREE_LIBRARY}
     ${TBB_LIBRARIES}
