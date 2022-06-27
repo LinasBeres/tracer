@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.0)
 
+option(GLFW_BUILD_DOCS OFF)
+option(GLFW_BUILD_EXAMPLES OFF)
+option(GLFW_BUILD_TESTS OFF)
+
 project(GLFW C)
 
 set(CMAKE_LEGACY_CYGWIN_WIN32 OFF)

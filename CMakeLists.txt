@@ -20,19 +20,11 @@ set(CMAKE_MODULE_PATH
 include(Options)
 include(CXX)
 
-option(GLFW_BUILD_DOCS OFF)
-option(GLFW_BUILD_EXAMPLES OFF)
-option(GLFW_BUILD_TESTS OFF)
-add_subdirectory(thirdparty/glfw)
+include(SetupUSD)
 
 add_subdirectory(thirdparty)
 
-
 # OLD !!!!!!!!!!!!!!!
-
-
-find_package(USD REQUIRED)
-find_package(PythonLibs 2.7 REQUIRED)
 
 set(Boost_NO_BOOST_CMAKE ON)
 find_package(
@@ -42,8 +34,7 @@ find_package(
 find_package(embree 3.0 REQUIRED)
 find_package(TBB REQUIRED)
 
-set(USD_LIBS
-    ${USD_LIBRARIES}
+set(REQ_LIBS
     ${PYTHON_LIBRARIES}
     ${Boost_ATOMIC_LIBRARY}
     ${Boost_CHRONO_LIBRARY}
@@ -109,41 +100,6 @@ source_group("Scenes" FILES ${PROJECT_SCENES})
 
 add_definitions(-DGLFW_INCLUDE_NONE)
 
-link_directories(${USD_LIBRARY_DIR})
-
-set (USD_COMP
-    usdImagingGL
-    usdImaging
-    usdHydra
-    hdx
-    hdSt
-    hd
-    glf
-    garch
-    pxOsd
-    usdRi
-    usdUI
-    usdShade
-    usdGeom
-    usd
-    usdUtils
-    trace
-    pcp
-    sdf
-    plug
-    js
-    ar
-    work
-    tf
-    kind
-    arch
-    vt
-    gf
-    hf
-    cameraUtil
-    usdLux)
-
-
 add_executable(${PROJECT_NAME}
     ${PROJECT_SOURCES}
     ${PROJECT_HEADERS}
@@ -167,7 +123,6 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     src/sampling/
     src/scene/
     src/utility/
-    ${USD_INCLUDE_DIR}
     ${PYTHON_INCLUDE_PATH}
     ${EMBREE_INCLUDE_DIRS}
     ${TBB_INCLUDE_DIRS}
@@ -178,10 +133,10 @@ target_link_libraries(${PROJECT_NAME}
     ${GLFW_LIBRARIES}
     glad
     imgui
-    ${USD_LIBS}
+    ${REQ_LIBS}
     ${EMBREE_LIBRARY}
     ${TBB_LIBRARIES}
-    ${USD_COMP})
+    ${USD_LIBRARIES})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
