@@ -20,30 +20,14 @@ set(CMAKE_MODULE_PATH
 include(Options)
 include(CXX)
 
+include(SetupBoost)
+include(SetupEmbree)
+include(SetupTBB)
 include(SetupUSD)
 
 add_subdirectory(thirdparty)
 
 # OLD !!!!!!!!!!!!!!!
-
-set(Boost_NO_BOOST_CMAKE ON)
-find_package(
-    Boost REQUIRED
-    COMPONENTS regex system filesystem thread date_time atomic python27)
-
-find_package(embree 3.0 REQUIRED)
-find_package(TBB REQUIRED)
-
-set(REQ_LIBS
-    ${PYTHON_LIBRARIES}
-    ${Boost_ATOMIC_LIBRARY}
-    ${Boost_CHRONO_LIBRARY}
-    ${Boost_DATE_TIME_LIBRARY}
-    ${Boost_FILESYSTEM_LIBRARY}
-    ${Boost_PYTHON_LIBRARY}
-    ${Boost_SYSTEM_LIBRARY}
-    ${Boost_THREAD_LIBRARY}
-    ${Boost_REGEX_LIBRARY})
 
 file(GLOB PROJECT_HEADERS
     src/bsdf/*.h
@@ -123,9 +107,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     src/sampling/
     src/scene/
     src/utility/
-    ${PYTHON_INCLUDE_PATH}
     ${EMBREE_INCLUDE_DIRS}
-    ${TBB_INCLUDE_DIRS}
 )
 
 target_link_libraries(${PROJECT_NAME}
@@ -133,10 +115,12 @@ target_link_libraries(${PROJECT_NAME}
     ${GLFW_LIBRARIES}
     glad
     imgui
-    ${REQ_LIBS}
+    ${Boost_LIBRARIES}
     ${EMBREE_LIBRARY}
     ${TBB_LIBRARIES}
-    ${USD_LIBRARIES})
+    ${USD_LIBRARIES}
+)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME}
+)
