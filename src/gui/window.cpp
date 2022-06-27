@@ -17,14 +17,25 @@ int Window::RenderWindow()
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
     window = glfwCreateWindow(renderGlobals.width, renderGlobals.height, "Tracer", nullptr, nullptr);
-    glfwMakeContextCurrent(window);
+    if (!window)
+        return 1;
 
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    glfwSwapInterval(1);
+    glfwMakeContextCurrent(window);
+    glfwSwapInterval(1); // Enable vsync
+
+    // glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     gladLoadGL();
 
-    ImGui_ImplGlfwGL3_Init(window, true);
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& guiIO = ImGui::GetIO(); (void)guiIO;
+
+    ImGui::StyleColorsClassic();
+
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    const char* glsl_version = "#version 330";
+    ImGui_ImplOpenGL3_Init(glsl_version);
 
     sceneManager.LoadScene("/home/lba42/Documents/testRenderers/tracer-hold/res/scenes/cupandsaucer.usdz");
 
@@ -46,13 +57,12 @@ int Window::RenderWindow()
 
         glfwPollEvents();
 
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         //--------------
         // GUI setting & callbacks
         //--------------
         SetupGUI();
-        ImGuiIO guiIO(ImGui::GetIO());
 
         KeyboardCallback(guiIO);
 
@@ -110,6 +120,13 @@ int Window::RenderWindow()
         //----------------
         RenderGUI();
 
+        // ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        // glfwGetFramebufferSize(window, &renderGlobals.width, &renderGlobals.height);
+        // glViewport(0, 0, renderGlobals.width, renderGlobals.height);
+        // glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
         glfwSwapBuffers(window);
     }
 
@@ -133,7 +150,9 @@ void Window::ResetRenderer()
 
 void Window::SetupGUI()
 {
-    ImGui_ImplGlfwGL3_NewFrame();
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
 
     if (profilingState)
         ProfilingWindow(profilingState);
@@ -168,7 +187,7 @@ void Window::SetupGUI()
                 {
                     Buffer outputBuffer;
                     outputBuffer.Init(renderGlobals.width, renderGlobals.height);
-                    
+
                     renderManager.Trace(renderGlobals,
                         sceneManager,
                         camera,
@@ -218,7 +237,7 @@ void Window::SetupGUI()
 
                 ImGui::EndMenu();
             }
-            
+
             ImGui::Separator();
             ImGui::MenuItem("Config", NULL, &renderConfigState);
 
@@ -284,7 +303,9 @@ void Window::RenderGUI()
 
 void Window::StopGUI()
 {
-    ImGui_ImplGlfwGL3_Shutdown();
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
 }
 
 void Window::RenderConfigWindow(bool& guiOpen)

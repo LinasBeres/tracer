@@ -20,16 +20,16 @@ set(CMAKE_MODULE_PATH
 include(Options)
 include(CXX)
 
+option(GLFW_BUILD_DOCS OFF)
+option(GLFW_BUILD_EXAMPLES OFF)
+option(GLFW_BUILD_TESTS OFF)
+add_subdirectory(thirdparty/glfw)
 
 add_subdirectory(thirdparty)
 
 
 # OLD !!!!!!!!!!!!!!!
 
-option(GLFW_BUILD_DOCS OFF)
-option(GLFW_BUILD_EXAMPLES OFF)
-option(GLFW_BUILD_TESTS OFF)
-add_subdirectory(thirdparty/glfw)
 
 find_package(USD REQUIRED)
 find_package(PythonLibs 2.7 REQUIRED)
@@ -53,9 +53,6 @@ set(USD_LIBS
     ${Boost_SYSTEM_LIBRARY}
     ${Boost_THREAD_LIBRARY}
     ${Boost_REGEX_LIBRARY})
-
-file(GLOB THIRDPARTY_SOURCES
-    thirdparty/imgui/*.cpp)
 
 file(GLOB PROJECT_HEADERS
     src/bsdf/*.h
@@ -105,7 +102,6 @@ file(GLOB PROJECT_CONFIGS
     .gitignore
     .gitmodules)
 
-source_group("Thirdparty" FILES ${THIRDPARTY_SOURCES})
 source_group("Headers" FILES ${PROJECT_HEADERS})
 source_group("Sources" FILES ${PROJECT_SOURCES})
 source_group("Shaders" FILES ${PROJECT_SHADERS})
@@ -148,7 +144,7 @@ set (USD_COMP
     usdLux)
 
 
-add_executable(${PROJECT_NAME} ${THIRDPARTY_SOURCES}
+add_executable(${PROJECT_NAME}
     ${PROJECT_SOURCES}
     ${PROJECT_HEADERS}
     ${PROJECT_SHADERS}
@@ -158,8 +154,6 @@ add_executable(${PROJECT_NAME} ${THIRDPARTY_SOURCES}
 target_include_directories(${PROJECT_NAME} PRIVATE
     thirdparty/embree/include/
     thirdparty/glfw/include/
-    thirdparty/imgui/
-    thirdparty/stb/
     thirdparty/tinyexr/
     src/bsdf/
     src/camera/
@@ -183,6 +177,7 @@ target_link_libraries(${PROJECT_NAME}
     glfw
     ${GLFW_LIBRARIES}
     glad
+    imgui
     ${USD_LIBS}
     ${EMBREE_LIBRARY}
     ${TBB_LIBRARIES}

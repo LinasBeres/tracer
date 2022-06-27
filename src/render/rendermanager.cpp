@@ -65,7 +65,7 @@ void RenderManager::RenderToScreenTexture(int width,
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGB, GL_FLOAT, buffer._pixelData.data());
     screenQuadShader.Use();
     glActiveTexture(GL_TEXTURE0);
-    
+
     glBindTexture(GL_TEXTURE_2D, screenTextureID);
 }
 
@@ -88,8 +88,8 @@ void RenderManager::SetupScreenQuad(int width,
     glBindVertexArray(0);
 
     // Screen quad shader and texture.
-    screenQuadShader.Setup("res/shaders/screenQuad.vert",
-        "res/shaders/screenQuad.frag");
+    screenQuadShader.Setup("/home/lba42/Documents/testRenderers/tracer-hold/res/shaders/screenQuad.vert",
+        "/home/lba42/Documents/testRenderers/tracer-hold/res/shaders/screenQuad.frag");
 
     glGenTextures(1, &screenTextureID);
     glActiveTexture(GL_TEXTURE0);
