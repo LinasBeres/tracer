@@ -1,17 +1,29 @@
-cmake_minimum_required(VERSION 3.1.0)
-project(tracer)
+cmake_minimum_required(VERSION 3.12)
 
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+project(tracer
+    VERSION 1.0
+    DESCRIPTION "Renderer using C++, Embree and USD to achieve Path Tracing techniques on the CPU."
+    HOMEPAGE_URL "https://github.com/JoshuaSenouf/tracer"
+    LANGUAGES C CXX
+)
 
+# Adding CMake modules
 set(CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}
-    ${CMAKE_SOURCE_DIR}/api/cmake
+    ${CMAKE_SOURCE_DIR}/cmake/dependencies/external
+    ${CMAKE_SOURCE_DIR}/cmake/dependencies/internal
+    ${CMAKE_SOURCE_DIR}/cmake/modules
+    ${CMAKE_SOURCE_DIR}/cmake/setup
 )
+
+# Project CMake setup
+include(Options)
+include(CXX)
 
 option(GLFW_BUILD_DOCS OFF)
 option(GLFW_BUILD_EXAMPLES OFF)
 option(GLFW_BUILD_TESTS OFF)
-add_subdirectory(api/glfw)
+add_subdirectory(thirdparty/glfw)
 
 find_package(USD REQUIRED)
 find_package(PythonLibs 2.7 REQUIRED)
@@ -23,9 +35,6 @@ find_package(
 
 find_package(embree 3.0 REQUIRED)
 find_package(TBB REQUIRED)
-
-message(STATUS "Embree library:: ${EMBREE_LIBRARY}")
-message(STATUS "USBBBSDSD library:: ${USD_LIBRARY_DIR}")
 
 set(USD_LIBS
     ${USD_LIBRARIES}
@@ -39,18 +48,9 @@ set(USD_LIBS
     ${Boost_THREAD_LIBRARY}
     ${Boost_REGEX_LIBRARY})
 
-if(MSVC)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4 /O2")
-else()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall -Wextra -Wpedantic -std=c++14")
-    if(NOT WIN32)
-        set(GLAD_LIBRARIES dl)
-    endif()
-endif()
-
-file(GLOB API_SOURCES
-    api/glad/src/glad.c
-    api/imgui/*.cpp)
+file(GLOB THIRDPARTY_SOURCES
+    thirdparty/glad/src/glad.c
+    thirdparty/imgui/*.cpp)
 
 file(GLOB PROJECT_HEADERS
     src/bsdf/*.h
@@ -100,14 +100,13 @@ file(GLOB PROJECT_CONFIGS
     .gitignore
     .gitmodules)
 
-source_group("API" FILES ${API_SOURCES})
+source_group("Thirdparty" FILES ${THIRDPARTY_SOURCES})
 source_group("Headers" FILES ${PROJECT_HEADERS})
 source_group("Sources" FILES ${PROJECT_SOURCES})
 source_group("Shaders" FILES ${PROJECT_SHADERS})
 source_group("Scenes" FILES ${PROJECT_SCENES})
 
-add_definitions(-DGLFW_INCLUDE_NONE
-    -DPROJECT_SOURCE_DIR=\"${PROJECT_SOURCE_DIR}\")
+add_definitions(-DGLFW_INCLUDE_NONE)
 
 link_directories(${USD_LIBRARY_DIR})
 
@@ -144,7 +143,7 @@ set (USD_COMP
     usdLux)
 
 
-add_executable(${PROJECT_NAME} ${API_SOURCES}
+add_executable(${PROJECT_NAME} ${THIRDPARTY_SOURCES}
     ${PROJECT_SOURCES}
     ${PROJECT_HEADERS}
     ${PROJECT_SHADERS}
@@ -152,12 +151,12 @@ add_executable(${PROJECT_NAME} ${API_SOURCES}
     ${PROJECT_CONFIGS})
 
 target_include_directories(${PROJECT_NAME} PRIVATE
-    api/embree/include/
-    api/glad/include/
-    api/glfw/include/
-    api/imgui/
-    api/stb/
-    api/tinyexr/
+    thirdparty/embree/include/
+    thirdparty/glad/include/
+    thirdparty/glfw/include/
+    thirdparty/imgui/
+    thirdparty/stb/
+    thirdparty/tinyexr/
     src/bsdf/
     src/camera/
     src/gui/
