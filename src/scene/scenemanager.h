@@ -6,12 +6,12 @@
 #include <mutex>
 #include <unordered_map>
 
-#include "geometry.h"
-#include "material.h"
+#include "../object/geometry.h"
+#include "../material/material.h"
 
-#include "embree_helper.h"
-#include "render_helper.h"
-#include "usd_helper.h"
+#include "../utility/embree_helper.h"
+#include "../utility/render_helper.h"
+#include "../utility/usd_helper.h"
 
 
 struct SceneManager

@@ -3,11 +3,11 @@
 
 #include "glad/glad.h"
 
-#include "geometry.h"
-#include "sampler.h"
+#include "../object/geometry.h"
+#include "../sampling/sampler.h"
 
-#include "embree_helper.h"
-#include "usd_helper.h"
+#include "../utility/embree_helper.h"
+#include "../utility/usd_helper.h"
 
 
 // From Embree 3.x

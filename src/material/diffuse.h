@@ -3,9 +3,6 @@
 
 #include "material.h"
 
-#include "embree_helper.h"
-
-
 struct Diffuse : public Material
 {
     Diffuse();

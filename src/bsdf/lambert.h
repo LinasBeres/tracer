@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "bsdf.h"
+#include "../bsdf/bsdf.h"
 
 
 struct Lambert : public BSDF

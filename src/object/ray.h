@@ -1,11 +1,11 @@
 #ifndef RAY_H
 #define RAY_H
 
-#include "camera.h"
-#include "sampler.h"
+#include "../camera/camera.h"
+#include "../sampling/sampler.h"
 
-#include "embree_helper.h"
-#include "render_helper.h"
+#include "../utility/embree_helper.h"
+#include "../utility/render_helper.h"
 
 
 struct Ray

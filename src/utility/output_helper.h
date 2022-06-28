@@ -3,9 +3,9 @@
 
 #define TINYEXR_IMPLEMENTATION
 
-#include "tinyexr.h"
+#include <tinyexr.h>
 
-#include "buffer.h"
+#include "../object/buffer.h"
 
 #include "color_helper.h"
 

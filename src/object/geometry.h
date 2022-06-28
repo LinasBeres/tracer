@@ -1,8 +1,8 @@
 #ifndef GEOMETRY_H
 #define GEOMETRY_H
 
-#include "embree_helper.h"
-#include "usd_helper.h"
+#include "../utility/embree_helper.h"
+#include "../utility/usd_helper.h"
 
 
 struct Geometry
@@ -24,7 +24,7 @@ struct Geometry
 
     unsigned int _geomID = RTC_INVALID_GEOMETRY_ID;
     unsigned int _geomInstanceID = RTC_INVALID_GEOMETRY_ID;
-    
+
     RTCScene _scene = nullptr;
     RTCGeometry _geom = nullptr;
     RTCGeometry _geomInstance = nullptr;

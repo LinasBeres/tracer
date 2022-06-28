@@ -1,6 +1,6 @@
 #include "udpt.h"
 
-#include "ray.h"
+#include "../object/ray.h"
 
 
 UDPTIntegrator::UDPTIntegrator()

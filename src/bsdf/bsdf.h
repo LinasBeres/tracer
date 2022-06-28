@@ -3,12 +3,12 @@
 
 #include <string>
 
-#include "sampler.h"
+#include "../sampling/sampler.h"
 
-#include "embree_helper.h"
-#include "math_helper.h"
-#include "render_helper.h"
-#include "usd_helper.h"
+#include "../utility/embree_helper.h"
+#include "../utility/math_helper.h"
+#include "../utility/render_helper.h"
+#include "../utility/usd_helper.h"
 
 
 struct BSDF

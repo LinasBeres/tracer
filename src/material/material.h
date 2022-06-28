@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "embree_helper.h"
+#include "../utility/embree_helper.h"
 
 
 struct Material

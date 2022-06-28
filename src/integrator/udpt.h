@@ -4,8 +4,8 @@
 #include "integrator.h"
 
 
-#include "lambert.h"
-#include "orennayar.h"
+#include "../bsdf/lambert.h"
+#include "../bsdf/orennayar.h"
 
 
 struct UDPTIntegrator : public Integrator

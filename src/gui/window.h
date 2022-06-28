@@ -12,13 +12,13 @@
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 
-#include "buffer.h"
-#include "camera.h"
-#include "rendermanager.h"
-#include "scenemanager.h"
+#include "../object/buffer.h"
+#include "../camera/camera.h"
+#include "../render/rendermanager.h"
+#include "../scene/scenemanager.h"
 
-#include "embree_helper.h"
-#include "render_helper.h"
+#include "../utility/embree_helper.h"
+#include "../utility/render_helper.h"
 
 
 class Window

@@ -6,23 +6,23 @@
 
 #include <glad/glad.h>
 
-#include "buffer.h"
-#include "camera.h"
-#include "glshader.h"
-#include "integrator.h"
-#include "ray.h"
-#include "scenemanager.h"
-#include "sampler.h"
+#include "../object/buffer.h"
+#include "../camera/camera.h"
+#include "../opengl/glshader.h"
+#include "../integrator/integrator.h"
+#include "../object/ray.h"
+#include "../scene/scenemanager.h"
+#include "../sampling/sampler.h"
 
-#include "render_helper.h"
-#include "tbb_helper.h"
+#include "../utility/render_helper.h"
+#include "../utility/tbb_helper.h"
 
-#include "udpt.h"
-#include "diffuse.h"
-#include "occlusion.h"
-#include "position.h"
-#include "normal.h"
-#include "debug.h"
+#include "../integrator/udpt.h"
+#include "../integrator/diffuse.h"
+#include "../integrator/occlusion.h"
+#include "../integrator/position.h"
+#include "../integrator/normal.h"
+#include "../integrator/debug.h"
 
 
 struct RenderManager

@@ -3,9 +3,6 @@
 
 #include "material.h"
 
-#include "embree_helper.h"
-
-
 struct Disney : public Material
 {
     Disney();

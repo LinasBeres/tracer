@@ -1,6 +1,6 @@
 #include "window.h"
 
-#include "output_helper.h"
+#include "../utility/output_helper.h"
 
 
 Window::Window()

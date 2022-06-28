@@ -1,6 +1,6 @@
 #include "sampler.h"
-#include <iterator>
 
+#include <iterator>
 
 Sampler::Sampler():
     floatUniformDistribution(0.0f, 1.0f),

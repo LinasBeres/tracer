@@ -1,6 +1,6 @@
 #include "normal.h"
 
-#include "render_helper.h"
+#include "../utility/render_helper.h"
 
 
 NormalIntegrator::NormalIntegrator()

@@ -1,8 +1,9 @@
 #include "scenemanager.h"
 
-#include "trianglemesh.h"
-#include "quadmesh.h"
-#include "tbb_helper.h"
+#include "../object/trianglemesh.h"
+#include "../object/quadmesh.h"
+
+#include "../utility/tbb_helper.h"
 
 
 SceneManager::SceneManager()

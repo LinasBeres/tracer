@@ -1,9 +1,9 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "camera_helper.h"
-#include "embree_helper.h"
-#include "math_helper.h"
+#include "../utility/camera_helper.h"
+#include "../utility/embree_helper.h"
+#include "../utility/math_helper.h"
 
 
 struct Camera
