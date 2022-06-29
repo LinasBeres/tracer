@@ -20,13 +20,16 @@ set(CMAKE_MODULE_PATH
 include(Options)
 include(CXX)
 
+# Include 3rd Party External
 include(SetupBoost)
 include(SetupEmbree)
 include(SetupTBB)
 include(SetupUSD)
 
+# Include 3rd Party Internal
 add_subdirectory(thirdparty)
 
+# Setup Project Resources
 file(GLOB PROJECT_SHADERS
     res/shaders/*.frag
     res/shaders/*.glsl
@@ -48,5 +51,5 @@ file(GLOB PROJECT_CONFIGS
     .gitmodules
 )
 
-# include_directories("src")
+# Include Source
 add_subdirectory("src")
