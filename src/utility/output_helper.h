@@ -10,9 +10,7 @@
 #include "color_helper.h"
 
 
-inline void toPPM(int width,
-    int height,
-    const Buffer& buffer)
+inline void toPPM(unsigned int width, unsigned int height, const Buffer& buffer)
 {
     FILE *ppmFile(fopen("tracer_render.ppm", "w"));
     fprintf(ppmFile, "P3\n%d %d\n%d\n", width, height, 255);
@@ -29,9 +27,7 @@ inline void toPPM(int width,
 }
 
 // Based on TinyEXR way of saving a scanline EXR file
-inline void toEXR(int width,
-    int height,
-    const Buffer& buffer)
+inline void toEXR(unsigned int width, unsigned int height, const Buffer& buffer)
 {
     EXRHeader exrHeader;
     EXRImage exrImage;
@@ -77,7 +73,7 @@ inline void toEXR(int width,
     exrHeader.pixel_types = (int *)malloc(sizeof(int) * exrHeader.num_channels);
     exrHeader.requested_pixel_types = (int *)malloc(sizeof(int) * exrHeader.num_channels);
 
-    for (unsigned int channelIdx = 0; channelIdx < exrHeader.num_channels; ++channelIdx)
+    for (unsigned int channelIdx = 0; channelIdx < static_cast<unsigned int>(exrHeader.num_channels); ++channelIdx)
     {
         exrHeader.pixel_types[channelIdx] = TINYEXR_PIXELTYPE_FLOAT; // Pixel type we are feeding the EXR
         exrHeader.requested_pixel_types[channelIdx] = TINYEXR_PIXELTYPE_HALF; // Pixel type we want to use as output in the EXR

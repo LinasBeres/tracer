@@ -10,10 +10,10 @@ embree::Vec3f OrenNayar::Evaluate(PixelSample& pixelSample,
     ShadingPoint& shadingPoint,
     BSDFSample& bsdfSample)
 {
-    float roughnessSqrt(_roughness * _roughness);
+    // float roughnessSqrt(_roughness * _roughness);
     // We setup Oren-Nayar's specific terms.
-	float A = 1 - 0.5f * (roughnessSqrt / (roughnessSqrt + 0.57f));
-    float B = 0.45f * (roughnessSqrt / (roughnessSqrt + 0.09f));
+    // float A = 1 - 0.5f * (roughnessSqrt / (roughnessSqrt + 0.57f));
+    // float B = 0.45f * (roughnessSqrt / (roughnessSqrt + 0.09f));
 
     // TODO
 
