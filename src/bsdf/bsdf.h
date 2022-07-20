@@ -11,21 +11,24 @@
 #include "../utility/usd_helper.h"
 
 
-struct BSDF
+class BSDF
 {
-    BSDF();
+	public:
+		BSDF() = default;
 
-    virtual embree::Vec3f Evaluate(PixelSample& pixelSample,
-        ShadingPoint& shadingPoint,
-        BSDFSample& bsdfSample) = 0;
-    virtual embree::Vec3fa Sample(PixelSample& pixelSample,
-        ShadingPoint& shadingPoint,
-        BSDFSample& bsdfSample) = 0;
-    virtual float Pdf(PixelSample& pixelSample,
-        ShadingPoint& shadingPoint,
-        BSDFSample& bsdfSample) = 0;
+		virtual embree::Vec3f Evaluate(PixelSample& pixelSample,
+				ShadingPoint& shadingPoint,
+				BSDFSample& bsdfSample) = 0;
+		virtual embree::Vec3fa Sample(PixelSample& pixelSample,
+				ShadingPoint& shadingPoint,
+				BSDFSample& bsdfSample) = 0;
+		virtual float Pdf(PixelSample& pixelSample,
+				ShadingPoint& shadingPoint,
+				BSDFSample& bsdfSample) = 0;
 
-    std::string _name;
+	protected:
+		std::string _name;
+	private:
 };
 
 #endif // BSDF_H

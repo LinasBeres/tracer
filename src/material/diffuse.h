@@ -3,13 +3,15 @@
 
 #include "material.h"
 
-struct Diffuse : public Material
+class Diffuse final : public Material
 {
-    Diffuse();
+	public:
+		Diffuse();
 
-    virtual bool Evaluate() override;
-    virtual bool Sample() override;
-    virtual bool Pdf() override;
+		virtual bool Evaluate() override;
+		virtual bool Sample() override;
+		virtual bool Pdf() override;
+	private:
 };
 
 #endif // DIFFUSE_H

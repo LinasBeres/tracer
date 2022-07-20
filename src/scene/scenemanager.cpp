@@ -94,7 +94,7 @@ bool SceneManager::LoadMeshGeometry()
             triangleMesh->Create(_device, _scene);
 
             _sceneMutex.lock();
-            _sceneGeom[triangleMesh.get()->_geomInstanceID] = triangleMesh;
+            _sceneGeom[triangleMesh.get()->GetGeomInstanceID()] = triangleMesh;
             _sceneMutex.unlock();
         }
         else if (isQuadMesh)
@@ -106,7 +106,7 @@ bool SceneManager::LoadMeshGeometry()
             quadMesh->Create(_device, _scene);
 
             _sceneMutex.lock();
-            _sceneGeom[quadMesh.get()->_geomInstanceID] = quadMesh;
+            _sceneGeom[quadMesh.get()->GetGeomInstanceID()] = quadMesh;
             _sceneMutex.unlock();
         }
         else if (needTriangulate)
@@ -120,7 +120,7 @@ bool SceneManager::LoadMeshGeometry()
             //     indices,
             //     meshHoleIndices,
             //     meshOrientation));
-            
+
             // TODO
         }
         else

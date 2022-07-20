@@ -11,18 +11,21 @@
 #include "../utility/render_helper.h"
 
 
-struct Integrator
+class Integrator
 {
-    Integrator();
+	public:
+		Integrator();
 
-    virtual embree::Vec3f GetPixelColor(Ray& ray,
-        PixelSample& pixelSample,
-        SceneManager &sceneManager,
-        const RenderGlobals& renderGlobals) = 0;
-    virtual ShadingPoint SetupShadingPoint(SceneManager &sceneManager,
-        const Ray& ray);
+		virtual embree::Vec3f GetPixelColor(Ray& ray,
+				PixelSample& pixelSample,
+				SceneManager &sceneManager,
+				const RenderGlobals& renderGlobals) = 0;
+		virtual ShadingPoint SetupShadingPoint(SceneManager &sceneManager,
+				const Ray& ray);
 
-    std::string _handle;
+	protected:
+		std::string _handle;
+	private:
 };
 
 #endif // INTEGRATOR_H

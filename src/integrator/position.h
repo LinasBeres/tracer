@@ -4,14 +4,16 @@
 #include "integrator.h"
 
 
-struct PositionIntegrator : public Integrator
+class PositionIntegrator final : public Integrator
 {
-    PositionIntegrator();
+	public:
+		PositionIntegrator();
 
-    virtual embree::Vec3f GetPixelColor(Ray& ray,
-        PixelSample& pixelSample,
-        SceneManager &sceneManager,
-        const RenderGlobals& renderGlobals) override;
+		virtual embree::Vec3f GetPixelColor(Ray& ray,
+				PixelSample& pixelSample,
+				SceneManager &sceneManager,
+				const RenderGlobals& renderGlobals) override;
+	private:
 };
 
 #endif // POSITION_H

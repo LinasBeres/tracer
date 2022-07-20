@@ -4,14 +4,16 @@
 #include "integrator.h"
 
 
-struct DiffuseIntegrator : public Integrator
+class DiffuseIntegrator final : public Integrator
 {
-    DiffuseIntegrator();
+	public:
+		DiffuseIntegrator();
 
-    virtual embree::Vec3f GetPixelColor(Ray& ray,
-        PixelSample& pixelSample,
-        SceneManager &sceneManager,
-        const RenderGlobals& renderGlobals) override;
+		virtual embree::Vec3f GetPixelColor(Ray& ray,
+				PixelSample& pixelSample,
+				SceneManager &sceneManager,
+				const RenderGlobals& renderGlobals) override;
+	private:
 };
 
 #endif // DIFFUSE_H

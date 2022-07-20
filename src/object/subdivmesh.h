@@ -4,9 +4,11 @@
 #include "geometry.h"
 
 
-struct SubdivMesh : public Geometry
+class SubdivMesh final : public Geometry
 {
-    SubdivMesh();
+	public:
+		SubdivMesh();
+	private:
 };
 
 #endif // SUBDIVMESH_H

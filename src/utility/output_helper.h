@@ -15,12 +15,13 @@ inline void toPPM(unsigned int width, unsigned int height, const Buffer& buffer)
     FILE *ppmFile(fopen("tracer_render.ppm", "w"));
     fprintf(ppmFile, "P3\n%d %d\n%d\n", width, height, 255);
 
+		const std::vector<embree::Vec3f>& pixelData = buffer.GetPixelData();
     for (unsigned int pixelIdx = 0; pixelIdx < (width * height); ++pixelIdx)
     {
         // A lot faster than using std::ofstream or std::ostream_iterator/std::copy, actually.
-        fprintf(ppmFile, "%d %d %d ", ToRGB(ToSRGB(buffer._pixelData[pixelIdx].x)),
-            ToRGB(ToSRGB(buffer._pixelData[pixelIdx].y)),
-            ToRGB(ToSRGB(buffer._pixelData[pixelIdx].z)));
+        fprintf(ppmFile, "%d %d %d ", ToRGB(ToSRGB(pixelData[pixelIdx].x)),
+            ToRGB(ToSRGB(pixelData[pixelIdx].y)),
+            ToRGB(ToSRGB(pixelData[pixelIdx].z)));
     }
 
     fclose(ppmFile);
@@ -41,11 +42,12 @@ inline void toEXR(unsigned int width, unsigned int height, const Buffer& buffer)
     channels[1].resize(width * height); // G channel
     channels[2].resize(width * height); // B channel
 
+		const std::vector<embree::Vec3f>& pixelData = buffer.GetPixelData();
     for (unsigned int pixelIdx = 0; pixelIdx < (width * height); ++pixelIdx)
     {
-        channels[0][pixelIdx] = buffer._pixelData[pixelIdx].x;
-        channels[1][pixelIdx] = buffer._pixelData[pixelIdx].y;
-        channels[2][pixelIdx] = buffer._pixelData[pixelIdx].z;
+        channels[0][pixelIdx] = pixelData[pixelIdx].x;
+        channels[1][pixelIdx] = pixelData[pixelIdx].y;
+        channels[2][pixelIdx] = pixelData[pixelIdx].z;
     }
 
     // We are swapping the channel order to BGR as many EXR file viewers are expecting this specific order,

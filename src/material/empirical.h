@@ -4,13 +4,15 @@
 #include "material.h"
 
 
-struct Empirical : public Material
+class Empirical final : public Material
 {
-    Empirical();
+	public:
+		Empirical();
 
-    virtual bool Evaluate() override;
-    virtual bool Sample() override;
-    virtual bool Pdf() override;
+		virtual bool Evaluate() override;
+		virtual bool Sample() override;
+		virtual bool Pdf() override;
+	private:
 };
 
 #endif // EMPIRICAL_H

@@ -4,9 +4,11 @@
 #include "geometry.h"
 
 
-struct Curve : public Geometry
+class Curve final : public Geometry
 {
-    Curve();
+	public:
+		Curve();
+	private:
 };
 
 #endif // CURVE_H

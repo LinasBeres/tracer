@@ -6,21 +6,23 @@
 #include "bsdf.h"
 
 
-struct OrenNayar : public BSDF
+class OrenNayar final : public BSDF
 {
-    OrenNayar();
+	public:
+		OrenNayar();
 
-    virtual embree::Vec3f Evaluate(PixelSample& pixelSample,
-        ShadingPoint& shadingPoint,
-        BSDFSample& bsdfSample) override;
-    virtual embree::Vec3fa Sample(PixelSample& pixelSample,
-        ShadingPoint& shadingPoint,
-        BSDFSample& bsdfSample) override;
-    virtual float Pdf(PixelSample& pixelSample,
-        ShadingPoint& shadingPoint,
-        BSDFSample& bsdfSample) override;
+		virtual embree::Vec3f Evaluate(PixelSample& pixelSample,
+				ShadingPoint& shadingPoint,
+				BSDFSample& bsdfSample) override;
+		virtual embree::Vec3fa Sample(PixelSample& pixelSample,
+				ShadingPoint& shadingPoint,
+				BSDFSample& bsdfSample) override;
+		virtual float Pdf(PixelSample& pixelSample,
+				ShadingPoint& shadingPoint,
+				BSDFSample& bsdfSample) override;
 
-    float _roughness;
+	private:
+		float _roughness;
 };
 
 #endif // ORENNAYAR_H

@@ -6,11 +6,13 @@
 
 struct Default : public Material
 {
-    Default();
+	public:
+		Default();
 
-    virtual bool Evaluate() override;
-    virtual bool Sample() override;
-    virtual bool Pdf() override;
+		virtual bool Evaluate() override;
+		virtual bool Sample() override;
+		virtual bool Pdf() override;
+	private:
 };
 
 #endif // DEFAULT_H

@@ -4,14 +4,16 @@
 #include "integrator.h"
 
 
-struct OcclusionIntegrator : public Integrator
+class OcclusionIntegrator final : public Integrator
 {
-    OcclusionIntegrator();
+	public:
+		OcclusionIntegrator();
 
-    virtual embree::Vec3f GetPixelColor(Ray& ray,
-        PixelSample& pixelSample,
-        SceneManager &sceneManager,
-        const RenderGlobals& renderGlobals) override;
+		virtual embree::Vec3f GetPixelColor(Ray& ray,
+				PixelSample& pixelSample,
+				SceneManager &sceneManager,
+				const RenderGlobals& renderGlobals) override;
+	private:
 };
 
 #endif // OCCLUSION_H

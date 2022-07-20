@@ -6,15 +6,17 @@
 #include "../utility/embree_helper.h"
 
 
-struct Material
+class Material
 {
-    Material();
+	public:
+		Material() = default;
 
-    virtual bool Evaluate() = 0;
-    virtual bool Sample() = 0;
-    virtual bool Pdf() = 0;
+		virtual bool Evaluate() = 0;
+		virtual bool Sample() = 0;
+		virtual bool Pdf() = 0;
 
-    std::string _name;
+	protected:
+		std::string _name;
 };
 
 #endif // MATERIAL_H

@@ -4,14 +4,16 @@
 #include "integrator.h"
 
 
-struct NormalIntegrator : public Integrator
+class NormalIntegrator final : public Integrator
 {
-    NormalIntegrator();
+	public:
+		NormalIntegrator();
 
-    virtual embree::Vec3f GetPixelColor(Ray& ray,
-        PixelSample& pixelSample,
-        SceneManager &sceneManager,
-        const RenderGlobals& renderGlobals) override;
+		virtual embree::Vec3f GetPixelColor(Ray& ray,
+				PixelSample& pixelSample,
+				SceneManager &sceneManager,
+				const RenderGlobals& renderGlobals) override;
+	private:
 };
 
 #endif // NORMAL_H

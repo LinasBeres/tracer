@@ -23,41 +23,42 @@
 
 class Window
 {
-    public:
-        Window();
+	public:
+		Window() = default;
 
-        int RenderWindow();
-        void ResetRenderer();
-        void SetupGUI();
-        void RenderGUI();
-        void StopGUI();
-        void RenderConfigWindow(bool &guiOpen);
-        void ProfilingWindow(bool& guiOpen);
-        void AboutWindow(bool &guiOpen);
-        void KeyboardCallback(ImGuiIO &guiIO);
-        void MouseCallback(ImGuiIO &guiIO,
-            embree::Vec2fa mousePos);
+		int RenderWindow();
+		void ResetRenderer();
+		void SetupGUI();
+		void RenderGUI();
+		void StopGUI();
+		void RenderConfigWindow(bool &guiOpen);
+		void ProfilingWindow(bool& guiOpen);
+		void AboutWindow(bool &guiOpen);
+		void KeyboardCallback(ImGuiIO &guiIO);
+		void MouseCallback(ImGuiIO &guiIO,
+				embree::Vec2fa mousePos);
 
-    private:
-        bool firstMouse = true;
-        bool renderReset = false;
-        bool renderConfigState = false;
-        bool profilingState = true;
-        bool aboutState = false;
-        bool pauseState = false;
-        bool swapState = false;
-        int iterations = 0;
-        float deltaTime = 0.0f;
-        float lastFrame = 0.0f;
-        embree::Vec2fa prevMousePos = embree::Vec2fa(renderGlobals.width / 2.0f, renderGlobals.height / 2.0f);
+	private:
+		bool firstMouse = true;
+		bool renderReset = false;
+		bool renderConfigState = false;
+		bool profilingState = true;
+		bool aboutState = false;
+		bool pauseState = false;
+		bool swapState = false;
+		int iterations = 0;
+		float deltaTime = 0.0f;
+		float lastFrame = 0.0f;
 
-        Buffer frontBuffer;
-        Buffer backBuffer;
-        Camera camera;
-        GLFWwindow* window;
-        SceneManager sceneManager;
-        RenderManager renderManager;
-        RenderGlobals renderGlobals;
+		Buffer frontBuffer;
+		Buffer backBuffer;
+		Camera camera;
+		GLFWwindow* window;
+		SceneManager sceneManager;
+		RenderManager renderManager;
+		RenderGlobals renderGlobals;
+
+		embree::Vec2fa prevMousePos = embree::Vec2fa(renderGlobals.width / 2.0f, renderGlobals.height / 2.0f);
 };
 
 

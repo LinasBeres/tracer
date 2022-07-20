@@ -8,17 +8,19 @@
 #include "../bsdf/orennayar.h"
 
 
-struct UDPTIntegrator : public Integrator
+class UDPTIntegrator final : public Integrator
 {
-    UDPTIntegrator();
+	public:
+		UDPTIntegrator();
 
-    virtual embree::Vec3f GetPixelColor(Ray& ray,
-        PixelSample& pixelSample,
-        SceneManager &sceneManager,
-        const RenderGlobals& renderGlobals) override;
+		virtual embree::Vec3f GetPixelColor(Ray& ray,
+				PixelSample& pixelSample,
+				SceneManager &sceneManager,
+				const RenderGlobals& renderGlobals) override;
 
-    // TODO: To remove once we have a proper material system.
-    Lambert diffuseMat;
+		// TODO: To remove once we have a proper material system.
+		Lambert diffuseMat;
+	private:
 };
 
 #endif // UPDT_H

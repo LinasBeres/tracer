@@ -3,15 +3,15 @@
 
 OcclusionIntegrator::OcclusionIntegrator()
 {
-    _handle = "Occlusion";
+	_handle = "Occlusion";
 }
 
 embree::Vec3f OcclusionIntegrator::GetPixelColor(Ray& ray,
-    PixelSample& pixelSample,
-    SceneManager &sceneManager,
-    const RenderGlobals& renderGlobals)
+		PixelSample& pixelSample,
+		SceneManager &sceneManager,
+		const RenderGlobals& renderGlobals)
 {
-    // TODO
+	// TODO
 
-    return embree::Vec3f(1.0f);
+	return embree::Vec3f(1.0f);
 }

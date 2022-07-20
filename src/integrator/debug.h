@@ -4,14 +4,16 @@
 #include "integrator.h"
 
 
-struct DebugIntegrator : public Integrator
+class DebugIntegrator final : public Integrator
 {
-    DebugIntegrator();
+	public:
+		DebugIntegrator();
 
-    virtual embree::Vec3f GetPixelColor(Ray& ray,
-        PixelSample& pixelSample,
-        SceneManager &sceneManager,
-        const RenderGlobals& renderGlobals) override;
+		virtual embree::Vec3f GetPixelColor(Ray& ray,
+				PixelSample& pixelSample,
+				SceneManager &sceneManager,
+				const RenderGlobals& renderGlobals) override;
+	private:
 };
 
 #endif // DEBUG_H
