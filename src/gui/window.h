@@ -12,6 +12,8 @@
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 
+#include "../share/config.h"
+
 #include "../object/buffer.h"
 #include "../camera/camera.h"
 #include "../render/rendermanager.h"
@@ -20,6 +22,7 @@
 #include "../utility/embree_helper.h"
 #include "../utility/render_helper.h"
 
+SPINDULYS_NAMESPACE_OPEN_SCOPE
 
 class Window
 {
@@ -61,5 +64,6 @@ class Window
 		embree::Vec2fa prevMousePos = embree::Vec2fa(renderGlobals.width / 2.0f, renderGlobals.height / 2.0f);
 };
 
+SPINDULYS_NAMESPACE_CLOSE_SCOPE
 
 #endif // WINDOW_H

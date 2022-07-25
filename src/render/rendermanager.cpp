@@ -80,8 +80,8 @@ void RenderManager::SetupScreenQuad(int width,
 	glBindVertexArray(0);
 
 	// Screen quad shader and texture.
-	screenQuadShader.Setup("/home/lba42/Documents/testRenderers/tracer-hold/res/shaders/screenQuad.vert",
-			"/home/lba42/Documents/testRenderers/tracer-hold/res/shaders/screenQuad.frag");
+	screenQuadShader.Setup("/home/lba42/Documents/testRenderers/spindulys/res/shaders/screenQuad.vert",
+			"/home/lba42/Documents/testRenderers/spindulys/res/shaders/screenQuad.frag");
 
 	glGenTextures(1, &screenTextureID);
 	glActiveTexture(GL_TEXTURE0);

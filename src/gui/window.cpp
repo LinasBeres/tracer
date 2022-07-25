@@ -2,6 +2,7 @@
 
 #include "../utility/output_helper.h"
 
+SPINDULYS_NAMESPACE_OPEN_SCOPE
 
 int Window::RenderWindow()
 {
@@ -12,7 +13,7 @@ int Window::RenderWindow()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	window = glfwCreateWindow(renderGlobals.width, renderGlobals.height, "Tracer", nullptr, nullptr);
+	window = glfwCreateWindow(renderGlobals.width, renderGlobals.height, "Spindulys", nullptr, nullptr);
 	if (!window)
 		return 1;
 
@@ -33,7 +34,7 @@ int Window::RenderWindow()
 	const char* glsl_version = "#version 330";
 	ImGui_ImplOpenGL3_Init(glsl_version);
 
-	sceneManager.LoadScene("/home/lba42/Documents/testRenderers/tracer-hold/res/scenes/cupandsaucer.usdz");
+	sceneManager.LoadScene("/home/lba42/Documents/testRenderers/spindulys/res/scenes/cupandsaucer.usdz");
 
 	camera._resolution = embree::Vec2fa(renderGlobals.width, renderGlobals.height);
 	camera.Init();
@@ -259,7 +260,7 @@ void Window::SetupGUI()
 			{
 				if (ImGui::MenuItem("Cup and Saucer"))
 				{
-					sceneManager.LoadScene("/home/lba42/Documents/testRenderers/tracer-hold/res/scenes/cupandsaucer.usdz");
+					sceneManager.LoadScene("/home/lba42/Documents/testRenderers/spindulys/res/scenes/cupandsaucer.usdz");
 					camera.Init();
 
 					renderReset = true;
@@ -267,7 +268,7 @@ void Window::SetupGUI()
 
 				if (ImGui::MenuItem("Stormtroopers"))
 				{
-					sceneManager.LoadScene("/home/lba42/Documents/testRenderers/tracer-hold/res/scenes/stormtroopers.usdc");
+					sceneManager.LoadScene("/home/lba42/Documents/testRenderers/spindulys/res/scenes/stormtroopers.usdc");
 					camera.Init();
 
 					renderReset = true;
@@ -352,7 +353,7 @@ void Window::AboutWindow(bool& guiOpen)
 {
 	ImGui::Begin("About", &guiOpen);
 
-	ImGui::Text("Tracer by Joshua Senouf\n\nEmail: joshua.senouf@gmail.com\nTwitter: @JoshuaSenouf");
+	ImGui::Text("Spindulys by Linas Beresna\n\nEmail: linas_beresna@sfu.ca");
 
 	ImGui::End();
 }
@@ -441,3 +442,5 @@ void Window::MouseCallback(ImGuiIO& guiIO,
 		}
 	}
 }
+
+SPINDULYS_NAMESPACE_CLOSE_SCOPE

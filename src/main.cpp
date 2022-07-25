@@ -1,14 +1,13 @@
-// Tracer by Joshua Senouf - 2017-2019
+// Spindulys by Linas Beresna
 
 #define STB_IMAGE_IMPLEMENTATION
 
 #include "./gui/window.h"
 
-
 int main(int argc, char** argv)
 {
-    Window mainWindow;
-    mainWindow.RenderWindow();
+	spindulys::Window mainWindow;
+	mainWindow.RenderWindow();
 
-    return 0;
+	return 0;
 }

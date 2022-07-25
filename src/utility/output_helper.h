@@ -12,7 +12,7 @@
 
 inline void toPPM(unsigned int width, unsigned int height, const Buffer& buffer)
 {
-    FILE *ppmFile(fopen("tracer_render.ppm", "w"));
+    FILE *ppmFile(fopen("spindulys_render.ppm", "w"));
     fprintf(ppmFile, "P3\n%d %d\n%d\n", width, height, 255);
 
 		const std::vector<embree::Vec3f>& pixelData = buffer.GetPixelData();
@@ -82,7 +82,7 @@ inline void toEXR(unsigned int width, unsigned int height, const Buffer& buffer)
     }
 
     const char* exrError;
-    int exrResult(SaveEXRImageToFile(&exrImage, &exrHeader, "tracer_render.exr", &exrError));
+    int exrResult(SaveEXRImageToFile(&exrImage, &exrHeader, "spindulys_render.exr", &exrError));
 
     if (exrResult != TINYEXR_SUCCESS)
     {

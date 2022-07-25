@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.12)
 
-project(tracer
+project(spindulys
     VERSION 1.0
     DESCRIPTION "Renderer using C++, Embree and USD to achieve Path Tracing techniques on the CPU."
-    HOMEPAGE_URL "https://github.com/JoshuaSenouf/tracer"
+		HOMEPAGE_URL "https://github.com/LinasBeres/spindulys"
     LANGUAGES C CXX
 )
 
