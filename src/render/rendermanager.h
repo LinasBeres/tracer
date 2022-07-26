@@ -6,8 +6,10 @@
 
 #include <glad/glad.h>
 
+#include "../share/config.h"
+
 #include "../object/buffer.h"
-#include "../camera/camera.h"
+#include "../frontend/camera/camera.h"
 #include "../opengl/glshader.h"
 #include "../integrator/integrator.h"
 #include "../object/ray.h"
@@ -24,6 +26,7 @@
 #include "../integrator/normal.h"
 #include "../integrator/debug.h"
 
+SPINDULYS_NAMESPACE_OPEN_SCOPE
 
 struct RenderManager
 {
@@ -59,5 +62,7 @@ struct RenderManager
 			std::make_shared<DebugIntegrator>()
 	};
 };
+
+SPINDULYS_NAMESPACE_CLOSE_SCOPE
 
 #endif // RENDERMANAGER_H

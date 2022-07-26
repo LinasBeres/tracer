@@ -1,7 +1,9 @@
 #ifndef RAY_H
 #define RAY_H
 
-#include "../camera/camera.h"
+#include "../share/config.h"
+
+#include "../frontend/camera/camera.h"
 #include "../sampling/sampler.h"
 
 #include "../utility/embree_helper.h"
@@ -44,7 +46,7 @@ struct Ray
     {
     }
 
-    __forceinline Ray(const Camera& camera,
+    __forceinline Ray(const spindulys::Camera& camera,
         const PixelSample& pixelSample,
         float tnear = 0.0f,
         float tfar = std::numeric_limits<float>::infinity(),
@@ -59,33 +61,33 @@ struct Ray
         geomID(geomID),
         instID(instID)
     {
-        embree::Vec3fa axisX(embree::normalize(embree::cross(camera._front, camera._up)));
-        embree::Vec3fa axisY(embree::normalize(embree::cross(axisX, camera._front)));
-        embree::Vec3fa forward(camera._position + camera._front);
-        embree::Vec3fa vectorX(axisX * std::tan(camera._fov.x * 0.5f * (M_PI / 180)));
-        embree::Vec3fa vectorY(axisY * std::tan(camera._fov.y * -0.5f * (M_PI / 180)));
+        embree::Vec3fa axisX(embree::normalize(embree::cross(camera.GetFront(), camera.GetUp())));
+        embree::Vec3fa axisY(embree::normalize(embree::cross(axisX, camera.GetFront())));
+        embree::Vec3fa forward(camera.GetPosition() + camera.GetFront());
+        embree::Vec3fa vectorX(axisX * std::tan(camera.GetFov().x * 0.5f * (M_PI / 180)));
+        embree::Vec3fa vectorY(axisY * std::tan(camera.GetFov().y * -0.5f * (M_PI / 180)));
 
-        float pointX((((camera._jitter ? pixelSample.sampler.Uniform1D() : 0.0f) - 0.5f) + pixelSample.pixelX)
-            / (camera._resolution.x - 1.0f));
-        float pointY((((camera._jitter ? pixelSample.sampler.Uniform1D() : 0.0f) - 0.5f) + pixelSample.pixelY)
-            / (camera._resolution.y - 1.0f));
+        float pointX((((camera.GetJitter() ? pixelSample.sampler.Uniform1D() : 0.0f) - 0.5f) + pixelSample.pixelX)
+            / (camera.GetResolution().x - 1.0f));
+        float pointY((((camera.GetJitter() ? pixelSample.sampler.Uniform1D() : 0.0f) - 0.5f) + pixelSample.pixelY)
+            / (camera.GetResolution().y - 1.0f));
 
-        embree::Vec3fa pointOnPlane(camera._position
+        embree::Vec3fa pointOnPlane(camera.GetPosition()
             + ((forward
             + (vectorX * ((2.0f * pointX) - 1.0f))
             + (vectorY * ((2.0f * pointY) - 1.0f))
-            - camera._position)
-            * camera._focalDistance));
+            - camera.GetPosition())
+            * camera.GetFocalDistance()));
 
-        embree::Vec3fa aperturePoint(camera._position);
-        if (camera._apertureRadius > 0.0f)
+        embree::Vec3fa aperturePoint(camera.GetPosition());
+        if (camera.GetAperatureRadius() > 0.0f)
         {
             float randomAngle(2.0f * M_PI * pixelSample.sampler.Uniform1D());
-            float randomRadius(camera._apertureRadius * embree::sqrt(pixelSample.sampler.Uniform1D()));
+            float randomRadius(camera.GetAperatureRadius() * embree::sqrt(pixelSample.sampler.Uniform1D()));
             float apertureX(embree::cos(randomAngle) * randomRadius);
             float apertureY(embree::sin(randomAngle) * randomRadius);
 
-            aperturePoint = camera._position + (axisX * apertureX) + (axisY * apertureY);
+            aperturePoint = camera.GetPosition() + (axisX * apertureX) + (axisY * apertureY);
         }
 
         origin = embree::Vec3fa(aperturePoint, tnear);

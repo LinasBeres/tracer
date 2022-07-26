@@ -1,5 +1,6 @@
 #include "camera.h"
 
+SPINDULYS_NAMESPACE_OPEN_SCOPE
 
 Camera::Camera()
 {
@@ -48,19 +49,19 @@ void Camera::KeyboardCallback(CAMERA_MOVEMENTS direction,
 {
     float velocity(_speed * deltaTime);
 
-    if (direction == FORWARD)
+    if (direction == Forward)
     {
         _position += _front * velocity;
     }
-    if (direction == BACKWARD)
+    if (direction == Backward)
     {
         _position -= _front * velocity;
     }
-    if (direction == LEFT)
+    if (direction == Left)
     {
         _position -= _right * velocity;
     }
-    if (direction == RIGHT)
+    if (direction == Right)
     {
         _position += _right * velocity;
     }
@@ -84,3 +85,25 @@ void Camera::MouseCallback(embree::Vec2fa mouseOffset)
 
     Update();
 }
+
+bool Camera::SetResolution(const embree::Vec2fa& resolution)
+{
+	return _resolution == std::exchange(_resolution, resolution);
+}
+
+bool Camera::SetJitter(bool jitter)
+{
+	return _jitter == std::exchange(_jitter, jitter);
+}
+
+bool Camera::SetFocalDistance(float focalDistance)
+{
+	return _focalDistance == std::exchange(_focalDistance, focalDistance);
+}
+
+bool Camera::SetAperatureRadius(float aperatureRadius)
+{
+	return _apertureRadius == std::exchange(_apertureRadius, aperatureRadius);
+}
+
+SPINDULYS_NAMESPACE_CLOSE_SCOPE

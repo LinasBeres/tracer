@@ -1,6 +1,6 @@
 file(GLOB PROJECT_HEADERS
 	bsdf/*.h
-	camera/*.h
+	frontend/camera/*.h
 	gui/*.h
 	integrator/*.h
 	material/*.h
@@ -16,7 +16,7 @@ file(GLOB PROJECT_HEADERS
 
 file(GLOB PROJECT_SOURCES
 	bsdf/*.cpp
-	camera/*.cpp
+	frontend/camera/*.cpp
 	gui/*.cpp
 	integrator/*.cpp
 	material/*.cpp

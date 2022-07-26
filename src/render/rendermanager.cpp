@@ -1,5 +1,6 @@
 #include "rendermanager.h"
 
+SPINDULYS_NAMESPACE_OPEN_SCOPE
 
 RenderManager::RenderManager()
 {
@@ -114,3 +115,5 @@ void RenderManager::DrawScreenQuad()
 
 	glBindVertexArray(0);
 }
+
+SPINDULYS_NAMESPACE_CLOSE_SCOPE

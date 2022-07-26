@@ -36,7 +36,7 @@ int Window::RenderWindow()
 
 	sceneManager.LoadScene("/home/lba42/Documents/testRenderers/spindulys/res/scenes/cupandsaucer.usdz");
 
-	camera._resolution = embree::Vec2fa(renderGlobals.width, renderGlobals.height);
+	camera.SetResolution(embree::Vec2fa(renderGlobals.width, renderGlobals.height));
 	camera.Init();
 
 	frontBuffer.Init(renderGlobals.width, renderGlobals.height);
@@ -73,9 +73,9 @@ int Window::RenderWindow()
 		}
 
 		// TODO: Will make use of Qt's callback system once the GUI will be revamped.
-		if (camera._jitter != renderGlobals.rayJitter)
+		if (camera.GetJitter() != renderGlobals.rayJitter)
 		{
-			camera._jitter = renderGlobals.rayJitter;
+			camera.SetJitter(renderGlobals.rayJitter);
 
 			renderReset = true;
 		}
@@ -344,7 +344,7 @@ void Window::ProfilingWindow(bool& guiOpen)
 			|ImGuiWindowFlags_AlwaysAutoResize);
 
 	ImGui::Text("Framerate: %.2f FPS / %.2f ms", ImGui::GetIO().Framerate, 1000.0f / ImGui::GetIO().Framerate);
-	ImGui::Text("Camera Position: (%.2f, %.2f, %.2f)", camera._position.x, camera._position.y, camera._position.z);
+	ImGui::Text("Camera Position: (%.2f, %.2f, %.2f)", camera.GetPosition().x, camera.GetPosition().y, camera.GetPosition().z);
 
 	ImGui::End();
 }
@@ -366,25 +366,25 @@ void Window::KeyboardCallback(ImGuiIO& guiIO)
 	}
 	if (guiIO.KeysDown[GLFW_KEY_W])
 	{
-		camera.KeyboardCallback(FORWARD, deltaTime);
+		camera.KeyboardCallback(Camera::Forward, deltaTime);
 
 		renderReset = true;
 	}
 	if (guiIO.KeysDown[GLFW_KEY_S])
 	{
-		camera.KeyboardCallback(BACKWARD, deltaTime);
+		camera.KeyboardCallback(Camera::Backward, deltaTime);
 
 		renderReset = true;
 	}
 	if (guiIO.KeysDown[GLFW_KEY_A])
 	{
-		camera.KeyboardCallback(LEFT, deltaTime);
+		camera.KeyboardCallback(Camera::Left, deltaTime);
 
 		renderReset = true;
 	}
 	if (guiIO.KeysDown[GLFW_KEY_D])
 	{
-		camera.KeyboardCallback(RIGHT, deltaTime);
+		camera.KeyboardCallback(Camera::Right, deltaTime);
 
 		renderReset = true;
 	}
@@ -393,11 +393,11 @@ void Window::KeyboardCallback(ImGuiIO& guiIO)
 	{
 		if (guiIO.KeysDown[GLFW_KEY_LEFT_CONTROL])
 		{
-			camera._focalDistance = camera._focalDistance + 0.1f;
+			camera.SetFocalDistance(camera.GetFocalDistance() + 0.1f);
 		}
 		else
 		{
-			camera._apertureRadius = camera._apertureRadius + 0.005f;
+			camera.SetAperatureRadius(camera.GetAperatureRadius() + 0.005f);
 		}
 
 		renderReset = true;
@@ -406,11 +406,11 @@ void Window::KeyboardCallback(ImGuiIO& guiIO)
 	{
 		if (guiIO.KeysDown[GLFW_KEY_LEFT_CONTROL])
 		{
-			camera._focalDistance = camera._focalDistance - 0.1f;
+			camera.SetFocalDistance(camera.GetFocalDistance() - 0.1f);
 		}
 		else
 		{
-			camera._apertureRadius = camera._apertureRadius - 0.005f;
+			camera.SetAperatureRadius(camera.GetAperatureRadius() - 0.005f);
 		}
 
 		renderReset = true;

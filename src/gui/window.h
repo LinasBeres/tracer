@@ -15,7 +15,7 @@
 #include "../share/config.h"
 
 #include "../object/buffer.h"
-#include "../camera/camera.h"
+#include "../frontend/camera/camera.h"
 #include "../render/rendermanager.h"
 #include "../scene/scenemanager.h"
 
