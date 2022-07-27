@@ -7,7 +7,7 @@
 #include "../scene/scenemanager.h"
 
 #include "../utility/embree_helper.h"
-#include "../utility/math_helper.h"
+#include <spindulysMath/helper.h>
 #include "../utility/render_helper.h"
 
 

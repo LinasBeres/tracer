@@ -1,12 +1,16 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "../../share/config.h"
+#include <config.h>
 
 // #include <embree3/common/math/vec4.h>
 
-#include "../../utility/embree_helper.h"
-#include "../../utility/math_helper.h"
+#include <embree3/common/math/vec2.h>
+#include <embree3/common/math/vec3.h>
+#include <embree3/rtcore.h>
+#include <embree3/rtcore_ray.h>
+
+#include <spindulysMath/helper.h>
 
 SPINDULYS_NAMESPACE_OPEN_SCOPE
 

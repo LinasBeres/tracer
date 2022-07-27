@@ -6,7 +6,7 @@
 
 #include <glad/glad.h>
 
-#include "../share/config.h"
+#include <config.h>
 
 #include "../object/buffer.h"
 #include "../frontend/camera/camera.h"

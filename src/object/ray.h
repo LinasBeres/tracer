@@ -1,7 +1,7 @@
 #ifndef RAY_H
 #define RAY_H
 
-#include "../share/config.h"
+#include <config.h>
 
 #include "../frontend/camera/camera.h"
 #include "../sampling/sampler.h"

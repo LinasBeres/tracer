@@ -6,7 +6,7 @@
 #include "../sampling/sampler.h"
 
 #include "../utility/embree_helper.h"
-#include "../utility/math_helper.h"
+#include <spindulysMath/helper.h>
 #include "../utility/render_helper.h"
 #include "../utility/usd_helper.h"
 

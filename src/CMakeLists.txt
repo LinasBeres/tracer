@@ -1,3 +1,5 @@
+add_subdirectory(share)
+
 file(GLOB PROJECT_HEADERS
 	bsdf/*.h
 	frontend/camera/*.h
@@ -53,6 +55,7 @@ target_link_libraries(
 	${EMBREE_LIBRARY}
 	${TBB_LIBRARIES}
 	${USD_LIBRARIES}
+	spindulysShare
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES

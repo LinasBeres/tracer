@@ -6,9 +6,6 @@
 
 #include <math.h>
 
-#include "embree_helper.h"
-#include "usd_helper.h"
-
 
 inline float DegToRad(float degAngle)
 {
@@ -18,34 +15,6 @@ inline float DegToRad(float degAngle)
 inline float RadToDeg(float radAngle)
 {
     return radAngle * (180.0f / M_PI);
-}
-
-inline pxr::GfVec3f EmbreeSIMDToUSD(const embree::Vec3fa& embreeVector)
-{
-    return pxr::GfVec3f(embreeVector.x,
-        embreeVector.y,
-        embreeVector.z);
-}
-
-inline pxr::GfVec3f EmbreeToUSD(const embree::Vec3f& embreeVector)
-{
-    return pxr::GfVec3f(embreeVector.x,
-        embreeVector.y,
-        embreeVector.z);
-}
-
-inline embree::Vec3f USDToEmbree(const pxr::GfVec3f& usdVector)
-{
-    return embree::Vec3f(usdVector[0],
-        usdVector[1],
-        usdVector[2]);
-}
-
-inline embree::Vec3fa USDToEmbreeSIMD(const pxr::GfVec3f& usdVector)
-{
-    return embree::Vec3fa(usdVector[0],
-        usdVector[1],
-        usdVector[2]);
 }
 
 template<typename T, typename A>
