@@ -1,7 +1,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include <config.h>
+#include <spindulys.h>
 
 // #include <embree3/common/math/vec4.h>
 
@@ -10,7 +10,7 @@
 #include <embree3/rtcore.h>
 #include <embree3/rtcore_ray.h>
 
-#include <spindulysMath/helper.h>
+#include <spindulys/mathHelper.h>
 
 SPINDULYS_NAMESPACE_OPEN_SCOPE
 

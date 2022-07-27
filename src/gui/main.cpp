@@ -6,7 +6,7 @@
 
 int main(int argc, char** argv)
 {
-	spindulys::Window mainWindow;
+	spindulys::spindulysFrontend::spindulysGUI::Window mainWindow;
 	mainWindow.RenderWindow();
 
 	return 0;

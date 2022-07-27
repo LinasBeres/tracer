@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include <spindulysMath/helper.h>
+#include <spindulys/mathHelper.h>
 
 #include <embree3/common/math/vec2.h>
 #include <embree3/common/math/vec3.h>

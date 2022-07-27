@@ -6,7 +6,7 @@
 #include <embree3/rtcore.h>
 #include <embree3/rtcore_ray.h>
 
-#include <config.h>
+#include <spindulys.h>
 
 #include <camera/camera.h>
 

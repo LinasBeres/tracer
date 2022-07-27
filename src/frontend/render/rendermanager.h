@@ -4,7 +4,7 @@
 #include <memory>
 #include <vector>
 
-#include <config.h>
+#include <spindulys.h>
 
 #include <camera/camera.h>
 

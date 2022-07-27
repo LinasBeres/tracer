@@ -6,7 +6,7 @@
 #include <embree3/rtcore.h>
 #include <embree3/rtcore_ray.h>
 
-#include <spindulysMath/helper.h>
+#include <spindulys/mathHelper.h>
 
 #include "../material/material.h"
 #include "../shapes/ray.h"

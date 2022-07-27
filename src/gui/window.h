@@ -16,8 +16,6 @@
 #include <embree3/rtcore.h>
 #include <embree3/rtcore_ray.h>
 
-#include <config.h>
-
 #include <camera/camera.h>
 
 #include <shapes/buffer.h>
@@ -26,9 +24,11 @@
 
 #include <utils/render_helper.h>
 
+#include "spindulysGUI.h"
+
 #include "opengl/glshader.h"
 
-SPINDULYS_NAMESPACE_OPEN_SCOPE
+GUI_NAMESPACE_OPEN_SCOPE
 
 class Window
 {
@@ -81,6 +81,6 @@ class Window
 		GLShader screenQuadShader;
 };
 
-SPINDULYS_NAMESPACE_CLOSE_SCOPE
+GUI_NAMESPACE_CLOSE_SCOPE
 
 #endif // WINDOW_H
