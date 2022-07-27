@@ -8,8 +8,9 @@
 
 #include <config.h>
 
+#include <camera/camera.h>
+
 #include "../object/buffer.h"
-#include "../frontend/camera/camera.h"
 #include "../opengl/glshader.h"
 #include "../integrator/integrator.h"
 #include "../object/ray.h"

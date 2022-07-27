@@ -3,7 +3,8 @@
 
 #include <config.h>
 
-#include "../frontend/camera/camera.h"
+#include <camera/camera.h>
+
 #include "../sampling/sampler.h"
 
 #include "../utility/embree_helper.h"

@@ -1,8 +1,8 @@
 add_subdirectory(share)
+add_subdirectory(frontend)
 
 file(GLOB PROJECT_HEADERS
 	bsdf/*.h
-	frontend/camera/*.h
 	gui/*.h
 	integrator/*.h
 	material/*.h
@@ -56,6 +56,7 @@ target_link_libraries(
 	${TBB_LIBRARIES}
 	${USD_LIBRARIES}
 	spindulysShare
+	spindulysFrontend
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES

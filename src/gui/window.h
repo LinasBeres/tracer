@@ -14,8 +14,9 @@
 
 #include <config.h>
 
+#include <camera/camera.h>
+
 #include "../object/buffer.h"
-#include "../frontend/camera/camera.h"
 #include "../render/rendermanager.h"
 #include "../scene/scenemanager.h"
 
