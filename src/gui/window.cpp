@@ -2,7 +2,8 @@
 
 #include <utils/output_helper.h>
 
-SPINDULYS_NAMESPACE_OPEN_SCOPE
+
+GUI_NAMESPACE_OPEN_SCOPE
 
 int Window::RenderWindow()
 {
@@ -501,4 +502,4 @@ void Window::DrawScreenQuad()
 	glBindVertexArray(0);
 }
 
-SPINDULYS_NAMESPACE_CLOSE_SCOPE
+GUI_NAMESPACE_CLOSE_SCOPE

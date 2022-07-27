@@ -2,6 +2,9 @@
 
 #include <iterator>
 
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
+
 Sampler::Sampler():
     floatUniformDistribution(0.0f, 1.0f),
     prng(NewSeed())
@@ -76,3 +79,5 @@ embree::Vec3f Sampler::SphereUniform(float rand0, float rand1)
         embree::sin(phi),
         embree::sin(theta) * embree::cos(phi));
 }
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE

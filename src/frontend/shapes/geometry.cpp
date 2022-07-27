@@ -1,6 +1,8 @@
 #include "geometry.h"
 
 
+FRONTEND_NAMESPACE_OPEN_SCOPE
+
 Geometry::Geometry()
 {
 }
@@ -122,3 +124,5 @@ bool Geometry::Clean()
 {
 	return true;
 }
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE

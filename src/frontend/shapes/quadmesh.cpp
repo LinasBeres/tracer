@@ -1,6 +1,8 @@
 #include "quadmesh.h"
 
 
+FRONTEND_NAMESPACE_OPEN_SCOPE
+
 QuadMesh::QuadMesh()
 {
 }
@@ -79,3 +81,5 @@ bool QuadMesh::UpdatePrototype()
 
 	return true;
 }
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE

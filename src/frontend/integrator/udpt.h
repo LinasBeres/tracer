@@ -1,12 +1,15 @@
 #ifndef UPDT_H
 #define UPDT_H
 
-#include "integrator.h"
+#include "../spindulysFrontend.h"
 
+#include "integrator.h"
 
 #include "../bsdf/lambert.h"
 #include "../bsdf/orennayar.h"
 
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 class UDPTIntegrator final : public Integrator
 {
@@ -22,5 +25,7 @@ class UDPTIntegrator final : public Integrator
 		Lambert diffuseMat;
 	private:
 };
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // UPDT_H

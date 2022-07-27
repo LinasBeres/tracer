@@ -11,12 +11,16 @@
 #include <embree3/rtcore.h>
 #include <embree3/rtcore_ray.h>
 
+#include "../spindulysFrontend.h"
+
 #include "../shapes/geometry.h"
 #include "../material/material.h"
 
 #include "../utils/render_helper.h"
 #include "../utils/usd_helper.h"
 
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 struct SceneManager
 {
@@ -39,5 +43,7 @@ struct SceneManager
     std::unordered_map<unsigned int, std::shared_ptr<Geometry>> _sceneGeom;
     std::mutex _sceneMutex;
 };
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // SCENEMANAGER_H

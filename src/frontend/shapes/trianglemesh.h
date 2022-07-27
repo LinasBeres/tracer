@@ -1,8 +1,12 @@
 #ifndef TRIANGLEMESH_H
 #define TRIANGLEMESH_H
 
+#include "../spindulysFrontend.h"
+
 #include "geometry.h"
 
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 class TriangleMesh final : public Geometry
 {
@@ -20,5 +24,7 @@ class TriangleMesh final : public Geometry
 		pxr::VtArray<pxr::GfVec3f> _points;
 		pxr::VtArray<int> _indices;
 };
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // TRIANGLEMESH_H

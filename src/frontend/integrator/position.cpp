@@ -3,6 +3,8 @@
 #include "../utils/render_helper.h"
 
 
+FRONTEND_NAMESPACE_OPEN_SCOPE
+
 PositionIntegrator::PositionIntegrator()
 {
 	_handle = "Position";
@@ -29,3 +31,5 @@ embree::Vec3f PositionIntegrator::GetPixelColor(Ray& ray,
 
 	return embree::normalize(shadingPoint.P);
 }
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE

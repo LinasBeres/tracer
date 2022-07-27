@@ -3,6 +3,8 @@
 #include "../utils/render_helper.h"
 
 
+FRONTEND_NAMESPACE_OPEN_SCOPE
+
 DebugIntegrator::DebugIntegrator()
 {
 	_handle = "Debug";
@@ -40,3 +42,5 @@ embree::Vec3f DebugIntegrator::GetPixelColor(Ray& ray,
 			(static_cast<float>((shadingPoint.instID & 0x0000ff00) >>  8)) / 255.0f,
 			(static_cast<float>((shadingPoint.instID & 0x00ff0000) >> 16)) / 255.0f);
 }
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE

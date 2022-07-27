@@ -6,7 +6,9 @@
 #include <embree3/rtcore.h>
 #include <embree3/rtcore_ray.h>
 
-#include <spindulysMath/helper.h>
+#include <spindulys/mathHelper.h>
+
+#include "../spindulysFrontend.h"
 
 #include "../material/material.h"
 #include "../shapes/ray.h"
@@ -15,6 +17,8 @@
 
 #include "../utils/render_helper.h"
 
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 class Integrator
 {
@@ -32,5 +36,7 @@ class Integrator
 		std::string _handle;
 	private:
 };
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // INTEGRATOR_H

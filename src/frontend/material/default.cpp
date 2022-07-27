@@ -1,6 +1,8 @@
 #include "default.h"
 
 
+FRONTEND_NAMESPACE_OPEN_SCOPE
+
 Default::Default()
 {
 	_name = "defualt";
@@ -20,3 +22,5 @@ bool Default::Pdf()
 {
 	return true;
 }
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE

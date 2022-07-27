@@ -5,5 +5,5 @@ add_library(
 target_sources(spindulysShare INTERFACE
 	FILE_SET HEADERS
 	BASE_DIRS ./
-	FILES ./config.h math/helper.h
+	FILES ./spindulys.h spindulys/mathHelper.h
 )

@@ -3,6 +3,8 @@
 #include "../utils/render_helper.h"
 
 
+FRONTEND_NAMESPACE_OPEN_SCOPE
+
 NormalIntegrator::NormalIntegrator()
 {
 	_handle = "Normal";
@@ -29,3 +31,5 @@ embree::Vec3f NormalIntegrator::GetPixelColor(Ray& ray,
 
 	return shadingPoint.N;
 }
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE

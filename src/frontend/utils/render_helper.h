@@ -6,11 +6,15 @@
 #include <embree3/rtcore.h>
 #include <embree3/rtcore_ray.h>
 
+#include "../spindulysFrontend.h"
+
 #include "../shapes/geometry.h"
 #include "../sampling/sampler.h"
 
 #include "usd_helper.h"
 
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 // From Embree 3.x
 static constexpr float errorBias = 32.0f * 1.19209e-07f;
@@ -77,5 +81,6 @@ struct BSDFSample
 	float pdf = 0.0f;                                       // PDF of the BSDF sample.
 };
 
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // RENDER_HELPER_H

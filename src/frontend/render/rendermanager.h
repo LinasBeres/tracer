@@ -4,9 +4,9 @@
 #include <memory>
 #include <vector>
 
-#include <config.h>
+#include "../spindulysFrontend.h"
 
-#include <camera/camera.h>
+#include "../camera/camera.h"
 
 #include "../shapes/buffer.h"
 #include "../integrator/integrator.h"
@@ -24,7 +24,8 @@
 #include "../integrator/normal.h"
 #include "../integrator/debug.h"
 
-SPINDULYS_NAMESPACE_OPEN_SCOPE
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 class RenderManager
 {
@@ -50,6 +51,6 @@ class RenderManager
 		};
 };
 
-SPINDULYS_NAMESPACE_CLOSE_SCOPE
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // RENDERMANAGER_H

@@ -6,8 +6,12 @@
 #include <embree3/rtcore.h>
 #include <embree3/rtcore_ray.h>
 
+#include "../spindulysFrontend.h"
+
 #include "../utils/usd_helper.h"
 
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 class Geometry
 {
@@ -46,5 +50,7 @@ class Geometry
 		embree::Vec3f _displayColor;
 	private:
 };
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // GEOMETRY_H

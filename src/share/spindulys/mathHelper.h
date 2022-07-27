@@ -6,6 +6,9 @@
 
 #include <math.h>
 
+#include "../spindulys.h"
+
+SPINDULYS_NAMESPACE_OPEN_SCOPE
 
 inline float DegToRad(float degAngle)
 {
@@ -36,5 +39,7 @@ A USDToUSDMatrixMultiply(const A& usdVector, const T& usdMatrix)
 {
     return A(usdMatrix.TransformDir(usdVector));
 }
+
+SPINDULYS_NAMESPACE_CLOSE_SCOPE
 
 #endif // MATH_HELPER_H

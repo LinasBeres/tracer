@@ -6,6 +6,8 @@
 #include "../utils/tbb_helper.h"
 
 
+FRONTEND_NAMESPACE_OPEN_SCOPE
+
 SceneManager::SceneManager()
 {
 }
@@ -131,3 +133,5 @@ bool SceneManager::LoadMeshGeometry()
 
     return true;
 }
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE

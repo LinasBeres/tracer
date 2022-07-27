@@ -1,8 +1,12 @@
 #ifndef EMPIRICAL_H
 #define EMPIRICAL_H
 
+#include "../spindulysFrontend.h"
+
 #include "material.h"
 
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 class Empirical final : public Material
 {
@@ -14,5 +18,7 @@ class Empirical final : public Material
 		virtual bool Pdf() override;
 	private:
 };
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // EMPIRICAL_H

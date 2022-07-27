@@ -1,6 +1,8 @@
 #include "integrator.h"
 
 
+FRONTEND_NAMESPACE_OPEN_SCOPE
+
 Integrator::Integrator()
 {
 }
@@ -17,7 +19,7 @@ ShadingPoint Integrator::SetupShadingPoint(SceneManager &sceneManager,
 	shadingPoint.N = embree::normalize(ray.Ng);
 
 	// Object to world space normal conversion.
-	embree::Vec3f normalWorld(USDToEmbreeMatrixMultiply(shadingPoint.N, shadingPoint.geometry->GetTransform()));
+	embree::Vec3f normalWorld(spindulys::USDToEmbreeMatrixMultiply(shadingPoint.N, shadingPoint.geometry->GetTransform()));
 	// We make the normal faceforwarding.
 	shadingPoint.Nw = embree::normalize(embree::dot(shadingPoint.V, normalWorld) < 0.0f ? -normalWorld : normalWorld);
 	shadingPoint.UV = embree::Vec2fa(ray.u, ray.v);
@@ -55,3 +57,5 @@ ShadingPoint Integrator::SetupShadingPoint(SceneManager &sceneManager,
 
 	return shadingPoint;
 }
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE

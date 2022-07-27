@@ -1,6 +1,10 @@
 #include "curve.h"
 
 
+FRONTEND_NAMESPACE_OPEN_SCOPE
+
 Curve::Curve()
 {
 }
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE

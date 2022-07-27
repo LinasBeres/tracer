@@ -8,6 +8,10 @@
 
 #include <glad/glad.h>
 
+#include "../spindulysGUI.h"
+
+
+GUI_NAMESPACE_OPEN_SCOPE
 
 class GLShader
 {
@@ -21,5 +25,7 @@ class GLShader
     private:
         GLuint programID;
 };
+
+GUI_NAMESPACE_CLOSE_SCOPE
 
 #endif // GLSHADER_H

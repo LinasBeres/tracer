@@ -5,6 +5,10 @@
 
 #include "../bsdf/bsdf.h"
 
+#include "../spindulysFrontend.h"
+
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 class Lambert final : public BSDF
 {
@@ -22,5 +26,7 @@ class Lambert final : public BSDF
 				BSDFSample& bsdfSample) override;
 	private:
 };
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // LAMBERT_H

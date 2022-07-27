@@ -1,6 +1,8 @@
 #include "glshader.h"
 
 
+GUI_NAMESPACE_OPEN_SCOPE
+
 GLShader::GLShader()
 {
 }
@@ -100,3 +102,5 @@ void GLShader::Use()
 {
     glUseProgram(programID);
 }
+
+GUI_NAMESPACE_CLOSE_SCOPE

@@ -3,8 +3,12 @@
 
 #include <string>
 
+#include "../spindulysFrontend.h"
+
 #include "bsdf.h"
 
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 class OrenNayar final : public BSDF
 {
@@ -24,5 +28,7 @@ class OrenNayar final : public BSDF
 	private:
 		float _roughness;
 };
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // ORENNAYAR_H

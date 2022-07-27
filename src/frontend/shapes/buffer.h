@@ -8,6 +8,10 @@
 #include <embree3/rtcore.h>
 #include <embree3/rtcore_ray.h>
 
+#include "../spindulysFrontend.h"
+
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 class Buffer
 {
@@ -28,5 +32,7 @@ class Buffer
 	private:
 		std::vector<embree::Vec3f> _pixelData;
 };
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // BUFFER_H
