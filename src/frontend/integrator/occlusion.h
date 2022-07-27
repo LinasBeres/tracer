@@ -1,8 +1,12 @@
 #ifndef OCCLUSION_H
 #define OCCLUSION_H
 
+#include "../spindulysFrontend.h"
+
 #include "integrator.h"
 
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 class OcclusionIntegrator final : public Integrator
 {
@@ -15,5 +19,7 @@ class OcclusionIntegrator final : public Integrator
 				const RenderGlobals& renderGlobals) override;
 	private:
 };
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // OCCLUSION_H

@@ -1,6 +1,8 @@
 #include "integrator.h"
 
 
+FRONTEND_NAMESPACE_OPEN_SCOPE
+
 Integrator::Integrator()
 {
 }
@@ -55,3 +57,5 @@ ShadingPoint Integrator::SetupShadingPoint(SceneManager &sceneManager,
 
 	return shadingPoint;
 }
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE

@@ -5,10 +5,14 @@
 
 #include <tinyexr.h>
 
+#include "../spindulysFrontend.h"
+
 #include "../shapes/buffer.h"
 
 #include "color_helper.h"
 
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 inline void toPPM(unsigned int width, unsigned int height, const Buffer& buffer)
 {
@@ -94,5 +98,6 @@ inline void toEXR(unsigned int width, unsigned int height, const Buffer& buffer)
     free(exrHeader.requested_pixel_types);
 }
 
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // OUTPUT_HELPER_H

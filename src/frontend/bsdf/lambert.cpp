@@ -1,6 +1,8 @@
 #include "lambert.h"
 
 
+FRONTEND_NAMESPACE_OPEN_SCOPE
+
 Lambert::Lambert()
 {
 	_name = "lambert";
@@ -52,3 +54,5 @@ float Lambert::Pdf(PixelSample& pixelSample,
 {
 	return bsdfSample.NdotL > 0.0f ? bsdfSample.NdotL / M_PI : 1.0f;
 }
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE

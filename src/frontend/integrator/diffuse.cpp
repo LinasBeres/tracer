@@ -1,6 +1,8 @@
 #include "diffuse.h"
 
 
+FRONTEND_NAMESPACE_OPEN_SCOPE
+
 DiffuseIntegrator::DiffuseIntegrator()
 {
 	_handle = "Diffuse";
@@ -29,3 +31,5 @@ embree::Vec3f DiffuseIntegrator::GetPixelColor(Ray& ray,
 
 	return embree::Vec3f(shadingPoint.geometry->GetDisplayColor() * diffuse * (1.0f / M_PI));
 }
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE

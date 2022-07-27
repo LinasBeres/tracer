@@ -1,8 +1,12 @@
 #ifndef QUADMESH_H
 #define QUADMESH_H
 
+#include "spindulysFrontend.h"
+
 #include "geometry.h"
 
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 class QuadMesh final : public Geometry
 {
@@ -20,5 +24,7 @@ class QuadMesh final : public Geometry
 		pxr::VtArray<pxr::GfVec3f> _points;
 		pxr::VtArray<int> _indices;
 };
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // QUADMESH_H

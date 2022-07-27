@@ -9,6 +9,10 @@
 #include <embree3/rtcore.h>
 #include <embree3/rtcore_ray.h>
 
+#include "../spindulysFrontend.h"
+
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 struct Sampler
 {
@@ -25,5 +29,7 @@ struct Sampler
     std::uniform_real_distribution<float> floatUniformDistribution;
     std::mt19937 prng;
 };
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // SAMPLER_H

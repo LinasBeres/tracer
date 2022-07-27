@@ -6,14 +6,16 @@
 #include <embree3/rtcore.h>
 #include <embree3/rtcore_ray.h>
 
-#include <spindulys.h>
+#include "../spindulysFrontend.h"
 
-#include <camera/camera.h>
+#include "../camera/camera.h"
 
 #include "../sampling/sampler.h"
 
 #include "../utils/render_helper.h"
 
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 struct Ray
 {
@@ -51,7 +53,7 @@ struct Ray
     {
     }
 
-    __forceinline Ray(const spindulys::Camera& camera,
+    __forceinline Ray(const Camera& camera,
         const PixelSample& pixelSample,
         float tnear = 0.0f,
         float tfar = std::numeric_limits<float>::infinity(),
@@ -109,5 +111,7 @@ __forceinline RTCRayHit *RTCRayHit_(Ray& ray)
 {
     return (RTCRayHit *) &ray;
 }
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // RAY_H

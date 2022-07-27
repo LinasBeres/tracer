@@ -8,6 +8,10 @@
 #include <embree3/rtcore.h>
 #include <embree3/rtcore_ray.h>
 
+#include "../spindulysFrontend.h"
+
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 class Material
 {
@@ -21,5 +25,7 @@ class Material
 	protected:
 		std::string _name;
 };
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // MATERIAL_H

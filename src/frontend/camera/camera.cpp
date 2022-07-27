@@ -1,6 +1,7 @@
 #include "camera.h"
 
-SPINDULYS_NAMESPACE_OPEN_SCOPE
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 Camera::Camera()
 {
@@ -106,4 +107,4 @@ bool Camera::SetAperatureRadius(float aperatureRadius)
 	return _apertureRadius == std::exchange(_apertureRadius, aperatureRadius);
 }
 
-SPINDULYS_NAMESPACE_CLOSE_SCOPE
+FRONTEND_NAMESPACE_CLOSE_SCOPE

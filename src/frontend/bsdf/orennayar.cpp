@@ -1,6 +1,8 @@
 #include "orennayar.h"
 
 
+FRONTEND_NAMESPACE_OPEN_SCOPE
+
 OrenNayar::OrenNayar()
 {
 	_name = "OrenNayar";
@@ -60,3 +62,5 @@ float OrenNayar::Pdf(PixelSample& pixelSample,
 {
 	return bsdfSample.NdotL > 0.0f ? bsdfSample.NdotL / M_PI : 1.0f;
 }
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE

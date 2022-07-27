@@ -14,6 +14,10 @@
 #include <pxr/base/gf/matrix4f.h>
 #include <pxr/base/gf/matrix4d.h>
 
+#include "../spindulysFrontend.h"
+
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 inline void GetPrimFromType(const std::string& primType,
     const pxr::UsdStageRefPtr& stage,
@@ -184,5 +188,7 @@ inline pxr::VtVec3iArray TriangulateMeshIndices(pxr::VtArray<int>& meshVertexCou
 
     return meshTriangulatedIndices;
 }
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // USD_HELPER_H

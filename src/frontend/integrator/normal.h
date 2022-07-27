@@ -1,8 +1,12 @@
 #ifndef NORMAL_H
 #define NORMAL_H
 
+#include "../spindulysFrontend.h"
+
 #include "integrator.h"
 
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 class NormalIntegrator final : public Integrator
 {
@@ -15,5 +19,7 @@ class NormalIntegrator final : public Integrator
 				const RenderGlobals& renderGlobals) override;
 	private:
 };
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // NORMAL_H

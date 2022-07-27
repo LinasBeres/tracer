@@ -6,6 +6,10 @@
 #include <embree3/rtcore.h>
 #include <embree3/rtcore_ray.h>
 
+#include "../spindulysFrontend.h"
+
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 inline float Clamp(float colorChannel)
 {
@@ -47,5 +51,7 @@ inline int ToRGB(float colorChannel)
 {
     return static_cast<int>(Clamp(colorChannel) * 255);
 }
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // COLOR_HELPER_H

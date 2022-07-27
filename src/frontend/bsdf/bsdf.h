@@ -10,11 +10,15 @@
 #include <embree3/rtcore.h>
 #include <embree3/rtcore_ray.h>
 
+#include "../spindulysFrontend.h"
+
 #include "../sampling/sampler.h"
 
 #include "../utils/render_helper.h"
 #include "../utils/usd_helper.h"
 
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 class BSDF
 {
@@ -35,5 +39,7 @@ class BSDF
 		std::string _name;
 	private:
 };
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // BSDF_H

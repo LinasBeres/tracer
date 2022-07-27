@@ -1,6 +1,8 @@
 #include "trianglemesh.h"
 
 
+FRONTEND_NAMESPACE_OPEN_SCOPE
+
 TriangleMesh::TriangleMesh()
 {
 }
@@ -83,3 +85,5 @@ bool TriangleMesh::UpdatePrototype()
 
 	return true;
 }
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE

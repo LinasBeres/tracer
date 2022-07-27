@@ -1,8 +1,6 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include <spindulys.h>
-
 // #include <embree3/common/math/vec4.h>
 
 #include <embree3/common/math/vec2.h>
@@ -12,7 +10,10 @@
 
 #include <spindulys/mathHelper.h>
 
-SPINDULYS_NAMESPACE_OPEN_SCOPE
+#include "../spindulysFrontend.h"
+
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 class Camera
 {
@@ -103,6 +104,6 @@ class Camera
 		embree::Vec3fa _right;
 };
 
-SPINDULYS_NAMESPACE_CLOSE_SCOPE
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // CAMERA_H

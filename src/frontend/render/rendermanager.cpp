@@ -1,6 +1,7 @@
 #include "rendermanager.h"
 
-SPINDULYS_NAMESPACE_OPEN_SCOPE
+
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 RenderManager::RenderManager()
 {
@@ -51,5 +52,4 @@ void RenderManager::Trace(const RenderGlobals& renderGlobals,
 		});
 }
 
-
-SPINDULYS_NAMESPACE_CLOSE_SCOPE
+FRONTEND_NAMESPACE_CLOSE_SCOPE

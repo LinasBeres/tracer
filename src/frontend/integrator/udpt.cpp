@@ -3,6 +3,8 @@
 #include "../shapes/ray.h"
 
 
+FRONTEND_NAMESPACE_OPEN_SCOPE
+
 UDPTIntegrator::UDPTIntegrator()
 {
 	_handle = "UDPT";
@@ -59,3 +61,5 @@ embree::Vec3f UDPTIntegrator::GetPixelColor(Ray& ray,
 
 	return colorAccumulation;
 }
+
+FRONTEND_NAMESPACE_CLOSE_SCOPE
