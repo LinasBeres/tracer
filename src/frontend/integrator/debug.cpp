@@ -1,6 +1,6 @@
 #include "debug.h"
 
-#include "../utility/render_helper.h"
+#include "../utils/render_helper.h"
 
 
 DebugIntegrator::DebugIntegrator()

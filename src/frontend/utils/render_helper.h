@@ -1,17 +1,19 @@
 #ifndef RENDER_HELPER_H
 #define RENDER_HELPER_H
 
-#include "glad/glad.h"
+#include <embree3/common/math/vec2.h>
+#include <embree3/common/math/vec3.h>
+#include <embree3/rtcore.h>
+#include <embree3/rtcore_ray.h>
 
-#include "../object/geometry.h"
+#include "../shapes/geometry.h"
 #include "../sampling/sampler.h"
 
-#include "../utility/embree_helper.h"
-#include "../utility/usd_helper.h"
+#include "usd_helper.h"
 
 
 // From Embree 3.x
-static const float errorBias = 32.0f * 1.19209e-07f;
+static constexpr float errorBias = 32.0f * 1.19209e-07f;
 
 enum class IntegratorIds {
 	UDPT = 0,
@@ -75,12 +77,5 @@ struct BSDFSample
 	float pdf = 0.0f;                                       // PDF of the BSDF sample.
 };
 
-static const GLfloat screenQuadVertices[] =
-{
-	-1.0f,  1.0f, 0.0f, 0.0f, 1.0f,
-	-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
-	1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
-	1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
-};
 
 #endif // RENDER_HELPER_H

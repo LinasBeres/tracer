@@ -5,7 +5,7 @@
 
 #include <tinyexr.h>
 
-#include "../object/buffer.h"
+#include "../shapes/buffer.h"
 
 #include "color_helper.h"
 

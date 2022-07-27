@@ -1,6 +1,6 @@
 #include "position.h"
 
-#include "../utility/render_helper.h"
+#include "../utils/render_helper.h"
 
 
 PositionIntegrator::PositionIntegrator()

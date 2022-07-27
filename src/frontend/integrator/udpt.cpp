@@ -1,6 +1,6 @@
 #include "udpt.h"
 
-#include "../object/ray.h"
+#include "../shapes/ray.h"
 
 
 UDPTIntegrator::UDPTIntegrator()

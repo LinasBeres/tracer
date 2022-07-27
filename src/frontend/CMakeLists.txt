@@ -1,9 +1,25 @@
 file(GLOB FRONTEND_HEADERS
+	bsdf/*.h
 	camera/*.h
+	integrator/*.h
+	material/*.h
+	render/*.h
+	sampling/*.h
+	scene/*.h
+	shapes/*.h
+	utils/*.h
 )
 
 file(GLOB FRONTEND_SOURCES
+	bsdf/*.cpp
 	camera/*.cpp
+	integrator/*.cpp
+	material/*.cpp
+	render/*.cpp
+	sampling/*.cpp
+	scene/*.cpp
+	shapes/*.cpp
+	utils/*.cpp
 )
 
 add_library(

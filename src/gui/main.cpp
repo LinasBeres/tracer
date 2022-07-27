@@ -2,7 +2,7 @@
 
 #define STB_IMAGE_IMPLEMENTATION
 
-#include "./gui/window.h"
+#include "window.h"
 
 int main(int argc, char** argv)
 {
