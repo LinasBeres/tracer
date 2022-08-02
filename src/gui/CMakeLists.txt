@@ -23,7 +23,6 @@ add_definitions(-DGLFW_INCLUDE_NONE)
 
 target_link_libraries(
 	${PROJECT_NAME}
-	embree_common
 	glfw
 	${GLFW_LIBRARIES}
 	glad

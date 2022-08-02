@@ -37,7 +37,7 @@ int Window::RenderWindow()
 
 	sceneManager.LoadScene("/home/lba42/Documents/testRenderers/spindulys/res/scenes/cupandsaucer.usdz");
 
-	camera.SetResolution(embree::Vec2fa(renderGlobals.width, renderGlobals.height));
+	camera.SetResolution(Vec2f(renderGlobals.width, renderGlobals.height));
 	camera.Init();
 
 	frontBuffer.Init(renderGlobals.width, renderGlobals.height);
@@ -65,7 +65,7 @@ int Window::RenderWindow()
 		KeyboardCallback(guiIO);
 
 		// ImVec2 mousePos(ImGui::GetMousePos());
-		embree::Vec2fa mousePos(ImGui::GetMousePos().x, ImGui::GetMousePos().y);
+		Vec2f mousePos(ImGui::GetMousePos().x, ImGui::GetMousePos().y);
 
 		if (prevMousePos.x != mousePos.x || prevMousePos.y != mousePos.y)
 			MouseCallback(guiIO, mousePos);
@@ -328,10 +328,7 @@ void Window::RenderConfigWindow(bool& guiOpen)
 
 void Window::ProfilingWindow(bool& guiOpen)
 {
-	ImGui::Begin("Profiling",
-			&guiOpen,
-			ImGuiWindowFlags_NoTitleBar
-			|ImGuiWindowFlags_AlwaysAutoResize);
+	ImGui::Begin("Profiling", &guiOpen, ImGuiWindowFlags_NoTitleBar |ImGuiWindowFlags_AlwaysAutoResize);
 
 	ImGui::Text("Framerate: %.2f FPS / %.2f ms", ImGui::GetIO().Framerate, 1000.0f / ImGui::GetIO().Framerate);
 	ImGui::Text("Camera Position: (%.2f, %.2f, %.2f)", camera.GetPosition().x, camera.GetPosition().y, camera.GetPosition().z);
@@ -369,7 +366,9 @@ void Window::KeyboardCallback(ImGuiIO& guiIO)
 	if (guiIO.KeysDown[GLFW_KEY_A])
 	{
 		camera.KeyboardCallback(Camera::Left, deltaTime);
-renderReset = true; } if (guiIO.KeysDown[GLFW_KEY_D])
+		renderReset = true;
+	}
+	if (guiIO.KeysDown[GLFW_KEY_D])
 	{
 		camera.KeyboardCallback(Camera::Right, deltaTime);
 
@@ -379,49 +378,38 @@ renderReset = true; } if (guiIO.KeysDown[GLFW_KEY_D])
 	if (guiIO.KeysDown[GLFW_KEY_KP_ADD])
 	{
 		if (guiIO.KeysDown[GLFW_KEY_LEFT_CONTROL])
-		{
 			camera.SetFocalDistance(camera.GetFocalDistance() + 0.1f);
-		}
 		else
-		{
 			camera.SetAperatureRadius(camera.GetAperatureRadius() + 0.005f);
-		}
 
 		renderReset = true;
 	}
 	if (guiIO.KeysDown[GLFW_KEY_KP_SUBTRACT])
 	{
 		if (guiIO.KeysDown[GLFW_KEY_LEFT_CONTROL])
-		{
 			camera.SetFocalDistance(camera.GetFocalDistance() - 0.1f);
-		}
 		else
-		{
 			camera.SetAperatureRadius(camera.GetAperatureRadius() - 0.005f);
-		}
 
 		renderReset = true;
 	}
 }
 
-void Window::MouseCallback(ImGuiIO& guiIO,
-		embree::Vec2fa mousePos)
+void Window::MouseCallback(ImGuiIO& guiIO, Vec2f mousePos)
 {
 	if (firstMouse)
 	{
-		prevMousePos = embree::Vec2fa(mousePos);
+		prevMousePos = Vec2f(mousePos);
 
 		firstMouse = false;
 	}
 
-	embree::Vec2fa mouseOffset(mousePos.x - prevMousePos.x,
-			mousePos.y - prevMousePos.y);
-	prevMousePos = embree::Vec2fa(mousePos);
+	prevMousePos = Vec2f(mousePos);
 
 	if (guiIO.MouseDown[GLFW_MOUSE_BUTTON_RIGHT])
 	{
-		if (mouseOffset != embree::Vec2fa())
-
+		const Vec2f mouseOffset(mousePos.x - prevMousePos.x, mousePos.y - prevMousePos.y);
+		if (mouseOffset != Vec2f())
 		{
 			camera.MouseCallback(mouseOffset);
 

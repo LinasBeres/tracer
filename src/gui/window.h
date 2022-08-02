@@ -11,10 +11,8 @@
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
-#include <embree3/common/math/vec2.h>
-#include <embree3/common/math/vec3.h>
-#include <embree3/rtcore.h>
-#include <embree3/rtcore_ray.h>
+
+#include <spindulys/math/vec2.h>
 
 #include <camera/camera.h>
 
@@ -44,8 +42,7 @@ class Window
 		void ProfilingWindow(bool& guiOpen);
 		void AboutWindow(bool &guiOpen);
 		void KeyboardCallback(ImGuiIO &guiIO);
-		void MouseCallback(ImGuiIO &guiIO,
-				embree::Vec2fa mousePos);
+		void MouseCallback(ImGuiIO &guiIO, Vec2f mousePos);
 
 		void RenderToScreenTexture(int width, int height, Buffer& buffer);
 		void SetupScreenQuad(int width, int height);
@@ -72,7 +69,7 @@ class Window
 		RenderManager renderManager;
 		RenderGlobals renderGlobals;
 
-		embree::Vec2fa prevMousePos = embree::Vec2fa(renderGlobals.width / 2.0f, renderGlobals.height / 2.0f);
+		Vec2f prevMousePos = Vec2f(renderGlobals.width / 2.0f, renderGlobals.height / 2.0f);
 
 		GLuint screenQuadVAO;
 		GLuint screenQuadVBO;
