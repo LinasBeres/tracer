@@ -8,6 +8,7 @@ file(GLOB FRONTEND_HEADERS
 	scene/*.h
 	shapes/*.h
 	utils/*.h
+	spindulysFrontend.h
 )
 
 file(GLOB FRONTEND_SOURCES
