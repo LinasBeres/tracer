@@ -9,6 +9,7 @@
 #include "../platform.h"
 
 #include "constants.h"
+#include "math.h"
 
 SPINDULYS_NAMESPACE_OPEN_SCOPE
 
