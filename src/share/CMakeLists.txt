@@ -1,3 +1,9 @@
+file(GLOB SPINDULYS_HEADERS
+	spindulys.h
+	spindulys/*h
+	spindulys/math/*.h
+)
+
 add_library(
 	spindulysShare INTERFACE
 )
@@ -5,5 +11,5 @@ add_library(
 target_sources(spindulysShare INTERFACE
 	FILE_SET HEADERS
 	BASE_DIRS ./
-	FILES ./spindulys.h spindulys/mathHelper.h
+	FILES ${SPINDULYS_HEADERS}
 )
