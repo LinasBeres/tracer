@@ -13,7 +13,7 @@ class NormalIntegrator final : public Integrator
 	public:
 		NormalIntegrator();
 
-		virtual embree::Vec3f GetPixelColor(Ray& ray,
+		virtual Vec3f GetPixelColor(Ray& ray,
 				PixelSample& pixelSample,
 				SceneManager &sceneManager,
 				const RenderGlobals& renderGlobals) override;

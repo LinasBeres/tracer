@@ -15,10 +15,10 @@ class OrenNayar final : public BSDF
 	public:
 		OrenNayar();
 
-		virtual embree::Vec3f Evaluate(PixelSample& pixelSample,
+		virtual Vec3f Evaluate(PixelSample& pixelSample,
 				ShadingPoint& shadingPoint,
 				BSDFSample& bsdfSample) override;
-		virtual embree::Vec3fa Sample(PixelSample& pixelSample,
+		virtual Vec3f Sample(PixelSample& pixelSample,
 				ShadingPoint& shadingPoint,
 				BSDFSample& bsdfSample) override;
 		virtual float Pdf(PixelSample& pixelSample,

@@ -1,5 +1,8 @@
 #include "scenemanager.h"
 
+#include <embree3/rtcore.h>
+#include <embree3/rtcore_ray.h>
+
 #include "../shapes/trianglemesh.h"
 #include "../shapes/quadmesh.h"
 

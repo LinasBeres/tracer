@@ -25,13 +25,13 @@ void RenderManager::Trace(const RenderGlobals& renderGlobals,
 					PixelSample pixelSample(sampler, pixelX, pixelY, pixelX + pixelY * renderGlobals.width, renderGlobals.samples, 0);
 
 					// The final pixel color of the sample we are computed that will be added and averaged to the buffer.
-					embree::Vec3f pixelColor(0.0f);
+					Vec3f pixelColor(0.0f);
 
 					for (int sample = 0; sample < renderGlobals.samples; ++sample)
 					{
 						Ray primaryRay(camera, pixelSample);
 
-						pixelColor += (embree::Vec3f(buffer.GetPixel(pixelSample.pixelIdx) * (iterations - 1)) +
+						pixelColor += (Vec3f(buffer.GetPixel(pixelSample.pixelIdx) * static_cast<float>(iterations - 1)) +
 								integrators[static_cast<int>(renderGlobals.integratorID)]->GetPixelColor(primaryRay,
 									pixelSample,
 									sceneManager,
@@ -46,7 +46,7 @@ void RenderManager::Trace(const RenderGlobals& renderGlobals,
 						++pixelSample.sampleIdx;
 					}
 
-					buffer.SetPixel(pixelSample.pixelIdx, pixelColor / iterations);
+					buffer.SetPixel(pixelSample.pixelIdx, pixelColor / static_cast<float>(iterations));
 				}
 			}
 		});

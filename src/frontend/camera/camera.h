@@ -1,13 +1,6 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-// #include <embree3/common/math/vec4.h>
-
-#include <embree3/common/math/vec2.h>
-#include <embree3/common/math/vec3.h>
-#include <embree3/rtcore.h>
-#include <embree3/rtcore_ray.h>
-
 #include <spindulys/math/vec2.h>
 #include <spindulys/math/vec3.h>
 
@@ -85,7 +78,7 @@ class Camera
 		// float                         _focalLength;
 		// float                         _far;
 		// float                         _close;
-		// std::vector<embree::Vec4f>    _clippingPlanes;
+		// std::vector<Vec4f>    _clippingPlanes;
 
 		// focus
 		// float                   _fStop;

@@ -10,7 +10,7 @@ DebugIntegrator::DebugIntegrator()
 	_handle = "Debug";
 }
 
-embree::Vec3f DebugIntegrator::GetPixelColor(Ray& ray,
+Vec3f DebugIntegrator::GetPixelColor(Ray& ray,
 		PixelSample& pixelSample,
 		SceneManager &sceneManager,
 		const RenderGlobals& renderGlobals)
@@ -23,7 +23,7 @@ embree::Vec3f DebugIntegrator::GetPixelColor(Ray& ray,
 	if (ray.instID == RTC_INVALID_GEOMETRY_ID)
 	{
 		// TODO: Hardcoded sky color value for now.
-		return embree::Vec3f(0.7, 0.8, 0.9);
+		return Vec3f(0.7, 0.8, 0.9);
 	}
 
 	// We setup all the necessary data describing the shading point.
@@ -38,7 +38,7 @@ embree::Vec3f DebugIntegrator::GetPixelColor(Ray& ray,
 	// and no actual geometry prototypes.
 	// TODO: Using a "parallel_for_each" loop in the SceneManager to generate the Embree geometry
 	// means that the IDs will never be the same everytime we run spindulys.
-	return embree::Vec3f((static_cast<float>((shadingPoint.instID & 0x000000ff) >>  0)) / 255.0f,
+	return Vec3f((static_cast<float>((shadingPoint.instID & 0x000000ff) >>  0)) / 255.0f,
 			(static_cast<float>((shadingPoint.instID & 0x0000ff00) >>  8)) / 255.0f,
 			(static_cast<float>((shadingPoint.instID & 0x00ff0000) >> 16)) / 255.0f);
 }

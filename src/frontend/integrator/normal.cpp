@@ -10,7 +10,7 @@ NormalIntegrator::NormalIntegrator()
 	_handle = "Normal";
 }
 
-embree::Vec3f NormalIntegrator::GetPixelColor(Ray& ray,
+Vec3f NormalIntegrator::GetPixelColor(Ray& ray,
 		PixelSample& pixelSample,
 		SceneManager &sceneManager,
 		const RenderGlobals& renderGlobals)
@@ -23,7 +23,7 @@ embree::Vec3f NormalIntegrator::GetPixelColor(Ray& ray,
 	// TODO: Hardcoded sky color value for now.
 	if (ray.instID == RTC_INVALID_GEOMETRY_ID)
 	{
-		return embree::Vec3f(0.7, 0.8, 0.9);
+		return Vec3f(0.7, 0.8, 0.9);
 	}
 
 	// We setup all the necessary data describing the shading point.

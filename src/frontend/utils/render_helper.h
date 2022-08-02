@@ -1,10 +1,8 @@
 #ifndef RENDER_HELPER_H
 #define RENDER_HELPER_H
 
-#include <embree3/common/math/vec2.h>
-#include <embree3/common/math/vec3.h>
-#include <embree3/rtcore.h>
-#include <embree3/rtcore_ray.h>
+#include <spindulys/math/vec2.h>
+#include <spindulys/math/vec3.h>
 
 #include "../spindulysFrontend.h"
 
@@ -55,11 +53,11 @@ struct PixelSample
 struct ShadingPoint
 {
 	const std::shared_ptr<Geometry>& geometry;              // Geometry that was intersected by the ray.
-	embree::Vec3fa V = embree::Vec3fa(0.0f);                // View vector of the ray.
-	embree::Vec3fa P = embree::Vec3fa(0.0f);                // World-space position of the shading point.
-	embree::Vec3f N = embree::Vec3f(0.0f);                  // Object/Local-space normal of the shading point.
-	embree::Vec3f Nw = embree::Vec3f(0.0f);                 // World-space normal of the shading point.
-	embree::Vec2fa UV = embree::Vec2fa(0.0f);               // UV barycentric coordinates of the shading point.
+	Vec3f V = Vec3f(0.0f);                // View vector of the ray.
+	Vec3f P = Vec3f(0.0f);                // World-space position of the shading point.
+	Vec3f N = Vec3f(0.0f);                  // Object/Local-space normal of the shading point.
+	Vec3f Nw = Vec3f(0.0f);                 // World-space normal of the shading point.
+	Vec2f UV = Vec2f(0.0f);               // UV barycentric coordinates of the shading point.
 	pxr::GfMatrix3f basis = pxr::GfMatrix3f(1.0f);          // Orthogonal basis of the shading point used for shading computation.
 	unsigned int geomID = RTC_INVALID_GEOMETRY_ID;          // Embree Geometry ID of the object the ray hit.
 	unsigned int primID = RTC_INVALID_GEOMETRY_ID;          // Embree Primitive ID of the object the ray hit.
@@ -74,8 +72,8 @@ struct ShadingPoint
 
 struct BSDFSample
 {
-	embree::Vec3f reflectance = embree::Vec3f(0.0f);        // Reflectance of the BSDF sample.
-	embree::Vec3fa wi = embree::Vec3fa(0.0f);               // Direction of the BSDF sample.
+	Vec3f reflectance = Vec3f(0.0f);        // Reflectance of the BSDF sample.
+	Vec3f wi = Vec3f(0.0f);               // Direction of the BSDF sample.
 	float NdotL = 0.0f;                                     // Dot product of the world-space normal and the exitant/light direction.
 	float NdotV = 0.0f;                                     // Dot product of the world-space normal and the incident/view direction.
 	float pdf = 0.0f;                                       // PDF of the BSDF sample.
