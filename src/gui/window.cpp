@@ -404,11 +404,11 @@ void Window::MouseCallback(ImGuiIO& guiIO, Vec2f mousePos)
 		firstMouse = false;
 	}
 
+	const Vec2f mouseOffset(mousePos.x - prevMousePos.x, mousePos.y - prevMousePos.y);
 	prevMousePos = Vec2f(mousePos);
 
 	if (guiIO.MouseDown[GLFW_MOUSE_BUTTON_RIGHT])
 	{
-		const Vec2f mouseOffset(mousePos.x - prevMousePos.x, mousePos.y - prevMousePos.y);
 		if (mouseOffset != Vec2f())
 		{
 			camera.MouseCallback(mouseOffset);
