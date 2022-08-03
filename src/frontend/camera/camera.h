@@ -6,8 +6,6 @@
 #include <spindulys/math/vec2.h>
 #include <spindulys/math/vec3.h>
 
-#include <spindulys/mathHelper.h>
-
 #include "../spindulysFrontend.h"
 
 

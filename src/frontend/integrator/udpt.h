@@ -16,7 +16,7 @@ class UDPTIntegrator final : public Integrator
 	public:
 		UDPTIntegrator();
 
-		virtual Vec3f GetPixelColor(Ray& ray,
+		virtual Col3f GetPixelColor(Ray& ray,
 				PixelSample& pixelSample,
 				SceneManager &sceneManager,
 				const RenderGlobals& renderGlobals) override;

@@ -8,7 +8,7 @@ DiffuseIntegrator::DiffuseIntegrator()
 	_handle = "Diffuse";
 }
 
-Vec3f DiffuseIntegrator::GetPixelColor(Ray& ray,
+Col3f DiffuseIntegrator::GetPixelColor(Ray& ray,
 		PixelSample& pixelSample,
 		SceneManager &sceneManager,
 		const RenderGlobals& renderGlobals)
@@ -21,7 +21,7 @@ Vec3f DiffuseIntegrator::GetPixelColor(Ray& ray,
 	if (ray.instID == RTC_INVALID_GEOMETRY_ID)
 	{
 		// TODO: Hardcoded sky color value for now.
-		return Vec3f(0.7, 0.8, 0.9);
+		return Col3f(0.7, 0.8, 0.9);
 	}
 
 	// We setup all the necessary data describing the shading point.
@@ -29,7 +29,7 @@ Vec3f DiffuseIntegrator::GetPixelColor(Ray& ray,
 
 	float diffuse(std::fabs(dot(shadingPoint.Nw, Vec3f(ray.direction.x, ray.direction.y, ray.direction.z))));
 
-	return Vec3f(shadingPoint.geometry->GetDisplayColor() * diffuse * (1.0f / static_cast<float>(M_PI)));
+	return Col3f(shadingPoint.geometry->GetDisplayColor() * diffuse * (1.0f / static_cast<float>(M_PI)));
 }
 
 FRONTEND_NAMESPACE_CLOSE_SCOPE

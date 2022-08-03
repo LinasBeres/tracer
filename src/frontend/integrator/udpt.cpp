@@ -10,13 +10,13 @@ UDPTIntegrator::UDPTIntegrator()
 	_handle = "UDPT";
 }
 
-Vec3f UDPTIntegrator::GetPixelColor(Ray& ray,
+Col3f UDPTIntegrator::GetPixelColor(Ray& ray,
 		PixelSample& pixelSample,
 		SceneManager &sceneManager,
 		const RenderGlobals& renderGlobals)
 {
-	Vec3f colorAccumulation(0.0f);
-	Vec3f colorThroughput(1.0f);
+	Col3f colorAccumulation(0.0f);
+	Col3f colorThroughput(1.0f);
 
 	for (int bounce = 0; bounce < renderGlobals.depth; ++bounce)
 	{
@@ -28,7 +28,7 @@ Vec3f UDPTIntegrator::GetPixelColor(Ray& ray,
 		if (ray.instID == RTC_INVALID_GEOMETRY_ID)
 		{
 			// TODO: Hardcoded sky color value for now.
-			return colorAccumulation += colorThroughput * Vec3f(0.7, 0.8, 0.9);
+			return colorAccumulation += colorThroughput * Col3f(0.7, 0.8, 0.9);
 		}
 
 		// We setup all the necessary data describing the shading point.
@@ -55,8 +55,9 @@ Vec3f UDPTIntegrator::GetPixelColor(Ray& ray,
 
 		// Initializing the new ray.
 		ray = Ray(ray.origin, ray.direction, shadingPoint.error);
+		const Vec3f color = bsdfSample.reflectance / bsdfSample.pdf;
 
-		colorThroughput = colorThroughput * (bsdfSample.reflectance / bsdfSample.pdf);
+		colorThroughput = colorThroughput * Col3f(color.x, color.y, color.z);
 	}
 
 	return colorAccumulation;

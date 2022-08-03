@@ -13,10 +13,10 @@
 #include <imgui_impl_opengl3.h>
 
 #include <spindulys/math/vec2.h>
+#include <spindulys/buffer.h>
 
 #include <camera/camera.h>
 
-#include <shapes/buffer.h>
 #include <render/rendermanager.h>
 #include <scene/scenemanager.h>
 
@@ -44,7 +44,7 @@ class Window
 		void KeyboardCallback(ImGuiIO &guiIO);
 		void MouseCallback(ImGuiIO &guiIO, Vec2f mousePos);
 
-		void RenderToScreenTexture(int width, int height, Buffer& buffer);
+		void RenderToScreenTexture(int width, int height, Buffer3f& buffer);
 		void SetupScreenQuad(int width, int height);
 		void CleanScreenQuad();
 		void DrawScreenQuad();
@@ -61,13 +61,14 @@ class Window
 		float deltaTime = 0.0f;
 		float lastFrame = 0.0f;
 
-		Buffer frontBuffer;
-		Buffer backBuffer;
 		Camera camera;
 		GLFWwindow* window;
 		SceneManager sceneManager;
 		RenderManager renderManager;
 		RenderGlobals renderGlobals;
+
+		Buffer3f frontBuffer = Buffer3f(renderGlobals.width, renderGlobals.height);
+		Buffer3f backBuffer  = Buffer3f(renderGlobals.width, renderGlobals.height);
 
 		Vec2f prevMousePos = Vec2f(renderGlobals.width / 2.0f, renderGlobals.height / 2.0f);
 

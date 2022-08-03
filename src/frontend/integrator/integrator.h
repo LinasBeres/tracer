@@ -2,13 +2,15 @@
 #define INTEGRATOR_H
 
 #include <spindulys/math/vec3.h>
+#include <spindulys/math/col3.h>
 #include <spindulys/mathHelper.h>
+
+#include <spindulys/sampler.h>
 
 #include "../spindulysFrontend.h"
 
 #include "../material/material.h"
 #include "../shapes/ray.h"
-#include "../sampling/sampler.h"
 #include "../scene/scenemanager.h"
 
 #include "../utils/render_helper.h"
@@ -21,7 +23,7 @@ class Integrator
 	public:
 		Integrator();
 
-		virtual Vec3f GetPixelColor(Ray& ray,
+		virtual Col3f GetPixelColor(Ray& ray,
 				PixelSample& pixelSample,
 				SceneManager &sceneManager,
 				const RenderGlobals& renderGlobals) = 0;

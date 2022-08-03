@@ -4,18 +4,23 @@
 #include <memory>
 #include <vector>
 
+#include <tbb/blocked_range2d.h>
+#include <tbb/blocked_range3d.h>
+#include <tbb/parallel_for.h>
+#include <tbb/parallel_for_each.h>
+
+#include <spindulys/sampler.h>
+#include <spindulys/buffer.h>
+
 #include "../spindulysFrontend.h"
 
 #include "../camera/camera.h"
 
-#include "../shapes/buffer.h"
 #include "../integrator/integrator.h"
 #include "../shapes/ray.h"
 #include "../scene/scenemanager.h"
-#include "../sampling/sampler.h"
 
 #include "../utils/render_helper.h"
-#include "../utils/tbb_helper.h"
 
 #include "../integrator/udpt.h"
 #include "../integrator/diffuse.h"
@@ -35,7 +40,7 @@ class RenderManager
 		void Trace(const RenderGlobals& renderGlobals,
 				SceneManager& sceneManager,
 				Camera& camera,
-				Buffer& buffer,
+				Buffer3f& buffer,
 				int iterations);
 
 		IntegratorIds integratorID = IntegratorIds::UDPT;

@@ -4,10 +4,11 @@
 #include <spindulys/math/vec2.h>
 #include <spindulys/math/vec3.h>
 
+#include <spindulys/sampler.h>
+
 #include "../spindulysFrontend.h"
 
 #include "../shapes/geometry.h"
-#include "../sampling/sampler.h"
 
 #include "usd_helper.h"
 

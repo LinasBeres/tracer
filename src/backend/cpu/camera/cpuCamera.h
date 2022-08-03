@@ -5,7 +5,7 @@
 
 #include <camera/camera.h>
 
-#include/ray.h>
+#include "../utils/ray.h"
 
 
 BACKEND_CPU_NAMESPACE_OPEN_SCOPE

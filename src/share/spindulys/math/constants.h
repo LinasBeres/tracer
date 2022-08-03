@@ -11,8 +11,8 @@
 
 SPINDULYS_NAMESPACE_OPEN_SCOPE
 
-static MAYBE_UNUSED const float one_over_255 = 1.f/255.f;
-static MAYBE_UNUSED const float min_rcp_input = 1E-18f;  // for abs(x) >= min_rcp_input the newton raphson rcp calculation does not fail
+static MAYBE_UNUSED constexpr float one_over_255 = 1.f/255.f;
+static MAYBE_UNUSED constexpr float min_rcp_input = 1E-18f;  // for abs(x) >= min_rcp_input the newton raphson rcp calculation does not fail
 
 /* we consider floating point numbers in that range as valid input numbers */
 static MAYBE_UNUSED float FLT_LARGE = 1.844E18f;

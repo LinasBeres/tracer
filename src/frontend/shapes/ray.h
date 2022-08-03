@@ -11,7 +11,7 @@
 
 #include "../camera/camera.h"
 
-#include "../sampling/sampler.h"
+#include <spindulys/sampler.h>
 
 #include "../utils/render_helper.h"
 

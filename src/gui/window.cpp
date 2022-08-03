@@ -40,8 +40,6 @@ int Window::RenderWindow()
 	camera.SetResolution(Vec2f(renderGlobals.width, renderGlobals.height));
 	camera.Init();
 
-	frontBuffer.Init(renderGlobals.width, renderGlobals.height);
-	backBuffer.Init(renderGlobals.width, renderGlobals.height);
 
 	SetupScreenQuad(renderGlobals.width, renderGlobals.height);
 
@@ -156,8 +154,7 @@ void Window::SetupGUI()
 			{
 				if (ImGui::MenuItem("PPM"))
 				{
-					Buffer outputBuffer;
-					outputBuffer.Init(renderGlobals.width, renderGlobals.height);
+					Buffer3f outputBuffer(renderGlobals.width, renderGlobals.height);
 
 					renderManager.Trace(renderGlobals,
 							sceneManager,
@@ -172,8 +169,7 @@ void Window::SetupGUI()
 
 				if (ImGui::MenuItem("EXR"))
 				{
-					Buffer outputBuffer;
-					outputBuffer.Init(renderGlobals.width, renderGlobals.height);
+					Buffer3f outputBuffer(renderGlobals.width, renderGlobals.height);
 
 					renderManager.Trace(renderGlobals,
 							sceneManager,
@@ -311,7 +307,7 @@ void Window::RenderConfigWindow(bool& guiOpen)
 		if (ImGui::Button("Save To Back Buffer"))
 		{
 			backBuffer.Clean(renderGlobals.width, renderGlobals.height);
-			backBuffer.SwapPixelData(frontBuffer.GetPixelData());
+			backBuffer.Swap(frontBuffer);
 		}
 	}
 	if (ImGui::Button("Swap Buffers"))
@@ -418,7 +414,7 @@ void Window::MouseCallback(ImGuiIO& guiIO, Vec2f mousePos)
 	}
 }
 
-void Window::RenderToScreenTexture(int width, int height, Buffer& buffer)
+void Window::RenderToScreenTexture(int width, int height, Buffer3f& buffer)
 {
 	glBindTexture(GL_TEXTURE_2D, screenTextureID);
 

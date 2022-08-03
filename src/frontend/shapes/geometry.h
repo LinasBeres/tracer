@@ -5,6 +5,7 @@
 #include <embree3/rtcore_ray.h>
 
 #include <spindulys/math/vec3.h>
+#include <spindulys/math/col3.h>
 
 #include "../spindulysFrontend.h"
 
@@ -31,7 +32,7 @@ class Geometry
 		virtual bool UpdateInstance();
 		virtual bool Clean();
 
-		const Vec3f& GetDisplayColor() const { return _displayColor; }
+		const Col3f& GetDisplayColor() const { return _displayColor; }
 		const pxr::GfMatrix4f GetTransform() const { return _transform; }
 		unsigned int GetGeomInstanceID() const { return _geomInstanceID; }
 
@@ -47,7 +48,7 @@ class Geometry
 		pxr::UsdGeomMesh _usdGeom;
 		pxr::UsdGeomXformCache _usdGeomXformCache;
 		pxr::GfMatrix4f _transform;
-		Vec3f _displayColor;
+		Col3f _displayColor;
 	private:
 };
 

@@ -10,7 +10,7 @@ RenderManager::RenderManager()
 void RenderManager::Trace(const RenderGlobals& renderGlobals,
 		SceneManager &sceneManager,
 		Camera& camera,
-		Buffer& buffer,
+		Buffer3f& buffer,
 		int iterations)
 {
 	tbb::parallel_for(tbb::blocked_range<int>(0, renderGlobals.height), [&](tbb::blocked_range<int> height_range)
@@ -25,13 +25,13 @@ void RenderManager::Trace(const RenderGlobals& renderGlobals,
 					PixelSample pixelSample(sampler, pixelX, pixelY, pixelX + pixelY * renderGlobals.width, renderGlobals.samples, 0);
 
 					// The final pixel color of the sample we are computed that will be added and averaged to the buffer.
-					Vec3f pixelColor(0.0f);
+					Col3f pixelColor(0.0f);
 
 					for (int sample = 0; sample < renderGlobals.samples; ++sample)
 					{
 						Ray primaryRay(camera, pixelSample);
 
-						pixelColor += (Vec3f(buffer.GetPixel(pixelSample.pixelIdx) * static_cast<float>(iterations - 1)) +
+						pixelColor += (buffer.GetPixel(pixelSample.pixelIdx) * static_cast<float>(iterations - 1) +
 								integrators[static_cast<int>(renderGlobals.integratorID)]->GetPixelColor(primaryRay,
 									pixelSample,
 									sceneManager,

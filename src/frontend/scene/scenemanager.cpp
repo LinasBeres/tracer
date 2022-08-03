@@ -6,7 +6,10 @@
 #include "../shapes/trianglemesh.h"
 #include "../shapes/quadmesh.h"
 
-#include "../utils/tbb_helper.h"
+#include <tbb/blocked_range2d.h>
+#include <tbb/blocked_range3d.h>
+#include <tbb/parallel_for.h>
+#include <tbb/parallel_for_each.h>
 
 
 FRONTEND_NAMESPACE_OPEN_SCOPE

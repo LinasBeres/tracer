@@ -7,9 +7,10 @@
 
 #include <spindulys/math/vec3.h>
 
+#include <spindulys/sampler.h>
+
 #include "../spindulysFrontend.h"
 
-#include "../sampling/sampler.h"
 
 #include "../utils/render_helper.h"
 #include "../utils/usd_helper.h"

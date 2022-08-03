@@ -15,10 +15,10 @@ bool Geometry::Create(const RTCDevice& device,
 
 	_primName = _prim.GetName();
 	// TODO: Get the display color from the correct time value.
-	_displayColor = (displayColor.empty() ? Vec3f(0.5f) :
-			Vec3f(displayColor[0][0],
-				displayColor[0][1],
-				displayColor[0][2]));
+	_displayColor = (displayColor.empty() ? Col3f(0.5f) :
+			Col3f(displayColor[0][0],
+						displayColor[0][1],
+						displayColor[0][2]));
 
 	CreatePrototype(device);
 	CommitPrototype();
