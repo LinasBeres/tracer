@@ -1,14 +1,9 @@
 Spindulys
 ======
 
-Spindulys is a renderer using C++, Embree and USD to produce photorealistic images using Path Tracing techniques on the CPU.
+Originaly forked from https://github.com/JoshuaSenouf/tracer as a little look into how one would start to create a realtime renderer.
 
-Features
-------
+At this point I want to further this for my own research and this also brings into the question of (Ship of Theseus)[https://en.wikipedia.org/wiki/Ship_of_Theseus]. At what point does this continue to be a fork and at what point is it something new. Well not many things can be said to be new, but still inpsired by Joshua's attempt and turned into my own thing.
 
-Dependencies (included, aside from Intel Embree/TBB, as well as Pixar USD and its own dependencies)
-------
 
-Credits
-------
-
+After the CPU code has been seperated from the frontend scene code this shall go into its own seperate repo.
