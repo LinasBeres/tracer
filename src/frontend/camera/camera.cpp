@@ -1,8 +1,5 @@
 #include "camera.h"
 
-#include <utility>
-
-
 FRONTEND_NAMESPACE_OPEN_SCOPE
 
 Camera::Camera()
@@ -85,26 +82,6 @@ void Camera::MouseCallback(const Vec2f& mouseOffset)
 	}
 
 	Update();
-}
-
-bool Camera::SetResolution(const Vec2f& resolution)
-{
-	return _resolution == std::exchange(_resolution, resolution);
-}
-
-bool Camera::SetJitter(bool jitter)
-{
-	return _jitter == std::exchange(_jitter, jitter);
-}
-
-bool Camera::SetFocalDistance(float focalDistance)
-{
-	return _focalDistance == std::exchange(_focalDistance, focalDistance);
-}
-
-bool Camera::SetAperatureRadius(float aperatureRadius)
-{
-	return _apertureRadius == std::exchange(_apertureRadius, aperatureRadius);
 }
 
 FRONTEND_NAMESPACE_CLOSE_SCOPE

@@ -1,6 +1,8 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
+#include <utility>
+
 #include <spindulys/math/vec2.h>
 #include <spindulys/math/vec3.h>
 
@@ -48,10 +50,10 @@ class Camera
 		// bool SetFStop(float fStop);
 		// bool SetFocusDistance(float focusDistance);
 
-		bool SetResolution(const Vec2f& position);
-		bool SetJitter(bool jitter);
-		bool SetFocalDistance(float focalDistance);
-		bool SetAperatureRadius(float aperatureRadius);
+		bool SetResolution(const Vec2f& resolution) { return _resolution == std::exchange(_resolution, resolution); }
+		bool SetJitter(bool jitter) { return _jitter == std::exchange(_jitter, jitter); }
+		bool SetFocalDistance(float focalDistance) { return _focalDistance == std::exchange(_focalDistance, focalDistance); }
+		bool SetAperatureRadius(float aperatureRadius) { return _apertureRadius == std::exchange(_apertureRadius, aperatureRadius); }
 
 		// Get Methods
 		bool GetJitter() const { return _jitter; }
@@ -68,7 +70,7 @@ class Camera
 		const Vec3f& GetUp() const { return _up; }
 		const Vec3f& GetRight() const { return _right; }
 
-	private:
+	protected:
 		// GfMatrix4d _transform;
 		// Projection                    _projection;
 		// float                         _horizontalAperature;
