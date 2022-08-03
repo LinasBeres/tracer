@@ -38,8 +38,8 @@ void RenderManager::Trace(const RenderGlobals& renderGlobals,
 									renderGlobals)) * (1.0f / renderGlobals.samples);
 
 						// Random noise test
-						// pixelColor += (embree::Vec3f(buffer.GetPixel(pixelSample.pixelIdx) * (iterations - 1)) +
-						//     embree::Vec3f(pixelSample.sampler.Uniform1D(),
+						// pixelColor += (Vec3f(buffer.GetPixel(pixelSample.pixelIdx) * (iterations - 1)) +
+						//     Vec3f(pixelSample.sampler.Uniform1D(),
 						//         pixelSample.sampler.Uniform1D(),
 						//         pixelSample.sampler.Uniform1D())) * (1.0f / renderGlobals.samples);
 

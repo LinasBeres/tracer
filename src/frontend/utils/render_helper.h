@@ -14,7 +14,6 @@
 
 FRONTEND_NAMESPACE_OPEN_SCOPE
 
-// From Embree 3.x
 static constexpr float errorBias = 32.0f * 1.19209e-07f;
 
 enum class IntegratorIds {

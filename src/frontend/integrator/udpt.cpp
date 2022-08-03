@@ -50,9 +50,8 @@ Vec3f UDPTIntegrator::GetPixelColor(Ray& ray,
 		// we apply some form of jitter on the position of the shading point,
 		// effectively offsetting the origin of the following ray.
 		float directionSign(sign(dot(bsdfSample.wi, shadingPoint.Nw)));
-		auto hold = shadingPoint.P + (directionSign * shadingPoint.error * shadingPoint.Nw);
-		ray.origin = embree::Vec3f(hold.x, hold.y, hold.z);
-		ray.direction = embree::Vec3f(bsdfSample.wi.x, bsdfSample.wi.y, bsdfSample.wi.z);
+		ray.origin = shadingPoint.P + (directionSign * shadingPoint.error * shadingPoint.Nw);
+		ray.direction = bsdfSample.wi;
 
 		// Initializing the new ray.
 		ray = Ray(ray.origin, ray.direction, shadingPoint.error);

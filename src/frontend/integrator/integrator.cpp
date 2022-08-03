@@ -13,14 +13,13 @@ ShadingPoint Integrator::SetupShadingPoint(SceneManager &sceneManager,
 	ShadingPoint shadingPoint(sceneManager._sceneGeom[ray.instID]);
 
 	shadingPoint.V = -Vec3f(ray.direction.x, ray.direction.y, ray.direction.z);
-	auto hold = ray.origin + ray.tfar * ray.direction;
-	shadingPoint.P = Vec3f(hold.x, hold.y, hold.z);
+	shadingPoint.P = ray.origin + ray.tfar * ray.direction;
 
 	// TODO: Use the normals primvar if available (for smooth normals).
-	shadingPoint.N = normalize(Vec3f(ray.Ng.x, ray.Ng.y, ray.Ng.z));
+	shadingPoint.N = normalize(ray.Ng);
 
 	// Object to world space normal conversion.
-	Vec3f normalWorld(spindulys::USDToEmbreeMatrixMultiply(shadingPoint.N, shadingPoint.geometry->GetTransform()));
+	Vec3f normalWorld(spindulys::USDToVectMatrixMultiply(shadingPoint.N, shadingPoint.geometry->GetTransform()));
 	// We make the normal faceforwarding.
 	shadingPoint.Nw = normalize(dot(shadingPoint.V, normalWorld) < 0.0f ? -normalWorld : normalWorld);
 	shadingPoint.UV = Vec2f(ray.u, ray.v);

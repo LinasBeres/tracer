@@ -44,7 +44,7 @@ Vec3f Lambert::Sample(PixelSample& pixelSample,
 	bsdfSample.pdf = Pdf(pixelSample, shadingPoint, bsdfSample);
 
 	// TODO: Using the basis directly does not yield the same result. This should get looked into.
-	// return embree::normalize(USDToEmbreeSIMD(EmbreeSIMDToUSD(wi) * shadingPoint.basis));
+	// return normalize(USDTo(SIMDToUSD(wi) * shadingPoint.basis));
 	return wi;
 }
 

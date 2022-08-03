@@ -1,11 +1,10 @@
 #ifndef RAY_H
 #define RAY_H
 
-#include <embree3/common/math/vec2.h>
-#include <embree3/common/math/vec3.h>
 #include <embree3/rtcore.h>
 #include <embree3/rtcore_ray.h>
 
+#include <spindulys/math/math.h>
 #include <spindulys/math/vec3.h>
 
 #include "../spindulysFrontend.h"
@@ -21,23 +20,25 @@ FRONTEND_NAMESPACE_OPEN_SCOPE
 
 struct Ray
 {
-	embree::Vec3fa origin;
-	embree::Vec3fa direction;
+	Vec3f origin;
+	float tnear;
+	Vec3f direction;
+	float time;
 
 	float tfar;
 	unsigned int mask;
 	unsigned int id;
 	unsigned int flags;
 
-	embree::Vec3f Ng;
+	Vec3f Ng;
 	float u;
 	float v;
 	unsigned int primID;
 	unsigned int geomID;
 	unsigned int instID;
 
-	__forceinline Ray(const embree::Vec3fa& origin,
-			const embree::Vec3fa& direction,
+	__forceinline Ray(const Vec3f& origin,
+			const Vec3f& direction,
 			float tnear = 0.0f,
 			float tfar = std::numeric_limits<float>::infinity(),
 			float time = 0.0f,
@@ -45,8 +46,10 @@ struct Ray
 			unsigned int geomID = RTC_INVALID_GEOMETRY_ID,
 			unsigned int primID = RTC_INVALID_GEOMETRY_ID,
 			unsigned int instID = RTC_INVALID_GEOMETRY_ID)
-		: origin(origin, tnear),
-		direction(direction, time),
+		: origin(origin),
+		tnear(tnear),
+		direction(direction),
+		time(time),
 		tfar(tfar),
 		mask(mask),
 		primID(primID),
@@ -64,7 +67,9 @@ struct Ray
 			unsigned int geomID = RTC_INVALID_GEOMETRY_ID,
 			unsigned int primID = RTC_INVALID_GEOMETRY_ID,
 			unsigned int instID = RTC_INVALID_GEOMETRY_ID)
-		: tfar(tfar),
+		: tnear(tnear),
+		time(time),
+		tfar(tfar),
 		mask(mask),
 		primID(primID),
 		geomID(geomID),
@@ -76,9 +81,9 @@ struct Ray
 		const Vec3f vectorX(axisX * tan(camera.GetFov().x * 0.5f * (float(M_PI) / 180.f)));
 		const Vec3f vectorY(axisY * tan(camera.GetFov().y * -0.5f * (float(M_PI) / 180.f)));
 
-		float pointX((((camera.GetJitter() ? pixelSample.sampler.Uniform1D() : 0.0f) - 0.5f) + pixelSample.pixelX)
+		const float pointX((((camera.GetJitter() ? pixelSample.sampler.Uniform1D() : 0.0f) - 0.5f) + pixelSample.pixelX)
 				/ (camera.GetResolution().x - 1.0f));
-		float pointY((((camera.GetJitter() ? pixelSample.sampler.Uniform1D() : 0.0f) - 0.5f) + pixelSample.pixelY)
+		const float pointY((((camera.GetJitter() ? pixelSample.sampler.Uniform1D() : 0.0f) - 0.5f) + pixelSample.pixelY)
 				/ (camera.GetResolution().y - 1.0f));
 
 		const Vec3f pointOnPlane(camera.GetPosition()
@@ -91,17 +96,16 @@ struct Ray
 		Vec3f aperturePoint(camera.GetPosition());
 		if (camera.GetAperatureRadius() > 0.0f)
 		{
-			float randomAngle(2.0f * M_PI * pixelSample.sampler.Uniform1D());
-			float randomRadius(camera.GetAperatureRadius() * embree::sqrt(pixelSample.sampler.Uniform1D()));
-			float apertureX(embree::cos(randomAngle) * randomRadius);
-			float apertureY(embree::sin(randomAngle) * randomRadius);
+			const float randomAngle(2.0f * M_PI * pixelSample.sampler.Uniform1D());
+			const float randomRadius(camera.GetAperatureRadius() * sqrt(pixelSample.sampler.Uniform1D()));
+			const float apertureX(cos(randomAngle) * randomRadius);
+			const float apertureY(sin(randomAngle) * randomRadius);
 
 			aperturePoint = camera.GetPosition() + (axisX * apertureX) + (axisY * apertureY);
 		}
 
-		origin = embree::Vec3fa(embree::Vec3fa(aperturePoint.x, aperturePoint.y, aperturePoint.z), tnear);
-		const Vec3f hold = normalize(pointOnPlane - aperturePoint);
-		direction = embree::Vec3fa(embree::Vec3fa(hold.x, hold.y, hold.z), time);
+		origin = aperturePoint;
+		direction = normalize(pointOnPlane - aperturePoint);
 	}
 };
 

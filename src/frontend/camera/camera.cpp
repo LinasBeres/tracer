@@ -12,7 +12,7 @@ Camera::Camera()
 void Camera::Init()
 {
 	// TODO: Hardcoded information for now.
-	_position = Vec3f(0, 4, 15);
+	_position = Vec3f(0.f, 4.f, 15.f);
 	_yaw = 90;
 	_pitch = 6;
 	_fov.x = 45;
