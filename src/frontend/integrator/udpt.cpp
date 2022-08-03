@@ -10,13 +10,13 @@ UDPTIntegrator::UDPTIntegrator()
 	_handle = "UDPT";
 }
 
-embree::Vec3f UDPTIntegrator::GetPixelColor(Ray& ray,
+Vec3f UDPTIntegrator::GetPixelColor(Ray& ray,
 		PixelSample& pixelSample,
 		SceneManager &sceneManager,
 		const RenderGlobals& renderGlobals)
 {
-	embree::Vec3f colorAccumulation(0.0f);
-	embree::Vec3f colorThroughput(1.0f);
+	Vec3f colorAccumulation(0.0f);
+	Vec3f colorThroughput(1.0f);
 
 	for (int bounce = 0; bounce < renderGlobals.depth; ++bounce)
 	{
@@ -28,7 +28,7 @@ embree::Vec3f UDPTIntegrator::GetPixelColor(Ray& ray,
 		if (ray.instID == RTC_INVALID_GEOMETRY_ID)
 		{
 			// TODO: Hardcoded sky color value for now.
-			return colorAccumulation += colorThroughput * embree::Vec3f(0.7, 0.8, 0.9);
+			return colorAccumulation += colorThroughput * Vec3f(0.7, 0.8, 0.9);
 		}
 
 		// We setup all the necessary data describing the shading point.
@@ -49,7 +49,7 @@ embree::Vec3f UDPTIntegrator::GetPixelColor(Ray& ray,
 		// Using the world-space normal and the error bias of the shading point , as well as a sign,
 		// we apply some form of jitter on the position of the shading point,
 		// effectively offsetting the origin of the following ray.
-		float directionSign(embree::sign(embree::dot(bsdfSample.wi, shadingPoint.Nw)));
+		float directionSign(sign(dot(bsdfSample.wi, shadingPoint.Nw)));
 		ray.origin = shadingPoint.P + (directionSign * shadingPoint.error * shadingPoint.Nw);
 		ray.direction = bsdfSample.wi;
 

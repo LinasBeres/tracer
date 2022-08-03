@@ -5,6 +5,8 @@
 
 #include <tinyexr.h>
 
+#include <spindulys/math/vec3.h>
+
 #include "../spindulysFrontend.h"
 
 #include "../shapes/buffer.h"
@@ -19,7 +21,7 @@ inline void toPPM(unsigned int width, unsigned int height, const Buffer& buffer)
     FILE *ppmFile(fopen("spindulys_render.ppm", "w"));
     fprintf(ppmFile, "P3\n%d %d\n%d\n", width, height, 255);
 
-		const std::vector<embree::Vec3f>& pixelData = buffer.GetPixelData();
+		const std::vector<Vec3f>& pixelData = buffer.GetPixelData();
     for (unsigned int pixelIdx = 0; pixelIdx < (width * height); ++pixelIdx)
     {
         // A lot faster than using std::ofstream or std::ostream_iterator/std::copy, actually.
@@ -46,7 +48,7 @@ inline void toEXR(unsigned int width, unsigned int height, const Buffer& buffer)
     channels[1].resize(width * height); // G channel
     channels[2].resize(width * height); // B channel
 
-		const std::vector<embree::Vec3f>& pixelData = buffer.GetPixelData();
+		const std::vector<Vec3f>& pixelData = buffer.GetPixelData();
     for (unsigned int pixelIdx = 0; pixelIdx < (width * height); ++pixelIdx)
     {
         channels[0][pixelIdx] = pixelData[pixelIdx].x;

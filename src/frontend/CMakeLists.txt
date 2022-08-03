@@ -39,7 +39,6 @@ target_include_directories(
 
 target_link_libraries(
 	spindulysFrontend
-	embree_common
 	${Boost_LIBRARIES}
 	${EMBREE_LIBRARY}
 	${TBB_LIBRARIES}

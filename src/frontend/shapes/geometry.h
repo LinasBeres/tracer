@@ -1,10 +1,10 @@
 #ifndef GEOMETRY_H
 #define GEOMETRY_H
 
-#include <embree3/common/math/vec2.h>
-#include <embree3/common/math/vec3.h>
 #include <embree3/rtcore.h>
 #include <embree3/rtcore_ray.h>
+
+#include <spindulys/math/vec3.h>
 
 #include "../spindulysFrontend.h"
 
@@ -31,7 +31,7 @@ class Geometry
 		virtual bool UpdateInstance();
 		virtual bool Clean();
 
-		const embree::Vec3f& GetDisplayColor() const { return _displayColor; }
+		const Vec3f& GetDisplayColor() const { return _displayColor; }
 		const pxr::GfMatrix4f GetTransform() const { return _transform; }
 		unsigned int GetGeomInstanceID() const { return _geomInstanceID; }
 
@@ -47,7 +47,7 @@ class Geometry
 		pxr::UsdGeomMesh _usdGeom;
 		pxr::UsdGeomXformCache _usdGeomXformCache;
 		pxr::GfMatrix4f _transform;
-		embree::Vec3f _displayColor;
+		Vec3f _displayColor;
 	private:
 };
 

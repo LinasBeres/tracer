@@ -21,17 +21,17 @@ inline float RadToDeg(float radAngle)
 }
 
 template<typename T, typename A>
-A USDToEmbreeMatrixMultiply(const A& embreeVector, const T& usdMatrix)
+A USDToVectMatrixMultiply(const A& vector, const T& usdMatrix)
 {
-    return A(embreeVector.x * usdMatrix[0][0] +
-            embreeVector.y * usdMatrix[1][0] +
-            embreeVector.z * usdMatrix[2][0],
-        embreeVector.x * usdMatrix[0][1] +
-            embreeVector.y * usdMatrix[1][1] +
-            embreeVector.z * usdMatrix[2][1],
-        embreeVector.x * usdMatrix[0][2] +
-            embreeVector.y * usdMatrix[1][2] +
-            embreeVector.z * usdMatrix[2][2]);
+    return A(vector.x * usdMatrix[0][0] +
+            vector.y * usdMatrix[1][0] +
+            vector.z * usdMatrix[2][0],
+        vector.x * usdMatrix[0][1] +
+            vector.y * usdMatrix[1][1] +
+            vector.z * usdMatrix[2][1],
+        vector.x * usdMatrix[0][2] +
+            vector.y * usdMatrix[1][2] +
+            vector.z * usdMatrix[2][2]);
 }
 
 template<typename T, typename A>

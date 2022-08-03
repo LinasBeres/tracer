@@ -3,10 +3,7 @@
 
 #include <vector>
 
-#include <embree3/common/math/vec2.h>
-#include <embree3/common/math/vec3.h>
-#include <embree3/rtcore.h>
-#include <embree3/rtcore_ray.h>
+#include <spindulys/math/vec3.h>
 
 #include "../spindulysFrontend.h"
 
@@ -22,15 +19,15 @@ class Buffer
 		void Clean(int width, int height);
 		void Swap(Buffer& buffer);
 
-		void SwapPixelData(const std::vector<embree::Vec3f>& pixelData) { _pixelData = pixelData; }
-		const std::vector<embree::Vec3f>& GetPixelData() const { return _pixelData; }
+		void SwapPixelData(const std::vector<Vec3f>& pixelData) { _pixelData = pixelData; }
+		const std::vector<Vec3f>& GetPixelData() const { return _pixelData; }
 
-		void SetPixel(int pixelIndex, const embree::Vec3f& pixel) { _pixelData[pixelIndex] = pixel; }
-		const embree::Vec3f& GetPixel(int pixelIndex) const { return _pixelData[pixelIndex]; }
+		void SetPixel(int pixelIndex, const Vec3f& pixel) { _pixelData[pixelIndex] = pixel; }
+		const Vec3f& GetPixel(int pixelIndex) const { return _pixelData[pixelIndex]; }
 
 
 	private:
-		std::vector<embree::Vec3f> _pixelData;
+		std::vector<Vec3f> _pixelData;
 };
 
 FRONTEND_NAMESPACE_CLOSE_SCOPE

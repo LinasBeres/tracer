@@ -4,10 +4,8 @@
 #include <algorithm>
 #include <random>
 
-#include <embree3/common/math/vec2.h>
-#include <embree3/common/math/vec3.h>
-#include <embree3/rtcore.h>
-#include <embree3/rtcore_ray.h>
+#include <spindulys/math/vec2.h>
+#include <spindulys/math/vec3.h>
 
 #include "../spindulysFrontend.h"
 
@@ -16,18 +14,18 @@ FRONTEND_NAMESPACE_OPEN_SCOPE
 
 struct Sampler
 {
-    Sampler();
+	Sampler();
 
-    unsigned NewSeed();
-    float Uniform1D();
-    embree::Vec2f Uniform2D();
-    std::vector<embree::Vec2f> Stratified2D(int samples);
-    embree::Vec3f HemisphereUniform(float rand0, float rand1);
-    embree::Vec3f HemisphereCosineWeighted(float rand0, float rand1);
-    embree::Vec3f SphereUniform(float rand0, float rand1);
+	unsigned NewSeed();
+	float Uniform1D();
+	Vec2f Uniform2D();
+	std::vector<Vec2f> Stratified2D(int samples);
+	Vec3f HemisphereUniform(float rand0, float rand1);
+	Vec3f HemisphereCosineWeighted(float rand0, float rand1);
+	Vec3f SphereUniform(float rand0, float rand1);
 
-    std::uniform_real_distribution<float> floatUniformDistribution;
-    std::mt19937 prng;
+	std::uniform_real_distribution<float> floatUniformDistribution;
+	std::mt19937 prng;
 };
 
 FRONTEND_NAMESPACE_CLOSE_SCOPE

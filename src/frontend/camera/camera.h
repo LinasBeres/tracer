@@ -1,12 +1,8 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-// #include <embree3/common/math/vec4.h>
-
-#include <embree3/common/math/vec2.h>
-#include <embree3/common/math/vec3.h>
-#include <embree3/rtcore.h>
-#include <embree3/rtcore_ray.h>
+#include <spindulys/math/vec2.h>
+#include <spindulys/math/vec3.h>
 
 #include <spindulys/mathHelper.h>
 
@@ -38,7 +34,7 @@ class Camera
 		void SetupFOV();
 		void KeyboardCallback(CAMERA_MOVEMENTS direction,
 				float deltaTime);
-		void MouseCallback(embree::Vec2fa mouseOffset);
+		void MouseCallback(const Vec2f& mouseOffset);
 
 		// Set Methods
 		// bool SetProjection(Projection projection);
@@ -52,7 +48,7 @@ class Camera
 		// bool SetFStop(float fStop);
 		// bool SetFocusDistance(float focusDistance);
 
-		bool SetResolution(const embree::Vec2fa& position);
+		bool SetResolution(const Vec2f& position);
 		bool SetJitter(bool jitter);
 		bool SetFocalDistance(float focalDistance);
 		bool SetAperatureRadius(float aperatureRadius);
@@ -65,12 +61,12 @@ class Camera
 		float GetSensitivity() const { return _sensitivity; }
 		float GetAperatureRadius() const { return _apertureRadius; }
 		float GetFocalDistance() const { return _focalDistance; }
-		const embree::Vec2fa& GetResolution() const { return _resolution; }
-		const embree::Vec2fa& GetFov() const { return _fov; }
-		const embree::Vec3fa& GetPosition() const { return _position; }
-		const embree::Vec3fa& GetFront() const { return _front; }
-		const embree::Vec3fa& GetUp() const { return _up; }
-		const embree::Vec3fa& GetRight() const { return _right; }
+		const Vec2f& GetResolution() const { return _resolution; }
+		const Vec2f& GetFov() const { return _fov; }
+		const Vec3f& GetPosition() const { return _position; }
+		const Vec3f& GetFront() const { return _front; }
+		const Vec3f& GetUp() const { return _up; }
+		const Vec3f& GetRight() const { return _right; }
 
 	private:
 		// GfMatrix4d _transform;
@@ -82,7 +78,7 @@ class Camera
 		// float                         _focalLength;
 		// float                         _far;
 		// float                         _close;
-		// std::vector<embree::Vec4f>    _clippingPlanes;
+		// std::vector<Vec4f>    _clippingPlanes;
 
 		// focus
 		// float                   _fStop;
@@ -96,12 +92,12 @@ class Camera
 		float _sensitivity;
 		float _apertureRadius;
 		float _focalDistance;
-		embree::Vec2fa _resolution;
-		embree::Vec2fa _fov;
-		embree::Vec3fa _position;
-		embree::Vec3fa _front;
-		embree::Vec3fa _up;
-		embree::Vec3fa _right;
+		Vec2f _resolution;
+		Vec2f _fov;
+		Vec3f _position;
+		Vec3f _front;
+		Vec3f _up;
+		Vec3f _right;
 };
 
 FRONTEND_NAMESPACE_CLOSE_SCOPE
