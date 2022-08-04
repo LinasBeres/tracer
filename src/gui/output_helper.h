@@ -8,11 +8,10 @@
 #include <spindulys/math/vec3.h>
 #include <spindulys/buffer.h>
 
-#include "../spindulysFrontend.h"
+#include "spindulysGUI.h"
 
 
-
-FRONTEND_NAMESPACE_OPEN_SCOPE
+GUI_NAMESPACE_OPEN_SCOPE
 
 inline void toPPM(unsigned int width, unsigned int height, const Buffer3f& buffer)
 {
@@ -97,6 +96,6 @@ inline void toEXR(unsigned int width, unsigned int height, const Buffer3f& buffe
 	free(exrHeader.requested_pixel_types);
 }
 
-FRONTEND_NAMESPACE_CLOSE_SCOPE
+GUI_NAMESPACE_CLOSE_SCOPE
 
 #endif // OUTPUT_HELPER_H

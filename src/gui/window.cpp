@@ -1,6 +1,6 @@
 #include "window.h"
 
-#include <utils/output_helper.h>
+#include "output_helper.h"
 
 
 GUI_NAMESPACE_OPEN_SCOPE
@@ -91,10 +91,10 @@ int Window::RenderWindow()
 			if (renderReset)
 				ResetRenderer();
 
-			++iterations;
-
 			// Progressive rendering
-			renderManager.Trace(renderGlobals, sceneManager, camera, frontBuffer, iterations);
+			if (iterations++ < 64)
+				renderManager.Trace(renderGlobals, sceneManager, camera, frontBuffer, iterations);
+
 			RenderToScreenTexture(renderGlobals.width, renderGlobals.height, frontBuffer);
 		}
 

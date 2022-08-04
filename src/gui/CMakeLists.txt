@@ -1,6 +1,7 @@
 file(GLOB GUI_HEADERS
 	spindulysGUI.h
 	window.h
+	output_helper.h
 	opengl/*.h
 )
 
