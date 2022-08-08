@@ -16,9 +16,10 @@ Ray CPUCamera::GetCameraRay(const PixelSample& pixelSample)
 	const float pointY((((GetJitter() ? pixelSample.sampler.Uniform1D() : 0.0f) - 0.5f) + pixelSample.pixelY)
 			/ (GetResolution().y - 1.0f));
 
-	const Vec3f pointOnPlane(GetPosition() + ((forward + (vectorX * ((2.0f * pointX) - 1.0f)) + (vectorY * ((2.0f * pointY) - 1.0f))
-					- GetPosition())
-				* GetFocalDistance()));
+	const Vec3f pointOnPlane(GetPosition()
+			+ ((forward + (vectorX * ((2.0f * pointX) - 1.0f))
+				+ (vectorY * ((2.0f * pointY) - 1.0f))
+				- GetPosition()) * GetFocalDistance()));
 
 	Vec3f aperturePoint(GetPosition());
 	if (GetAperatureRadius() > 0.0f)

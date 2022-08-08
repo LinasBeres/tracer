@@ -1,10 +1,12 @@
 file(GLOB BACKEND_CPU_HEADERS
 	camera/*.h
+	integrator/*.h
 	spindulysCPUBackend.h
 )
 
 file(GLOB BACKEND_CPU_SOURCES
 	camera/*.cpp
+	integrator/*.cpp
 )
 
 add_library(
