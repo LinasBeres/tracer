@@ -9,7 +9,6 @@
 
 #include "../spindulysFrontend.h"
 
-#include "../material/material.h"
 #include "../shapes/ray.h"
 #include "../scene/scenemanager.h"
 
