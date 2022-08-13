@@ -1,14 +1,12 @@
-#ifndef LAMBERT_H
-#define LAMBERT_H
+#ifndef CPU_LAMBERT_H
+#define CPU_LAMBERT_H
 
-#include <string>
+#include "bsdf.h"
 
-#include "../bsdf/bsdf.h"
-
-#include "../spindulysFrontend.h"
+#include "../spindulysBackendCPU.h"
 
 
-FRONTEND_NAMESPACE_OPEN_SCOPE
+BACKEND_CPU_NAMESPACE_OPEN_SCOPE
 
 class Lambert final : public BSDF
 {
@@ -27,6 +25,6 @@ class Lambert final : public BSDF
 	private:
 };
 
-FRONTEND_NAMESPACE_CLOSE_SCOPE
+BACKEND_CPU_NAMESPACE_CLOSE_SCOPE
 
-#endif // LAMBERT_H
+#endif // CPU_LAMBERT_H

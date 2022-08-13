@@ -1,24 +1,19 @@
 #include "position.h"
 
-#include "../utils/render_helper.h"
 
+BACKEND_CPU_NAMESPACE_OPEN_SCOPE
 
-FRONTEND_NAMESPACE_OPEN_SCOPE
-
-PositionIntegrator::PositionIntegrator()
-{
-	_handle = "Position";
-}
+PositionIntegrator::PositionIntegrator() { }
 
 Col3f PositionIntegrator::GetPixelColor(Ray& ray,
 		PixelSample& pixelSample,
-		SceneManager &sceneManager,
-		const RenderGlobals& renderGlobals)
+		Scene& scene,
+		const RenderManager::RenderGlobals& renderGlobals)
 {
 	RTCIntersectContext intersectContext;
 	rtcInitIntersectContext(&intersectContext);
 
-	rtcIntersect1(sceneManager._scene, &intersectContext, RTCRayHit_(ray));
+	rtcIntersect1(scene.GetScene(), &intersectContext, RTCRayHit_(ray));
 
 	if (ray.instID == RTC_INVALID_GEOMETRY_ID)
 	{
@@ -27,10 +22,10 @@ Col3f PositionIntegrator::GetPixelColor(Ray& ray,
 	}
 
 	// We setup all the necessary data describing the shading point.
-	ShadingPoint shadingPoint(SetupShadingPoint(sceneManager, ray));
+	ShadingPoint shadingPoint(SetupShadingPoint(scene, ray));
 	const Vec3f normalizedPoint = normalize(shadingPoint.P);
 
 	return Col3f(normalizedPoint.x, normalizedPoint.y, normalizedPoint.z);
 }
 
-FRONTEND_NAMESPACE_CLOSE_SCOPE
+BACKEND_CPU_NAMESPACE_CLOSE_SCOPE

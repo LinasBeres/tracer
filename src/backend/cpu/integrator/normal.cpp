@@ -1,24 +1,19 @@
 #include "normal.h"
 
-#include "../utils/render_helper.h"
 
+BACKEND_CPU_NAMESPACE_OPEN_SCOPE
 
-FRONTEND_NAMESPACE_OPEN_SCOPE
-
-NormalIntegrator::NormalIntegrator()
-{
-	_handle = "Normal";
-}
+NormalIntegrator::NormalIntegrator() { }
 
 Col3f NormalIntegrator::GetPixelColor(Ray& ray,
 		PixelSample& pixelSample,
-		SceneManager &sceneManager,
-		const RenderGlobals& renderGlobals)
+		Scene& scene,
+		const RenderManager::RenderGlobals& renderGlobals)
 {
 	RTCIntersectContext intersectContext;
 	rtcInitIntersectContext(&intersectContext);
 
-	rtcIntersect1(sceneManager._scene, &intersectContext, RTCRayHit_(ray));
+	rtcIntersect1(scene.GetScene(), &intersectContext, RTCRayHit_(ray));
 
 	// TODO: Hardcoded sky color value for now.
 	if (ray.instID == RTC_INVALID_GEOMETRY_ID)
@@ -27,9 +22,9 @@ Col3f NormalIntegrator::GetPixelColor(Ray& ray,
 	}
 
 	// We setup all the necessary data describing the shading point.
-	ShadingPoint shadingPoint(SetupShadingPoint(sceneManager, ray));
+	ShadingPoint shadingPoint(SetupShadingPoint(scene, ray));
 
 	return Col3f(shadingPoint.N.x, shadingPoint.N.y, shadingPoint.N.z);
 }
 
-FRONTEND_NAMESPACE_CLOSE_SCOPE
+BACKEND_CPU_NAMESPACE_CLOSE_SCOPE

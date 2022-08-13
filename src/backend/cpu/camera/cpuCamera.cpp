@@ -3,7 +3,7 @@
 BACKEND_CPU_NAMESPACE_OPEN_SCOPE
 
 
-Ray CPUCamera::GetCameraRay(const PixelSample& pixelSample)
+Ray CPUCamera::GetCameraRay(const PixelSample& pixelSample) const
 {
 	const Vec3f axisX(normalize(cross(GetFront(), GetUp())));
 	const Vec3f axisY(normalize(cross(axisX, GetFront())));
@@ -15,6 +15,8 @@ Ray CPUCamera::GetCameraRay(const PixelSample& pixelSample)
 			/ (GetResolution().x - 1.0f));
 	const float pointY((((GetJitter() ? pixelSample.sampler.Uniform1D() : 0.0f) - 0.5f) + pixelSample.pixelY)
 			/ (GetResolution().y - 1.0f));
+
+	// std::cerr << "FOX:" << GetFov() << "\n";
 
 	const Vec3f pointOnPlane(GetPosition()
 			+ ((forward + (vectorX * ((2.0f * pointX) - 1.0f))

@@ -1,19 +1,14 @@
 #include "udpt.h"
 
-#include "../shapes/ray.h"
 
+BACKEND_CPU_NAMESPACE_OPEN_SCOPE
 
-FRONTEND_NAMESPACE_OPEN_SCOPE
-
-UDPTIntegrator::UDPTIntegrator()
-{
-	_handle = "UDPT";
-}
+UDPTIntegrator::UDPTIntegrator() { }
 
 Col3f UDPTIntegrator::GetPixelColor(Ray& ray,
 		PixelSample& pixelSample,
-		SceneManager &sceneManager,
-		const RenderGlobals& renderGlobals)
+		Scene &scene,
+		const RenderManager::RenderGlobals& renderGlobals)
 {
 	Col3f colorAccumulation(0.0f);
 	Col3f colorThroughput(1.0f);
@@ -23,7 +18,7 @@ Col3f UDPTIntegrator::GetPixelColor(Ray& ray,
 		RTCIntersectContext intersectContext;
 		rtcInitIntersectContext(&intersectContext);
 
-		rtcIntersect1(sceneManager._scene, &intersectContext, RTCRayHit_(ray));
+		rtcIntersect1(scene.GetScene(), &intersectContext, RTCRayHit_(ray));
 
 		if (ray.instID == RTC_INVALID_GEOMETRY_ID)
 		{
@@ -32,7 +27,7 @@ Col3f UDPTIntegrator::GetPixelColor(Ray& ray,
 		}
 
 		// We setup all the necessary data describing the shading point.
-		ShadingPoint shadingPoint(SetupShadingPoint(sceneManager, ray));
+		ShadingPoint shadingPoint(SetupShadingPoint(scene, ray));
 
 		// Sky/Environment Sampling
 		// TODO
@@ -63,4 +58,4 @@ Col3f UDPTIntegrator::GetPixelColor(Ray& ray,
 	return colorAccumulation;
 }
 
-FRONTEND_NAMESPACE_CLOSE_SCOPE
+BACKEND_CPU_NAMESPACE_CLOSE_SCOPE

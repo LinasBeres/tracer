@@ -10,13 +10,13 @@
 
 BACKEND_CPU_NAMESPACE_OPEN_SCOPE
 
-class CPUCamera final : Camera
+class CPUCamera final : public Camera
 {
 	public:
 		CPUCamera() = default;
 		~CPUCamera() = default;
 
-	Ray GetCameraRay(const PixelSample& pixelSample);
+	virtual Ray GetCameraRay(const PixelSample& pixelSample) const override;
 };
 
 BACKEND_CPU_NAMESPACE_CLOSE_SCOPE

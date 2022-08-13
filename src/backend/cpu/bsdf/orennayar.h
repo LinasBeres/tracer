@@ -1,14 +1,12 @@
-#ifndef ORENNAYAR_H
-#define ORENNAYAR_H
+#ifndef CPU_ORENNAYAR_H
+#define CPU_ORENNAYAR_H
 
-#include <string>
-
-#include "../spindulysFrontend.h"
+#include "../spindulysBackendCPU.h"
 
 #include "bsdf.h"
 
 
-FRONTEND_NAMESPACE_OPEN_SCOPE
+BACKEND_CPU_NAMESPACE_OPEN_SCOPE
 
 class OrenNayar final : public BSDF
 {
@@ -29,6 +27,6 @@ class OrenNayar final : public BSDF
 		float _roughness;
 };
 
-FRONTEND_NAMESPACE_CLOSE_SCOPE
+BACKEND_CPU_NAMESPACE_CLOSE_SCOPE
 
-#endif // ORENNAYAR_H
+#endif // CPU_ORENNAYAR_H

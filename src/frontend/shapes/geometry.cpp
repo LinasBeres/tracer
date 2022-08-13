@@ -7,6 +7,11 @@ Geometry::Geometry()
 {
 }
 
+Geometry::~Geometry()
+{
+
+}
+
 bool Geometry::Create(const RTCDevice& device,
 		const RTCScene& topScene)
 {

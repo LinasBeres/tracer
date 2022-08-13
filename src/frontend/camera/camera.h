@@ -5,11 +5,16 @@
 
 #include <spindulys/math/vec2.h>
 #include <spindulys/math/vec3.h>
+#include <spindulys/sampler.h>
 
 #include "../spindulysFrontend.h"
 
+#include "../utils/helperStructs.h"
+
 
 FRONTEND_NAMESPACE_OPEN_SCOPE
+
+struct Ray;
 
 class Camera
 {
@@ -28,6 +33,7 @@ class Camera
 		};
 
 		Camera();
+		virtual ~Camera();
 
 		void Init();
 		void Update();
@@ -35,6 +41,9 @@ class Camera
 		void KeyboardCallback(CAMERA_MOVEMENTS direction,
 				float deltaTime);
 		void MouseCallback(const Vec2f& mouseOffset);
+
+
+		virtual Ray GetCameraRay(const PixelSample& pixelSample) const = 0;
 
 		// Set Methods
 		// bool SetProjection(Projection projection);

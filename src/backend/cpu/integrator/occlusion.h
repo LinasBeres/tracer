@@ -1,12 +1,12 @@
 #ifndef OCCLUSION_H
 #define OCCLUSION_H
 
-#include "../spindulysFrontend.h"
+#include "../spindulysBackendCPU.h"
 
 #include "integrator.h"
 
 
-FRONTEND_NAMESPACE_OPEN_SCOPE
+BACKEND_CPU_NAMESPACE_OPEN_SCOPE
 
 class OcclusionIntegrator final : public Integrator
 {
@@ -15,11 +15,11 @@ class OcclusionIntegrator final : public Integrator
 
 		virtual Col3f GetPixelColor(Ray& ray,
 				PixelSample& pixelSample,
-				SceneManager &sceneManager,
-				const RenderGlobals& renderGlobals) override;
+				Scene& scene,
+				const RenderManager::RenderGlobals& renderGlobals) override;
 	private:
 };
 
-FRONTEND_NAMESPACE_CLOSE_SCOPE
+BACKEND_CPU_NAMESPACE_CLOSE_SCOPE
 
 #endif // OCCLUSION_H

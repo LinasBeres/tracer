@@ -1,21 +1,15 @@
 file(GLOB FRONTEND_HEADERS
-	bsdf/*.h
 	camera/*.h
-	integrator/*.h
 	render/*.h
-	sampling/*.h
 	scene/*.h
 	shapes/*.h
-	utils/*.h
 	spindulysFrontend.h
+	utils/*.h
 )
 
 file(GLOB FRONTEND_SOURCES
-	bsdf/*.cpp
 	camera/*.cpp
-	integrator/*.cpp
 	render/*.cpp
-	sampling/*.cpp
 	scene/*.cpp
 	shapes/*.cpp
 	utils/*.cpp

@@ -1,7 +1,7 @@
 #include "lambert.h"
 
 
-FRONTEND_NAMESPACE_OPEN_SCOPE
+BACKEND_CPU_NAMESPACE_OPEN_SCOPE
 
 Lambert::Lambert()
 {
@@ -13,7 +13,7 @@ Vec3f Lambert::Evaluate(PixelSample& pixelSample,
 		BSDFSample& bsdfSample)
 {
 	// TODO: "NdotL" should not be the same one as from "Sample()", but the actual dot product of the normal and the light direction?
-	const Vec3f geometryColor = Vec3f(shadingPoint.geometry->GetDisplayColor().r, shadingPoint.geometry->GetDisplayColor().g, shadingPoint.geometry->GetDisplayColor().b);
+	const Vec3f geometryColor = Vec3f(shadingPoint.geometry.GetDisplayColor().r, shadingPoint.geometry.GetDisplayColor().g, shadingPoint.geometry.GetDisplayColor().b);
 	return (geometryColor / static_cast<float>(M_PI)) * bsdfSample.NdotL;
 }
 
@@ -56,4 +56,4 @@ float Lambert::Pdf(PixelSample& pixelSample,
 	return bsdfSample.NdotL > 0.0f ? bsdfSample.NdotL / M_PI : 1.0f;
 }
 
-FRONTEND_NAMESPACE_CLOSE_SCOPE
+BACKEND_CPU_NAMESPACE_CLOSE_SCOPE

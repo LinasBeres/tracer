@@ -1,24 +1,19 @@
 #include "debug.h"
 
-#include "../utils/render_helper.h"
 
+BACKEND_CPU_NAMESPACE_OPEN_SCOPE
 
-FRONTEND_NAMESPACE_OPEN_SCOPE
-
-DebugIntegrator::DebugIntegrator()
-{
-	_handle = "Debug";
-}
+DebugIntegrator::DebugIntegrator() { }
 
 Col3f DebugIntegrator::GetPixelColor(Ray& ray,
 		PixelSample& pixelSample,
-		SceneManager &sceneManager,
-		const RenderGlobals& renderGlobals)
+		Scene& scene,
+		const RenderManager::RenderGlobals& renderGlobals)
 {
 	RTCIntersectContext intersectContext;
 	rtcInitIntersectContext(&intersectContext);
 
-	rtcIntersect1(sceneManager._scene, &intersectContext, RTCRayHit_(ray));
+	rtcIntersect1(scene.GetScene(), &intersectContext, RTCRayHit_(ray));
 
 	if (ray.instID == RTC_INVALID_GEOMETRY_ID)
 	{
@@ -27,7 +22,7 @@ Col3f DebugIntegrator::GetPixelColor(Ray& ray,
 	}
 
 	// We setup all the necessary data describing the shading point.
-	ShadingPoint shadingPoint(SetupShadingPoint(sceneManager, ray));
+	ShadingPoint shadingPoint(SetupShadingPoint(scene, ray));
 
 	// We return a color based on the "instID" of the intersected geometry.
 	// In Embree, the "primID" correspond to a unique *piece* of geometry, such as a triangle,
@@ -43,4 +38,4 @@ Col3f DebugIntegrator::GetPixelColor(Ray& ray,
 			(static_cast<float>((shadingPoint.instID & 0x00ff0000) >> 16)) / 255.0f);
 }
 
-FRONTEND_NAMESPACE_CLOSE_SCOPE
+BACKEND_CPU_NAMESPACE_CLOSE_SCOPE

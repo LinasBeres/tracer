@@ -41,7 +41,7 @@ template<typename T> inline std::ostream& operator<<(std::ostream& cout, const B
 {
 	std::string out;
 	for (const auto& col : a.GetPixelData())
-		out += col + " ";
+		out += std::to_string(col.r) + std::to_string(col.g) + std::to_string(col.b) + " ";
 	return cout << a;
 }
 

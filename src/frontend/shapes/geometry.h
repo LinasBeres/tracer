@@ -18,6 +18,7 @@ class Geometry
 {
 	public:
 		Geometry();
+		virtual ~Geometry();
 
 		virtual bool Create(const RTCDevice& device,
 				const RTCScene& topScene);

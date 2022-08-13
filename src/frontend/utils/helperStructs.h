@@ -1,39 +1,19 @@
-#ifndef CPU_HELPER_STRUCTS_H
-#define CPU_HELPER_STRUCTS_H
+#ifndef HELPER_STRUCTS_H
+#define HELPER_STRUCTS_H
 
 #include <spindulys/math/vec2.h>
 #include <spindulys/math/vec3.h>
 #include <spindulys/math/linearspace3.h>
 #include <spindulys/sampler.h>
 
-#include <shapes/geometry.h>
+#include "../shapes/geometry.h"
 
-#include "../spindulysBackendCPU.h"
+#include "../spindulysFrontend.h"
 
 
-
-BACKEND_CPU_NAMESPACE_OPEN_SCOPE
+FRONTEND_NAMESPACE_OPEN_SCOPE
 
 static constexpr float errorBias = 32.0f * 1.19209e-07f;
-
-enum class IntegratorIds {
-	UDPT = 0,
-	Diffuse,
-	Occlusion,
-	Position,
-	Normal,
-	Debug,
-};
-
-struct RenderGlobals
-{
-	int width = 800;                                   // The width of the image to render.
-	int height = 600;                                  // The height of the image to render.
-	int depth = 3;                                     // The maximum ray depth, or number of bounces, the renderer can make use of.
-	int samples = 1;                                   // Total number of samples per pixel to compute.
-	IntegratorIds integratorID = IntegratorIds::UDPT;  // The ID of the integrator currently being used by the renderer.
-	bool rayJitter = true;                             // Define whether the camera rays should be jittered or not.
-};
 
 struct PixelSample
 {
@@ -78,6 +58,6 @@ struct BSDFSample
 	float pdf = 0.0f;                 // PDF of the BSDF sample.
 };
 
-BACKEND_CPU_NAMESPACE_CLOSE_SCOPE
+FRONTEND_NAMESPACE_CLOSE_SCOPE
 
 #endif // CPU_HELPER_STRUCTS_H

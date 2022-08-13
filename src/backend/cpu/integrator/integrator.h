@@ -3,7 +3,8 @@
 
 #include <spindulys/math/col3.h>
 
-#include <scene/scenemanager.h>
+#include <render/renderManager.h>
+#include <scene/scene.h>
 
 #include "../spindulysBackendCPU.h"
 
@@ -18,9 +19,9 @@ class Integrator
 
 		virtual Col3f GetPixelColor(Ray& ray,
 				PixelSample& pixelSample,
-				SceneManager &scene,
-				const RenderGlobals& renderGlobals) = 0;
-		virtual ShadingPoint SetupShadingPoint(SceneManager &scene, const Ray& ray);
+				Scene &scene,
+				const RenderManager::RenderGlobals& renderGlobals) = 0;
+		virtual ShadingPoint SetupShadingPoint(Scene &scene, const Ray& ray);
 
 	private:
 };

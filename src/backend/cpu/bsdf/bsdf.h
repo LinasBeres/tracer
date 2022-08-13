@@ -1,22 +1,19 @@
-#ifndef BSDF_H
-#define BSDF_H
+#ifndef CPU_BSDF_H
+#define CPU_BSDF_H
 
 #include <string>
 
 #include <spindulys/mathHelper.h>
-
 #include <spindulys/math/vec3.h>
-
 #include <spindulys/sampler.h>
 
-#include "../spindulysFrontend.h"
+#include <utils/helperStructs.h>
+
+#include "../spindulysBackendCPU.h"
 
 
-#include "../utils/render_helper.h"
-#include "../utils/usd_helper.h"
 
-
-FRONTEND_NAMESPACE_OPEN_SCOPE
+BACKEND_CPU_NAMESPACE_OPEN_SCOPE
 
 class BSDF
 {
@@ -38,6 +35,6 @@ class BSDF
 	private:
 };
 
-FRONTEND_NAMESPACE_CLOSE_SCOPE
+BACKEND_CPU_NAMESPACE_CLOSE_SCOPE
 
-#endif // BSDF_H
+#endif // CPU_BSDF_H
