@@ -3,6 +3,8 @@
 #include "../geometry/cpuTrianglemesh.h"
 #include "../geometry/cpuQuadmesh.h"
 
+#include <spindulys/math/linearspace3.h>
+
 
 BACKEND_CPU_NAMESPACE_OPEN_SCOPE
 
@@ -14,12 +16,13 @@ CPUScene::CPUScene()
 
 bool CPUScene::CreateGeomerty(Geometry::GeometryTypes geometryType,
 		const std::string& primName,
-		const pxr::GfMatrix4f& transform,
+		const LinearSpace3f& transform,
 		const Col3f& displayColor,
 		const pxr::VtArray<pxr::GfVec3f>& points,
 		const pxr::VtArray<int>& indices)
 {
 	bool success = true;
+
 	if (geometryType == Geometry::GeometryTypes::TriangleMesh)
 	{
 		CPUTriangleMesh* triangleMesh(new CPUTriangleMesh(primName, transform, displayColor, points, indices));

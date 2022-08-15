@@ -30,8 +30,8 @@ bool CPUGeometry::Create(const RTCDevice& device,
 
 	rtcSetGeometryTransform(_geomInstance,
 			0,
-			RTC_FORMAT_FLOAT4X4_COLUMN_MAJOR,
-			_transform.GetArray());
+			RTC_FORMAT_FLOAT3X3_COLUMN_MAJOR,
+			&_transform);
 
 	rtcCommitGeometry(_geomInstance);
 	rtcReleaseGeometry(_geomInstance);

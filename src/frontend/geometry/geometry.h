@@ -3,6 +3,7 @@
 
 #include <spindulys/math/vec3.h>
 #include <spindulys/math/col3.h>
+#include <spindulys/math/linearspace3.h>
 
 #include "../spindulysFrontend.h"
 
@@ -12,10 +13,6 @@
 #include <pxr/usd/usdGeom/xformCache.h>
 #include <pxr/usd/usd/attribute.h>
 #include <pxr/base/vt/array.h>
-#include <pxr/base/gf/matrix3f.h>
-#include <pxr/base/gf/matrix3d.h>
-#include <pxr/base/gf/matrix4f.h>
-#include <pxr/base/gf/matrix4d.h>
 
 FRONTEND_NAMESPACE_OPEN_SCOPE
 
@@ -33,7 +30,7 @@ class Geometry
 
 		const std::string& GetName() const { return _name; }
 		const Col3f& GetDisplayColor() const { return _displayColor; }
-		const pxr::GfMatrix4f GetTransform() const { return _transform; }
+		const LinearSpace3f GetTransform() const { return _transform; }
 
 		unsigned int GetGeomID() const { return _geomID; }
 		unsigned int GetGeomInstanceID() const { return _geomInstanceID; }
@@ -43,7 +40,7 @@ class Geometry
 		unsigned int _geomInstanceID = SPINDULYS_INVALID_GEOMETRY_ID;
 
 		std::string _name;
-		pxr::GfMatrix4f _transform;
+		LinearSpace3f _transform;
 		Col3f _displayColor;
 	private:
 };

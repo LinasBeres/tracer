@@ -8,7 +8,7 @@ QuadMesh::QuadMesh()
 }
 
 QuadMesh::QuadMesh(const std::string& primName,
-		const pxr::GfMatrix4f& transform,
+		const LinearSpace3f& transform,
 		const Col3f& displayColor,
 		const pxr::VtArray<pxr::GfVec3f>& points,
 		const pxr::VtArray<int>& indices)
