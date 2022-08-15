@@ -11,7 +11,7 @@ Integrator::Integrator()
 {
 }
 
-ShadingPoint Integrator::SetupShadingPoint(const Scene* scene, const Ray& ray)
+ShadingPoint Integrator::SetupShadingPoint(const CPUScene* scene, const Ray& ray)
 {
 	ShadingPoint shadingPoint(scene->GetGeometery(ray.instID));
 

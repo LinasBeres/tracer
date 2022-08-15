@@ -7,7 +7,7 @@ UDPTIntegrator::UDPTIntegrator() { }
 
 Col3f UDPTIntegrator::GetPixelColor(Ray& ray,
 		PixelSample& pixelSample,
-		Scene* scene,
+		CPUScene* scene,
 		const RenderManager::RenderGlobals& renderGlobals)
 {
 	Col3f colorAccumulation(0.0f);

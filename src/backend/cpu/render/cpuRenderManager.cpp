@@ -11,10 +11,7 @@ BACKEND_CPU_NAMESPACE_OPEN_SCOPE
 CPURenderManager::CPURenderManager()
 {
 	scene = new CPUScene();
-
 	mainCamera = std::unique_ptr<Camera>(new CPUCamera());
-	// CPUScene* cpuScene = dynamic_cast<CPUScene*>(scene);
-	// cpuScene->CommitGeometry();
 }
 
 void CPURenderManager::Trace(int iterations)
@@ -43,17 +40,17 @@ void CPURenderManager::Trace(int iterations)
 						pixelColor += buffer.GetPixel(pixelSample.pixelIdx) * static_cast<float>(iterations - 1);
 
 						if (renderGlobals.integratorID == IntegratorIds::UDPT)
-							pixelColor += UDPTIntegrator().GetPixelColor(primaryRay, pixelSample, scene, renderGlobals);
+							pixelColor += UDPTIntegrator().GetPixelColor(primaryRay, pixelSample, dynamic_cast<CPUScene*>(scene), renderGlobals);
 						else if (renderGlobals.integratorID == IntegratorIds::Diffuse)
-							pixelColor += DiffuseIntegrator().GetPixelColor(primaryRay, pixelSample, scene, renderGlobals);
+							pixelColor += DiffuseIntegrator().GetPixelColor(primaryRay, pixelSample, dynamic_cast<CPUScene*>(scene), renderGlobals);
 						else if (renderGlobals.integratorID == IntegratorIds::Occlusion)
-							pixelColor += OcclusionIntegrator().GetPixelColor(primaryRay, pixelSample, scene, renderGlobals);
+							pixelColor += OcclusionIntegrator().GetPixelColor(primaryRay, pixelSample, dynamic_cast<CPUScene*>(scene), renderGlobals);
 						else if (renderGlobals.integratorID == IntegratorIds::Position)
-							pixelColor += PositionIntegrator().GetPixelColor(primaryRay, pixelSample, scene, renderGlobals);
+							pixelColor += PositionIntegrator().GetPixelColor(primaryRay, pixelSample, dynamic_cast<CPUScene*>(scene), renderGlobals);
 						else if (renderGlobals.integratorID == IntegratorIds::Normal)
-							pixelColor += NormalIntegrator().GetPixelColor(primaryRay, pixelSample, scene, renderGlobals);
+							pixelColor += NormalIntegrator().GetPixelColor(primaryRay, pixelSample, dynamic_cast<CPUScene*>(scene), renderGlobals);
 						else if (renderGlobals.integratorID == IntegratorIds::Debug)
-							pixelColor += DebugIntegrator().GetPixelColor(primaryRay, pixelSample, scene, renderGlobals);
+							pixelColor += DebugIntegrator().GetPixelColor(primaryRay, pixelSample, dynamic_cast<CPUScene*>(scene), renderGlobals);
 
 						pixelColor *= (1.f / renderGlobals.samples);
 

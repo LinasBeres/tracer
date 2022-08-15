@@ -7,7 +7,7 @@ DiffuseIntegrator::DiffuseIntegrator() { }
 
 Col3f DiffuseIntegrator::GetPixelColor(Ray& ray,
 		PixelSample& pixelSample,
-		Scene* scene,
+		CPUScene* scene,
 		const RenderManager::RenderGlobals& renderGlobals)
 {
 	RTCIntersectContext intersectContext;

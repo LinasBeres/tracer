@@ -1,17 +1,12 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include <vector>
 #include <string>
 #include <mutex>
 #include <unordered_map>
 
-#include <embree3/rtcore.h>
-#include <embree3/rtcore_ray.h>
-
 #include "../spindulysFrontend.h"
 
-#include "../camera/camera.h"
 #include "../geometry/geometry.h"
 
 FRONTEND_NAMESPACE_OPEN_SCOPE
@@ -24,23 +19,18 @@ class Scene
 
 		bool LoadScene(const std::string& filepath);
 		bool LoadMeshGeometry(const pxr::UsdStagePtr& stage);
-		virtual bool CommitGeometry() { std::cerr << "COMMITTING FROM SCENE??\n"; return true; }
+		virtual void CommitScene() = 0;
+		virtual bool CommitGeometry(Geometry* geometry) = 0;
 
 		const std::string& GetFilePath() const { return filepath; }
-		RTCScene GetScene() { return _scene; }
 
-		const Geometry& GetGeometery(unsigned int geomInstanceID) const { return _sceneGeom.at(geomInstanceID); }
+		const Geometry& GetGeometery(unsigned int geomInstanceID) const { return *(_sceneGeometry.at(geomInstanceID).get()); }
 
 		bool SceneDirty() const { return update; }
 
 	protected:
 		std::string filepath;
-
-		RTCDevice _device = nullptr;
-		RTCScene _scene = nullptr; // Contains the instanced (single or not) geometry objects. This is the scene we are tracing against.
-															 // std::unordered_map<unsigned int, std::shared_ptr<Material>> _sceneMaterial;
-		std::unordered_map<unsigned int, Geometry> _sceneGeom;
-
+		std::unordered_map<unsigned int, std::unique_ptr<Geometry>> _sceneGeometry;
 		std::mutex _sceneMutex;
 
 		bool update = false;

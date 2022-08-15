@@ -9,19 +9,14 @@ CPUScene::CPUScene()
 	_scene = rtcNewScene(_device);
 }
 
-bool CPUScene::CommitGeometry()
+bool CPUScene::CommitGeometry(Geometry* geometry)
 {
+	if(!geometry->Create(_device, _scene))
+		return false;
 
-	std::cerr << "COMMIT GEOM FROM CPU GOOOOODDDD\n";
-
-	for (const auto& it : _sceneGeom)
-	{
-		Geometry geom = it.second;
-
-		geom.Create(_device, _scene);
-	}
-
-	rtcCommitScene(_scene);
+	_sceneMutex.lock();
+	_sceneGeometry[geometry->GetGeomInstanceID()] = std::unique_ptr<Geometry>(geometry);
+	_sceneMutex.unlock();
 
 	return true;
 }

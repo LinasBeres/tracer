@@ -16,7 +16,10 @@ class CPUScene final : public Scene
 		CPUScene();
 		~CPUScene() = default;
 
-		virtual bool CommitGeometry() override;
+		virtual void CommitScene() override { rtcCommitScene(_scene); }
+		virtual bool CommitGeometry(Geometry* geometry) override;
+
+		RTCScene GetScene() { return _scene; }
 
 	private:
 		RTCDevice _device = nullptr;

@@ -4,10 +4,10 @@
 #include <spindulys/math/col3.h>
 
 #include <render/renderManager.h>
-#include <scene/scene.h>
 
 #include "../spindulysBackendCPU.h"
 
+#include "../scene/cpuScene.h"
 #include "../utils/ray.h"
 
 BACKEND_CPU_NAMESPACE_OPEN_SCOPE
@@ -19,9 +19,9 @@ class Integrator
 
 		virtual Col3f GetPixelColor(Ray& ray,
 				PixelSample& pixelSample,
-				Scene* scene,
+				CPUScene* scene,
 				const RenderManager::RenderGlobals& renderGlobals) = 0;
-		virtual ShadingPoint SetupShadingPoint(const Scene* scene, const Ray& ray);
+		virtual ShadingPoint SetupShadingPoint(const CPUScene* scene, const Ray& ray);
 
 	private:
 };

@@ -35,8 +35,6 @@ class CPURenderManager final : public RenderManager
 
 		virtual void Trace(int iterations) override;
 
-		bool CommitScene() { return true; }
-
 	private:
 };
 

@@ -7,7 +7,7 @@ DebugIntegrator::DebugIntegrator() { }
 
 Col3f DebugIntegrator::GetPixelColor(Ray& ray,
 		PixelSample& pixelSample,
-		Scene* scene,
+		CPUScene* scene,
 		const RenderManager::RenderGlobals& renderGlobals)
 {
 	RTCIntersectContext intersectContext;

@@ -12,8 +12,7 @@ Geometry::~Geometry()
 
 }
 
-bool Geometry::Create(const RTCDevice& device,
-		const RTCScene& topScene)
+bool Geometry::Create(const RTCDevice& device, const RTCScene& topScene)
 {
 	CreatePrototype(device);
 
@@ -41,12 +40,6 @@ bool Geometry::Create(const RTCDevice& device,
 
 	return true;
 }
-
-bool Geometry::CreatePrototype(const RTCDevice& device)
-{
-	return true;
-}
-
 
 
 FRONTEND_NAMESPACE_CLOSE_SCOPE

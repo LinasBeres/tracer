@@ -15,7 +15,7 @@ class PositionIntegrator final : public Integrator
 
 		virtual Col3f GetPixelColor(Ray& ray,
 				PixelSample& pixelSample,
-				Scene* scene,
+				CPUScene* scene,
 				const RenderManager::RenderGlobals& renderGlobals) override;
 	private:
 };

@@ -1,5 +1,7 @@
 #include "scene.h"
 
+#include <vector>
+
 #include <tbb/blocked_range2d.h>
 #include <tbb/blocked_range3d.h>
 #include <tbb/parallel_for.h>
@@ -16,26 +18,35 @@ bool Scene::LoadScene(const std::string& filepath)
 		return false;
 
 	if (!((std::size_t(filepath.rfind(std::string(".usd")) != std::string::npos) ||
-        std::size_t(filepath.rfind(std::string(".usda")) != std::string::npos) ||
-        std::size_t(filepath.rfind(std::string(".usdc")) != std::string::npos) ||
-        std::size_t(filepath.rfind(std::string(".usdz")) != std::string::npos)) ? true : false))
+					std::size_t(filepath.rfind(std::string(".usda")) != std::string::npos) ||
+					std::size_t(filepath.rfind(std::string(".usdc")) != std::string::npos) ||
+					std::size_t(filepath.rfind(std::string(".usdz")) != std::string::npos)) ? true : false))
 	{
 		std::cerr << "ERROR - The following file is not an USD scene: " << filepath << std::endl;
 
 		return false;
 	}
 
-	_device = rtcNewDevice("");
-	_scene = rtcNewScene(_device);
-
 	const pxr::UsdStageRefPtr stage = pxr::UsdStage::Open(filepath);
 	if (!stage)
 		return false;
 
 	LoadMeshGeometry(stage);
-	rtcCommitScene(_scene);
 
 	return true;
+}
+
+void GetPrimFromType(const std::string& primType, const pxr::UsdStageRefPtr& stage, const pxr::SdfPath& primPath, std::vector<pxr::UsdPrim>& primVector)
+{
+	const pxr::UsdPrim basePrim = stage->GetPrimAtPath(primPath);
+	for(const pxr::UsdPrim& prim: basePrim.GetChildren())
+	{
+		if (prim.GetTypeName() == primType)
+			primVector.push_back(prim);
+
+		if (prim.GetChildren())
+			GetPrimFromType(primType, stage, prim.GetPath(), primVector);
+	}
 }
 
 bool Scene::LoadMeshGeometry(const pxr::UsdStagePtr& stage)
@@ -46,10 +57,7 @@ bool Scene::LoadMeshGeometry(const pxr::UsdStagePtr& stage)
 
 	tbb::parallel_for_each(meshPrims.begin(), meshPrims.end(), [&](pxr::UsdPrim& prim)
 			{
-			const pxr::TfToken primName(prim.GetName());
-			const pxr::SdfPath primPath(prim.GetPrimPath());
-
-			pxr::UsdGeomMesh usdGeom(pxr::UsdGeomMesh::Get(stage, primPath));
+			pxr::UsdGeomMesh usdGeom(pxr::UsdGeomMesh::Get(stage, prim.GetPrimPath()));
 
 			pxr::VtArray<pxr::GfVec3f> points;
 			pxr::VtArray<int> indicesCounts;
@@ -59,39 +67,23 @@ bool Scene::LoadMeshGeometry(const pxr::UsdStagePtr& stage)
 			usdGeom.GetFaceVertexIndicesAttr().Get(&indices);
 			usdGeom.GetFaceVertexCountsAttr().Get(&indicesCounts);
 
-			bool isTriangleMesh((static_cast<float>(indices.size()) /
-						static_cast<float>(indicesCounts.size()) == 3.0f) ? true : false);
-			bool isQuadMesh((static_cast<float>(indices.size()) /
-						static_cast<float>(indicesCounts.size()) == 4.0f) ? true : false);
-			bool needTriangulate((!isTriangleMesh && !isQuadMesh) ? true : false);
-
-			if (isTriangleMesh)
+			if (indices.size() / indicesCounts.size() == 3)
 			{
-				TriangleMesh triangleMesh(prim, usdGeom, points, indices);
-				triangleMesh.Create(_device, _scene);
-
-				_sceneMutex.lock();
-				_sceneGeom[triangleMesh.GetGeomInstanceID()] = triangleMesh;
-				_sceneMutex.unlock();
+				TriangleMesh* triangleMesh(new TriangleMesh(prim, usdGeom, points, indices));
+				CommitGeometry(triangleMesh);
 			}
-			else if (isQuadMesh)
+			else if (indices.size() / indicesCounts.size() == 4)
 			{
-				QuadMesh quadMesh(prim, usdGeom, points, indices);
-				quadMesh.Create(_device, _scene);
-
-				_sceneMutex.lock();
-				_sceneGeom[quadMesh.GetGeomInstanceID()] = quadMesh;
-				_sceneMutex.unlock();
-			}
-			else if (needTriangulate)
-			{
-				// TODO
+				QuadMesh* quadMesh(new QuadMesh(prim, usdGeom, points, indices));
+				CommitGeometry(quadMesh);
 			}
 			else
 			{
 				// TODO
 			}
 			});
+
+	CommitScene();
 
 	return true;
 }

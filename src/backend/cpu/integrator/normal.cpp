@@ -7,7 +7,7 @@ NormalIntegrator::NormalIntegrator() { }
 
 Col3f NormalIntegrator::GetPixelColor(Ray& ray,
 		PixelSample& pixelSample,
-		Scene* scene,
+		CPUScene* scene,
 		const RenderManager::RenderGlobals& renderGlobals)
 {
 	RTCIntersectContext intersectContext;

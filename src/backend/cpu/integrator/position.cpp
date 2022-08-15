@@ -7,7 +7,7 @@ PositionIntegrator::PositionIntegrator() { }
 
 Col3f PositionIntegrator::GetPixelColor(Ray& ray,
 		PixelSample& pixelSample,
-		Scene* scene,
+		CPUScene* scene,
 		const RenderManager::RenderGlobals& renderGlobals)
 {
 	RTCIntersectContext intersectContext;

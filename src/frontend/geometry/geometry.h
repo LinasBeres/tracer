@@ -9,33 +9,47 @@
 
 #include "../spindulysFrontend.h"
 
-#include "../utils/usd_helper.h"
-
+#include <pxr/usd/usd/stage.h>
+#include <pxr/usd/usd/prim.h>
+#include <pxr/usd/usdGeom/mesh.h>
+#include <pxr/usd/usdGeom/xformCache.h>
+#include <pxr/usd/usd/attribute.h>
+#include <pxr/base/vt/array.h>
+#include <pxr/base/gf/matrix3f.h>
+#include <pxr/base/gf/matrix3d.h>
+#include <pxr/base/gf/matrix4f.h>
+#include <pxr/base/gf/matrix4d.h>
 
 FRONTEND_NAMESPACE_OPEN_SCOPE
 
 class Geometry
 {
 	public:
+		enum GeometryTypes
+		{
+			QuadMesh = 0,
+			TriangleMesh,
+		};
+
 		Geometry();
 		virtual ~Geometry();
 
 		virtual bool Create(const RTCDevice& device, const RTCScene& topScene);
-		virtual bool CreatePrototype(const RTCDevice& device);
+		virtual bool CreatePrototype(const RTCDevice& device) = 0;
 
 		const Col3f& GetDisplayColor() const { return _displayColor; }
 		const pxr::GfMatrix4f GetTransform() const { return _transform; }
 		unsigned int GetGeomInstanceID() const { return _geomInstanceID; }
 
+		pxr::TfToken _primName;
 	protected:
-		unsigned int _geomID = RTC_INVALID_GEOMETRY_ID;
-		unsigned int _geomInstanceID = RTC_INVALID_GEOMETRY_ID;
+		unsigned int _geomID = SPINDULYS_INVALID_GEOMETRY_ID;
+		unsigned int _geomInstanceID = SPINDULYS_INVALID_GEOMETRY_ID;
 
 		RTCScene _scene = nullptr;
 		RTCGeometry _geom = nullptr;
 		RTCGeometry _geomInstance = nullptr;
 		pxr::UsdPrim _prim;
-		pxr::TfToken _primName;
 		pxr::UsdGeomMesh _usdGeom;
 		pxr::UsdGeomXformCache _usdGeomXformCache;
 		pxr::GfMatrix4f _transform;

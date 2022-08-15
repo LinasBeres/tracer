@@ -36,7 +36,6 @@ int Window::RenderWindow()
 	ImGui_ImplOpenGL3_Init(glsl_version);
 
 	renderManager.LoadScene("/home/lba42/Documents/testRenderers/spindulys/res/scenes/cupandsaucer.usdz");
-	renderManager.CommitScene();
 	renderManager.mainCamera->SetResolution(Vec2f(renderGlobals.width, renderGlobals.height));
 	renderManager.mainCamera->Init();
 

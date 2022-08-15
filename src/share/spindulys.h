@@ -49,4 +49,7 @@
 
 #endif // SPINDULYS_USE_NAMESPACE
 
+
+#define SPINDULYS_INVALID_GEOMETRY_ID ((unsigned int)-1)
+
 #endif //SPINDULYS_H
