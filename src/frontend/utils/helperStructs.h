@@ -6,7 +6,7 @@
 #include <spindulys/math/linearspace3.h>
 #include <spindulys/sampler.h>
 
-#include "../shapes/geometry.h"
+#include "../geometry/geometry.h"
 
 #include "../spindulysFrontend.h"
 

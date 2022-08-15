@@ -5,8 +5,8 @@
 #include <tbb/parallel_for.h>
 #include <tbb/parallel_for_each.h>
 
-#include "../shapes/trianglemesh.h"
-#include "../shapes/quadmesh.h"
+#include "../geometry/trianglemesh.h"
+#include "../geometry/quadmesh.h"
 
 FRONTEND_NAMESPACE_OPEN_SCOPE
 

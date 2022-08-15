@@ -1,17 +1,17 @@
 file(GLOB FRONTEND_HEADERS
+	spindulysFrontend.h
 	camera/*.h
+	geometry/*.h
 	render/*.h
 	scene/*.h
-	shapes/*.h
-	spindulysFrontend.h
 	utils/*.h
 )
 
 file(GLOB FRONTEND_SOURCES
 	camera/*.cpp
+	geometry/*.cpp
 	render/*.cpp
 	scene/*.cpp
-	shapes/*.cpp
 	utils/*.cpp
 )
 

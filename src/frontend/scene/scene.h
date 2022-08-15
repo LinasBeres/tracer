@@ -12,7 +12,7 @@
 #include "../spindulysFrontend.h"
 
 #include "../camera/camera.h"
-#include "../shapes/geometry.h"
+#include "../geometry/geometry.h"
 
 FRONTEND_NAMESPACE_OPEN_SCOPE
 
