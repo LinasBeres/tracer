@@ -8,7 +8,7 @@
 
 FRONTEND_NAMESPACE_OPEN_SCOPE
 
-class QuadMesh final : public Geometry
+class QuadMesh : public Geometry
 {
 	public:
 		QuadMesh();
@@ -18,9 +18,8 @@ class QuadMesh final : public Geometry
 				const pxr::VtArray<int>& indices);
 
 		virtual bool CreatePrototype(const RTCDevice& device) override;
-		virtual bool UpdatePrototype() override;
 
-	private:
+	protected:
 		pxr::VtArray<pxr::GfVec3f> _points;
 		pxr::VtArray<int> _indices;
 };

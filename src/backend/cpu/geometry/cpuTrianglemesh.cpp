@@ -1,13 +1,13 @@
-#include "trianglemesh.h"
+#include "cpuTrianglemesh.h"
 
 
-FRONTEND_NAMESPACE_OPEN_SCOPE
+BACKEND_CPU_NAMESPACE_OPEN_SCOPE
 
-TriangleMesh::TriangleMesh()
+CPUTriangleMesh::CPUTriangleMesh()
 {
 }
 
-TriangleMesh::TriangleMesh(const pxr::UsdPrim& prim,
+CPUTriangleMesh::CPUTriangleMesh(const pxr::UsdPrim& prim,
 		const pxr::UsdGeomMesh& usdGeom,
 		const pxr::VtArray<pxr::GfVec3f>& points,
 		const pxr::VtArray<int>& indices)
@@ -28,7 +28,7 @@ TriangleMesh::TriangleMesh(const pxr::UsdPrim& prim,
 						displayColor[0][2]));
 }
 
-bool TriangleMesh::CreatePrototype(const RTCDevice& device)
+bool CPUTriangleMesh::CreatePrototype(const RTCDevice& device)
 {
 	_scene = rtcNewScene(device);
 	_geom = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_TRIANGLE);
@@ -55,4 +55,4 @@ bool TriangleMesh::CreatePrototype(const RTCDevice& device)
 }
 
 
-FRONTEND_NAMESPACE_CLOSE_SCOPE
+BACKEND_CPU_NAMESPACE_CLOSE_SCOPE

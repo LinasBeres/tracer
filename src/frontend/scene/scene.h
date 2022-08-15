@@ -31,6 +31,7 @@ class Scene
 
 		const Geometry& GetGeometery(unsigned int geomInstanceID) const { return _sceneGeom.at(geomInstanceID); }
 
+		bool SceneDirty() const { return update; }
 
 	protected:
 		std::string filepath;
@@ -41,6 +42,8 @@ class Scene
 		std::unordered_map<unsigned int, Geometry> _sceneGeom;
 
 		std::mutex _sceneMutex;
+
+		bool update = false;
 	private:
 };
 

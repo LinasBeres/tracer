@@ -1,18 +1,18 @@
-#include "geometry.h"
+#include "cpuGeometry.h"
 
 
-FRONTEND_NAMESPACE_OPEN_SCOPE
+BACKEND_CPU_NAMESPACE_OPEN_SCOPE
 
-Geometry::Geometry()
+CPUGeometry::CPUGeometry()
 {
 }
 
-Geometry::~Geometry()
+CPUGeometry::~CPUGeometry()
 {
 
 }
 
-bool Geometry::Create(const RTCDevice& device,
+bool CPUGeometry::Create(const RTCDevice& device,
 		const RTCScene& topScene)
 {
 	CreatePrototype(device);
@@ -42,11 +42,11 @@ bool Geometry::Create(const RTCDevice& device,
 	return true;
 }
 
-bool Geometry::CreatePrototype(const RTCDevice& device)
+bool CPUGeometry::CreatePrototype(const RTCDevice& device)
 {
 	return true;
 }
 
 
 
-FRONTEND_NAMESPACE_CLOSE_SCOPE
+BACKEND_CPU_NAMESPACE_CLOSE_SCOPE

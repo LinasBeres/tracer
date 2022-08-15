@@ -16,6 +16,16 @@ QuadMesh::QuadMesh(const pxr::UsdPrim& prim,
 	_usdGeom = usdGeom;
 	_points = points;
 	_indices = indices;
+
+	pxr::VtArray<pxr::GfVec3f> displayColor;
+	_usdGeom.GetDisplayColorAttr().Get(&displayColor);
+
+	_primName = _prim.GetName();
+	// TODO: Get the display color from the correct time value.
+	_displayColor = (displayColor.empty() ? Col3f(0.5f) :
+			Col3f(displayColor[0][0],
+						displayColor[0][1],
+						displayColor[0][2]));
 }
 
 bool QuadMesh::CreatePrototype(const RTCDevice& device)
@@ -44,42 +54,5 @@ bool QuadMesh::CreatePrototype(const RTCDevice& device)
 	return true;
 }
 
-bool QuadMesh::UpdatePrototype()
-{
-	pxr::VtArray<pxr::GfVec3f> points;
-	pxr::VtArray<int> indices;
-	pxr::VtArray<int> indicesCounts;
-
-	_usdGeom.GetPointsAttr().Get(&points);
-	_usdGeom.GetFaceVertexIndicesAttr().Get(&indices);
-	_usdGeom.GetFaceVertexCountsAttr().Get(&indicesCounts);
-
-	bool isQuadMesh((static_cast<float>(indices.size()) /
-				static_cast<float>(indicesCounts.size()) == 4.0f) ? true : false);
-
-	if (isQuadMesh)
-	{
-		if (_points != points)
-		{
-			_points = points;
-			const pxr::GfVec3f* pointsData((pxr::GfVec3f*)rtcGetGeometryBufferData(_geom,
-						RTC_BUFFER_TYPE_VERTEX,
-						0));
-
-			pointsData = _points.cdata();
-		}
-		if (_indices != indices)
-		{
-			_indices = indices;
-			const int* indicesData((int*)rtcGetGeometryBufferData(_geom,
-						RTC_BUFFER_TYPE_INDEX,
-						0));
-
-			indicesData = _indices.cdata();
-		}
-	}
-
-	return true;
-}
 
 FRONTEND_NAMESPACE_CLOSE_SCOPE

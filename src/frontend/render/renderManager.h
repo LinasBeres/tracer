@@ -43,6 +43,8 @@ class RenderManager
 
 		bool LoadScene(const std::string& filepath) { return scene.LoadScene(filepath); }
 
+		bool RenderDirty() const { return update || scene.SceneDirty(); }
+
 		const Buffer3f& GetBuffer() { return buffer; }
 
 		virtual void Trace(int iterations) = 0;
@@ -53,6 +55,8 @@ class RenderManager
 	protected:
 		Buffer3f buffer = Buffer3f(renderGlobals.width, renderGlobals.height);
 		Scene scene;
+
+		bool update = false;
 
 	private:
 };

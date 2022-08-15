@@ -1,5 +1,5 @@
-#ifndef GEOMETRY_H
-#define GEOMETRY_H
+#ifndef CPU_GEOMETRY_H
+#define CPU_GEOMETRY_H
 
 #include <embree3/rtcore.h>
 #include <embree3/rtcore_ray.h>
@@ -7,24 +7,23 @@
 #include <spindulys/math/vec3.h>
 #include <spindulys/math/col3.h>
 
-#include "../spindulysFrontend.h"
+#include <geometry/geometry.h>
 
-#include "../utils/usd_helper.h"
+#include "../spindulysBackendCPU.h"
 
 
-FRONTEND_NAMESPACE_OPEN_SCOPE
+BACKEND_CPU_NAMESPACE_OPEN_SCOPE
 
-class Geometry
+class CPUGeometry : public Geometry
 {
 	public:
-		Geometry();
-		virtual ~Geometry();
+		CPUGeometry();
+		virtual ~CPUGeometry();
 
 		virtual bool Create(const RTCDevice& device, const RTCScene& topScene);
 		virtual bool CreatePrototype(const RTCDevice& device);
 
-		const Col3f& GetDisplayColor() const { return _displayColor; }
-		const pxr::GfMatrix4f GetTransform() const { return _transform; }
+		unsigned int GetGeomID() const { return _geomID; }
 		unsigned int GetGeomInstanceID() const { return _geomInstanceID; }
 
 	protected:
@@ -34,15 +33,9 @@ class Geometry
 		RTCScene _scene = nullptr;
 		RTCGeometry _geom = nullptr;
 		RTCGeometry _geomInstance = nullptr;
-		pxr::UsdPrim _prim;
-		pxr::TfToken _primName;
-		pxr::UsdGeomMesh _usdGeom;
-		pxr::UsdGeomXformCache _usdGeomXformCache;
-		pxr::GfMatrix4f _transform;
-		Col3f _displayColor;
 	private:
 };
 
-FRONTEND_NAMESPACE_CLOSE_SCOPE
+BACKEND_CPU_NAMESPACE_CLOSE_SCOPE
 
-#endif // GEOMETRY_H
+#endif // CPU_GEOMETRY_H
