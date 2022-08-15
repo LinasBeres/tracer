@@ -28,9 +28,6 @@ bool CPUGeometry::Create(const RTCDevice& device,
 	rtcSetGeometryInstancedScene(_geomInstance, _scene);
 	rtcSetGeometryTimeStepCount(_geomInstance, 1);
 
-	pxr::GfMatrix4d usdTransform(_usdGeomXformCache.GetLocalToWorldTransform(_prim));
-	_transform = pxr::GfMatrix4f(usdTransform);
-
 	rtcSetGeometryTransform(_geomInstance,
 			0,
 			RTC_FORMAT_FLOAT4X4_COLUMN_MAJOR,
@@ -39,11 +36,6 @@ bool CPUGeometry::Create(const RTCDevice& device,
 	rtcCommitGeometry(_geomInstance);
 	rtcReleaseGeometry(_geomInstance);
 
-	return true;
-}
-
-bool CPUGeometry::CreatePrototype(const RTCDevice& device)
-{
 	return true;
 }
 

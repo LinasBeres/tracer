@@ -55,9 +55,12 @@ bool Scene::LoadMeshGeometry(const pxr::UsdStagePtr& stage)
 
 	GetPrimFromType("Mesh", stage, pxr::SdfPath("/"), meshPrims);
 
+	pxr::UsdGeomXformCache usdGeomXformCache;
+
 	tbb::parallel_for_each(meshPrims.begin(), meshPrims.end(), [&](pxr::UsdPrim& prim)
 			{
 			pxr::UsdGeomMesh usdGeom(pxr::UsdGeomMesh::Get(stage, prim.GetPrimPath()));
+
 
 			pxr::VtArray<pxr::GfVec3f> points;
 			pxr::VtArray<int> indicesCounts;
@@ -67,20 +70,24 @@ bool Scene::LoadMeshGeometry(const pxr::UsdStagePtr& stage)
 			usdGeom.GetFaceVertexIndicesAttr().Get(&indices);
 			usdGeom.GetFaceVertexCountsAttr().Get(&indicesCounts);
 
+			const pxr::TfToken primName = prim.GetName();
+			const pxr::GfMatrix4f transform(usdGeomXformCache.GetLocalToWorldTransform(prim));
+
+			// TODO: Get the display color from the correct time value.
+			pxr::VtArray<pxr::GfVec3f> pxrDisplayColor;
+			usdGeom.GetDisplayColorAttr().Get(&pxrDisplayColor);
+			const Col3f displayColor = (pxrDisplayColor.empty() ? Col3f(0.5f) :
+					Col3f(pxrDisplayColor[0][0],
+								pxrDisplayColor[0][1],
+								pxrDisplayColor[0][2]));
+
 			if (indices.size() / indicesCounts.size() == 3)
-			{
-				TriangleMesh* triangleMesh(new TriangleMesh(prim, usdGeom, points, indices));
-				CommitGeometry(triangleMesh);
-			}
+				CreateGeomerty(Geometry::GeometryTypes::TriangleMesh, primName, transform, displayColor, points, indices);
 			else if (indices.size() / indicesCounts.size() == 4)
-			{
-				QuadMesh* quadMesh(new QuadMesh(prim, usdGeom, points, indices));
-				CommitGeometry(quadMesh);
-			}
+				CreateGeomerty(Geometry::GeometryTypes::QuadMesh, primName, transform, displayColor, points, indices);
 			else
-			{
+				std::cerr << "FIXME...\n";
 				// TODO
-			}
 			});
 
 	CommitScene();

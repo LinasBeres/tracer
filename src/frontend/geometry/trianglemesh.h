@@ -8,16 +8,15 @@
 
 FRONTEND_NAMESPACE_OPEN_SCOPE
 
-class TriangleMesh : public Geometry
+class TriangleMesh : virtual public Geometry
 {
 	public:
 		TriangleMesh();
-		TriangleMesh(const pxr::UsdPrim& prim,
-				const pxr::UsdGeomMesh& usdGeom,
+		TriangleMesh(const pxr::TfToken& primName,
+				const pxr::GfMatrix4f& transform,
+				const Col3f& displayColor,
 				const pxr::VtArray<pxr::GfVec3f>& points,
 				const pxr::VtArray<int>& indices);
-
-		virtual bool CreatePrototype(const RTCDevice& device) override;
 
 	protected:
 		pxr::VtArray<pxr::GfVec3f> _points;

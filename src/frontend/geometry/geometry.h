@@ -1,9 +1,6 @@
 #ifndef GEOMETRY_H
 #define GEOMETRY_H
 
-#include <embree3/rtcore.h>
-#include <embree3/rtcore_ray.h>
-
 #include <spindulys/math/vec3.h>
 #include <spindulys/math/col3.h>
 
@@ -34,23 +31,15 @@ class Geometry
 		Geometry();
 		virtual ~Geometry();
 
-		virtual bool Create(const RTCDevice& device, const RTCScene& topScene);
-		virtual bool CreatePrototype(const RTCDevice& device) = 0;
-
 		const Col3f& GetDisplayColor() const { return _displayColor; }
 		const pxr::GfMatrix4f GetTransform() const { return _transform; }
 		unsigned int GetGeomInstanceID() const { return _geomInstanceID; }
 
-		pxr::TfToken _primName;
 	protected:
-		unsigned int _geomID = SPINDULYS_INVALID_GEOMETRY_ID;
+		unsigned int _geomID         = SPINDULYS_INVALID_GEOMETRY_ID;
 		unsigned int _geomInstanceID = SPINDULYS_INVALID_GEOMETRY_ID;
 
-		RTCScene _scene = nullptr;
-		RTCGeometry _geom = nullptr;
-		RTCGeometry _geomInstance = nullptr;
-		pxr::UsdPrim _prim;
-		pxr::UsdGeomMesh _usdGeom;
+		pxr::TfToken _primName;
 		pxr::UsdGeomXformCache _usdGeomXformCache;
 		pxr::GfMatrix4f _transform;
 		Col3f _displayColor;

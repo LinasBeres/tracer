@@ -40,7 +40,7 @@ class Camera
 		void MouseCallback(const Vec2f& mouseOffset);
 
 
-		virtual bool GetCameraRay(const PixelSample& pixelSample, Vec3f& origin, Vec3f& direction) const { return true; }
+		virtual bool GetCameraRay(const PixelSample& pixelSample, Vec3f& origin, Vec3f& direction) const = 0;
 
 		// Set Methods
 		// bool SetProjection(Projection projection);

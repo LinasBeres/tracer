@@ -1,6 +1,7 @@
 file(GLOB BACKEND_CPU_HEADERS
 	bsdf/*.h
 	camera/*.h
+	geometry/*.h
 	integrator/*.h
 	render/*.h
 	scene/*.h
@@ -10,6 +11,7 @@ file(GLOB BACKEND_CPU_HEADERS
 file(GLOB BACKEND_CPU_SOURCES
 	bsdf/*.cpp
 	camera/*.cpp
+	geometry/*.cpp
 	integrator/*.cpp
 	render/*.cpp
 	scene/*.cpp

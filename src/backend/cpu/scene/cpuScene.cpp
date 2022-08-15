@@ -1,5 +1,8 @@
 #include "cpuScene.h"
 
+#include "../geometry/cpuTrianglemesh.h"
+#include "../geometry/cpuQuadmesh.h"
+
 
 BACKEND_CPU_NAMESPACE_OPEN_SCOPE
 
@@ -9,7 +12,29 @@ CPUScene::CPUScene()
 	_scene = rtcNewScene(_device);
 }
 
-bool CPUScene::CommitGeometry(Geometry* geometry)
+bool CPUScene::CreateGeomerty(Geometry::GeometryTypes geometryType,
+		const pxr::TfToken& primName,
+		const pxr::GfMatrix4f& transform,
+		const Col3f& displayColor,
+		const pxr::VtArray<pxr::GfVec3f>& points,
+		const pxr::VtArray<int>& indices)
+{
+	bool success = true;
+	if (geometryType == Geometry::GeometryTypes::TriangleMesh)
+	{
+		CPUTriangleMesh* triangleMesh(new CPUTriangleMesh(primName, transform, displayColor, points, indices));
+		success = success && CommitGeometry(triangleMesh);
+	}
+	else if (geometryType == Geometry::GeometryTypes::QuadMesh)
+	{
+		CPUQuadMesh* quadMesh(new CPUQuadMesh(primName, transform, displayColor, points, indices));
+		success = success && CommitGeometry(quadMesh);
+	}
+
+	return success;
+}
+
+bool CPUScene::CommitGeometry(CPUGeometry* geometry)
 {
 	if(!geometry->Create(_device, _scene))
 		return false;

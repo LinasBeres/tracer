@@ -14,8 +14,9 @@ class CPUQuadMesh final : public CPUGeometry, public QuadMesh
 {
 	public:
 		CPUQuadMesh();
-		CPUQuadMesh(const pxr::UsdPrim& prim,
-				const pxr::UsdGeomMesh& usdGeom,
+		CPUQuadMesh(const pxr::TfToken& primName,
+				const pxr::GfMatrix4f& transform,
+				const Col3f& displayColor,
 				const pxr::VtArray<pxr::GfVec3f>& points,
 				const pxr::VtArray<int>& indices);
 

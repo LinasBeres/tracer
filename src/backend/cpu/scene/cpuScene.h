@@ -8,6 +8,8 @@
 
 #include "../spindulysBackendCPU.h"
 
+#include "../geometry/cpuGeometry.h"
+
 BACKEND_CPU_NAMESPACE_OPEN_SCOPE
 
 class CPUScene final : public Scene
@@ -17,7 +19,13 @@ class CPUScene final : public Scene
 		~CPUScene() = default;
 
 		virtual void CommitScene() override { rtcCommitScene(_scene); }
-		virtual bool CommitGeometry(Geometry* geometry) override;
+		virtual bool CreateGeomerty(Geometry::GeometryTypes geometryType,
+				const pxr::TfToken& primName,
+				const pxr::GfMatrix4f& transform,
+				const Col3f& displayColor,
+				const pxr::VtArray<pxr::GfVec3f>& points,
+				const pxr::VtArray<int>& indices) override;
+		bool CommitGeometry(CPUGeometry* geometry);
 
 		RTCScene GetScene() { return _scene; }
 

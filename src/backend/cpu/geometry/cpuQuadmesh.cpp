@@ -3,7 +3,12 @@
 
 BACKEND_CPU_NAMESPACE_OPEN_SCOPE
 
-CPUQuadMesh::CPUQuadMesh()
+CPUQuadMesh::CPUQuadMesh(const pxr::TfToken& primName,
+		const pxr::GfMatrix4f& transform,
+		const Col3f& displayColor,
+		const pxr::VtArray<pxr::GfVec3f>& points,
+		const pxr::VtArray<int>& indices)
+	: QuadMesh(primName, transform, displayColor, points, indices)
 {
 }
 

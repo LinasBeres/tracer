@@ -31,17 +31,17 @@ struct PixelSample
 
 struct ShadingPoint
 {
-	const Geometry& geometry;                       // Geometry that was intersected by the ray.
-	Vec3f V = Vec3f(0.0f);                          // View vector of the ray.
-	Vec3f P = Vec3f(0.0f);                          // World-space position of the shading point.
-	Vec3f N = Vec3f(0.0f);                          // Object/Local-space normal of the shading point.
-	Vec3f Nw = Vec3f(0.0f);                         // World-space normal of the shading point.
-	Vec2f UV = Vec2f(0.0f);                         // UV barycentric coordinates of the shading point.
-	LinearSpace3f basis = LinearSpace3f(one);       // Orthogonal basis of the shading point used for shading computation.
-	unsigned int geomID = RTC_INVALID_GEOMETRY_ID;  // Embree Geometry ID of the object the ray hit.
-	unsigned int primID = RTC_INVALID_GEOMETRY_ID;  // Embree Primitive ID of the object the ray hit.
-	unsigned int instID = RTC_INVALID_GEOMETRY_ID;  // Embree Instance ID of the object the ray hit.
-	float error = 0.0f;                             // Error to take into account when intersecting a primitive.
+	const Geometry& geometry;                             // Geometry that was intersected by the ray.
+	Vec3f V = Vec3f(0.0f);                                // View vector of the ray.
+	Vec3f P = Vec3f(0.0f);                                // World-space position of the shading point.
+	Vec3f N = Vec3f(0.0f);                                // Object/Local-space normal of the shading point.
+	Vec3f Nw = Vec3f(0.0f);                               // World-space normal of the shading point.
+	Vec2f UV = Vec2f(0.0f);                               // UV barycentric coordinates of the shading point.
+	LinearSpace3f basis = LinearSpace3f(one);             // Orthogonal basis of the shading point used for shading computation.
+	unsigned int geomID = SPINDULYS_INVALID_GEOMETRY_ID;  // Embree Geometry ID of the object the ray hit.
+	unsigned int primID = SPINDULYS_INVALID_GEOMETRY_ID;  // Embree Primitive ID of the object the ray hit.
+	unsigned int instID = SPINDULYS_INVALID_GEOMETRY_ID;  // Embree Instance ID of the object the ray hit.
+	float error = 0.0f;                                   // Error to take into account when intersecting a primitive.
 
 	__forceinline ShadingPoint(const Geometry& geometry)
 		: geometry(geometry)

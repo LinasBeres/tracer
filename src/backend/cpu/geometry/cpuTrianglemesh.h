@@ -14,8 +14,9 @@ class CPUTriangleMesh final : public CPUGeometry, public TriangleMesh
 {
 	public:
 		CPUTriangleMesh();
-		CPUTriangleMesh(const pxr::UsdPrim& prim,
-				const pxr::UsdGeomMesh& usdGeom,
+		CPUTriangleMesh(const pxr::TfToken& primName,
+				const pxr::GfMatrix4f& transform,
+				const Col3f& displayColor,
 				const pxr::VtArray<pxr::GfVec3f>& points,
 				const pxr::VtArray<int>& indices);
 

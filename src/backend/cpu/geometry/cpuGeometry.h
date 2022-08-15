@@ -14,22 +14,19 @@
 
 BACKEND_CPU_NAMESPACE_OPEN_SCOPE
 
-class CPUGeometry : public Geometry
+class CPUGeometry : virtual public Geometry
 {
 	public:
 		CPUGeometry();
 		virtual ~CPUGeometry();
 
 		virtual bool Create(const RTCDevice& device, const RTCScene& topScene);
-		virtual bool CreatePrototype(const RTCDevice& device);
+		virtual bool CreatePrototype(const RTCDevice& device) = 0;
 
 		unsigned int GetGeomID() const { return _geomID; }
 		unsigned int GetGeomInstanceID() const { return _geomInstanceID; }
 
 	protected:
-		unsigned int _geomID = RTC_INVALID_GEOMETRY_ID;
-		unsigned int _geomInstanceID = RTC_INVALID_GEOMETRY_ID;
-
 		RTCScene _scene = nullptr;
 		RTCGeometry _geom = nullptr;
 		RTCGeometry _geomInstance = nullptr;

@@ -20,7 +20,13 @@ class Scene
 		bool LoadScene(const std::string& filepath);
 		bool LoadMeshGeometry(const pxr::UsdStagePtr& stage);
 		virtual void CommitScene() = 0;
-		virtual bool CommitGeometry(Geometry* geometry) = 0;
+		virtual bool CreateGeomerty(Geometry::GeometryTypes geometryType,
+				const pxr::TfToken& primName,
+				const pxr::GfMatrix4f& transform,
+				const Col3f& displayColor,
+				const pxr::VtArray<pxr::GfVec3f>& points,
+				const pxr::VtArray<int>& indices) = 0;
+		// virtual bool CommitGeometry(Geometry* geometry) = 0;
 
 		const std::string& GetFilePath() const { return filepath; }
 

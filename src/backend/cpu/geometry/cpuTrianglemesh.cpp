@@ -7,25 +7,13 @@ CPUTriangleMesh::CPUTriangleMesh()
 {
 }
 
-CPUTriangleMesh::CPUTriangleMesh(const pxr::UsdPrim& prim,
-		const pxr::UsdGeomMesh& usdGeom,
+CPUTriangleMesh::CPUTriangleMesh(const pxr::TfToken& primName,
+		const pxr::GfMatrix4f& transform,
+		const Col3f& displayColor,
 		const pxr::VtArray<pxr::GfVec3f>& points,
 		const pxr::VtArray<int>& indices)
+	: TriangleMesh(primName, transform, displayColor, points, indices)
 {
-	_prim = prim;
-	_usdGeom = usdGeom;
-	_points = points;
-	_indices = indices;
-
-	pxr::VtArray<pxr::GfVec3f> displayColor;
-	_usdGeom.GetDisplayColorAttr().Get(&displayColor);
-
-	_primName = _prim.GetName();
-	// TODO: Get the display color from the correct time value.
-	_displayColor = (displayColor.empty() ? Col3f(0.5f) :
-			Col3f(displayColor[0][0],
-						displayColor[0][1],
-						displayColor[0][2]));
 }
 
 bool CPUTriangleMesh::CreatePrototype(const RTCDevice& device)
