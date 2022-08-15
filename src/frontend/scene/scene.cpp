@@ -10,14 +10,11 @@
 
 FRONTEND_NAMESPACE_OPEN_SCOPE
 
-Scene::Scene(const std::string& filepath)
-	: filepath(filepath)
-{
-	LoadScene(filepath);
-}
-
 bool Scene::LoadScene(const std::string& filepath)
 {
+	if (filepath.empty())
+		return false;
+
 	if (!((std::size_t(filepath.rfind(std::string(".usd")) != std::string::npos) ||
         std::size_t(filepath.rfind(std::string(".usda")) != std::string::npos) ||
         std::size_t(filepath.rfind(std::string(".usdc")) != std::string::npos) ||

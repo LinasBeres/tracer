@@ -15,7 +15,7 @@ class OcclusionIntegrator final : public Integrator
 
 		virtual Col3f GetPixelColor(Ray& ray,
 				PixelSample& pixelSample,
-				Scene& scene,
+				Scene* scene,
 				const RenderManager::RenderGlobals& renderGlobals) override;
 	private:
 };

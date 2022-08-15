@@ -3,9 +3,13 @@
 
 FRONTEND_NAMESPACE_OPEN_SCOPE
 
-RenderManager::RenderManager(const std::string& filepath)
+RenderManager::RenderManager()
 {
-	scene.LoadScene(filepath);
+}
+
+RenderManager::~RenderManager()
+{
+	delete scene;
 }
 
 FRONTEND_NAMESPACE_CLOSE_SCOPE

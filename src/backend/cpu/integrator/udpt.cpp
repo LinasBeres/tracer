@@ -7,7 +7,7 @@ UDPTIntegrator::UDPTIntegrator() { }
 
 Col3f UDPTIntegrator::GetPixelColor(Ray& ray,
 		PixelSample& pixelSample,
-		Scene &scene,
+		Scene* scene,
 		const RenderManager::RenderGlobals& renderGlobals)
 {
 	Col3f colorAccumulation(0.0f);
@@ -18,7 +18,7 @@ Col3f UDPTIntegrator::GetPixelColor(Ray& ray,
 		RTCIntersectContext intersectContext;
 		rtcInitIntersectContext(&intersectContext);
 
-		rtcIntersect1(scene.GetScene(), &intersectContext, RTCRayHit_(ray));
+		rtcIntersect1(scene->GetScene(), &intersectContext, RTCRayHit_(ray));
 
 		if (ray.instID == RTC_INVALID_GEOMETRY_ID)
 		{

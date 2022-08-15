@@ -20,11 +20,11 @@ class Scene
 {
 	public:
 		Scene() = default;
-		Scene(const std::string& filepath);
-		~Scene() = default;
+		virtual ~Scene() = default;
 
 		bool LoadScene(const std::string& filepath);
 		bool LoadMeshGeometry(const pxr::UsdStagePtr& stage);
+		virtual bool CommitGeometry() { std::cerr << "COMMITTING FROM SCENE??\n"; return true; }
 
 		const std::string& GetFilePath() const { return filepath; }
 		RTCScene GetScene() { return _scene; }

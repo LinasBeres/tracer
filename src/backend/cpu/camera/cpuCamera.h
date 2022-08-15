@@ -16,7 +16,7 @@ class CPUCamera final : public Camera
 		CPUCamera() = default;
 		~CPUCamera() = default;
 
-	virtual Ray GetCameraRay(const PixelSample& pixelSample) const override;
+	virtual bool GetCameraRay(const PixelSample& pixelSample, Vec3f& origin, Vec3f& direction) const override;
 };
 
 BACKEND_CPU_NAMESPACE_CLOSE_SCOPE

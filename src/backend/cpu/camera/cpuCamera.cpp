@@ -3,7 +3,7 @@
 BACKEND_CPU_NAMESPACE_OPEN_SCOPE
 
 
-Ray CPUCamera::GetCameraRay(const PixelSample& pixelSample) const
+bool CPUCamera::GetCameraRay(const PixelSample& pixelSample, Vec3f& origin, Vec3f& direction) const
 {
 	const Vec3f axisX(normalize(cross(GetFront(), GetUp())));
 	const Vec3f axisY(normalize(cross(axisX, GetFront())));
@@ -34,10 +34,10 @@ Ray CPUCamera::GetCameraRay(const PixelSample& pixelSample) const
 		aperturePoint = GetPosition() + (axisX * apertureX) + (axisY * apertureY);
 	}
 
-	const Vec3f origin = aperturePoint;
-	const Vec3f direction = normalize(pointOnPlane - aperturePoint);
+	origin = aperturePoint;
+	direction = normalize(pointOnPlane - aperturePoint);
 
-	return {origin, direction};
+	return true;;
 }
 
 BACKEND_CPU_NAMESPACE_CLOSE_SCOPE

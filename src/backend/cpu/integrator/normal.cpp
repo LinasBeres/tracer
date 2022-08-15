@@ -7,13 +7,13 @@ NormalIntegrator::NormalIntegrator() { }
 
 Col3f NormalIntegrator::GetPixelColor(Ray& ray,
 		PixelSample& pixelSample,
-		Scene& scene,
+		Scene* scene,
 		const RenderManager::RenderGlobals& renderGlobals)
 {
 	RTCIntersectContext intersectContext;
 	rtcInitIntersectContext(&intersectContext);
 
-	rtcIntersect1(scene.GetScene(), &intersectContext, RTCRayHit_(ray));
+	rtcIntersect1(scene->GetScene(), &intersectContext, RTCRayHit_(ray));
 
 	// TODO: Hardcoded sky color value for now.
 	if (ray.instID == RTC_INVALID_GEOMETRY_ID)

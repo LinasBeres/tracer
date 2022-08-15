@@ -10,15 +10,12 @@ BACKEND_CPU_NAMESPACE_OPEN_SCOPE
 
 CPURenderManager::CPURenderManager()
 {
-	mainCamera = std::unique_ptr<Camera>(new CPUCamera());
-}
+	scene = new CPUScene();
 
-CPURenderManager::CPURenderManager(const std::string& filepath)
-	: RenderManager(filepath)
-{
 	mainCamera = std::unique_ptr<Camera>(new CPUCamera());
+	// CPUScene* cpuScene = dynamic_cast<CPUScene*>(scene);
+	// cpuScene->CommitGeometry();
 }
-
 
 void CPURenderManager::Trace(int iterations)
 {
@@ -38,8 +35,10 @@ void CPURenderManager::Trace(int iterations)
 
 					for (int sample = 0; sample < renderGlobals.samples; ++sample)
 					{
-						Ray primaryRay = mainCamera->GetCameraRay(pixelSample);
-						// Ray primaryRay(*(mainCamera.get()), pixelSample);
+						Vec3f origin(zero);
+						Vec3f direction(zero);
+						mainCamera->GetCameraRay(pixelSample, origin, direction);
+						Ray primaryRay(origin, direction);
 
 						pixelColor += buffer.GetPixel(pixelSample.pixelIdx) * static_cast<float>(iterations - 1);
 

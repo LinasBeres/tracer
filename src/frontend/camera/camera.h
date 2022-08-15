@@ -14,8 +14,6 @@
 
 FRONTEND_NAMESPACE_OPEN_SCOPE
 
-struct Ray;
-
 class Camera
 {
 	public:
@@ -42,7 +40,7 @@ class Camera
 		void MouseCallback(const Vec2f& mouseOffset);
 
 
-		virtual Ray GetCameraRay(const PixelSample& pixelSample) const = 0;
+		virtual bool GetCameraRay(const PixelSample& pixelSample, Vec3f& origin, Vec3f& direction) const { return true; }
 
 		// Set Methods
 		// bool SetProjection(Projection projection);

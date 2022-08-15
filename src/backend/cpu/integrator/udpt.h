@@ -18,7 +18,7 @@ class UDPTIntegrator final : public Integrator
 
 		virtual Col3f GetPixelColor(Ray& ray,
 				PixelSample& pixelSample,
-				Scene &scene,
+				Scene* scene,
 				const RenderManager::RenderGlobals& renderGlobals) override;
 
 		// TODO: To remove once we have a proper material system.

@@ -9,7 +9,7 @@ OcclusionIntegrator::OcclusionIntegrator()
 
 Col3f OcclusionIntegrator::GetPixelColor(Ray& ray,
 		PixelSample& pixelSample,
-		Scene& scene,
+		Scene* scene,
 		const RenderManager::RenderGlobals& renderGlobals)
 {
 	// TODO

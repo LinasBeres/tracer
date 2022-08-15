@@ -11,6 +11,7 @@
 
 #include "../spindulysBackendCPU.h"
 
+#include "../scene/cpuScene.h"
 
 #include "../camera/cpuCamera.h"
 #include "../utils/ray.h"
@@ -30,10 +31,11 @@ class CPURenderManager final : public RenderManager
 {
 	public:
 		CPURenderManager();
-		CPURenderManager(const std::string& filepath);
 		~CPURenderManager() = default;
 
 		virtual void Trace(int iterations) override;
+
+		bool CommitScene() { return true; }
 
 	private:
 };
