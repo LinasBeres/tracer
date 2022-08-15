@@ -1,6 +1,12 @@
 #ifndef SPINDULYS_LINEARSPACE3_H
 #define SPINDULYS_LINEARSPACE3_H
 
+// TODO: Set this as an optional include
+#include <pxr/base/gf/matrix3f.h>
+#include <pxr/base/gf/matrix3d.h>
+#include <pxr/base/gf/matrix4f.h>
+#include <pxr/base/gf/matrix4d.h>
+
 #include <iostream>
 
 #include "../../spindulys.h"
@@ -27,6 +33,17 @@ template<typename T> struct LinearSpace3
 	__forceinline LinearSpace3& operator=( const LinearSpace3& other ) { vx = other.vx; vy = other.vy; vz = other.vz; return *this; }
 
 	template<typename L1> __forceinline LinearSpace3( const LinearSpace3<L1>& s ) : vx(s.vx), vy(s.vy), vz(s.vz) {}
+
+	__forceinline LinearSpace3<Vec3f>( const pxr::GfMatrix3f& m)
+		: vx(m[0][0], m[0][1], m[0][2]), vy(m[1][0], m[1][1], m[1][2]), vz(m[2][0], m[2][1], m[2][2]) {}
+	__forceinline LinearSpace3<Vec3f>( const pxr::GfMatrix3d& m)
+		: vx(m[0][0], m[0][1], m[0][2]), vy(m[1][0], m[1][1], m[1][2]), vz(m[2][0], m[2][1], m[2][2]) {}
+
+	__forceinline LinearSpace3<Vec3f>( const pxr::GfMatrix4f& m)
+		: vx(m[0][0], m[0][1], m[0][2]), vy(m[1][0], m[1][1], m[1][2]), vz(m[2][0], m[2][1], m[2][2]) {}
+	__forceinline LinearSpace3<Vec3f>( const pxr::GfMatrix4d& m)
+		: vx(m[0][0], m[0][1], m[0][2]), vy(m[1][0], m[1][1], m[1][2]), vz(m[2][0], m[2][1], m[2][2]) {}
+
 
 	/*! matrix construction from column vectors */
 	__forceinline LinearSpace3(const Vector& vx, const Vector& vy, const Vector& vz)

@@ -1,16 +1,26 @@
 file(GLOB BACKEND_CPU_HEADERS
+	bsdf/*.h
 	camera/*.h
+	geometry/*.h
+	integrator/*.h
+	render/*.h
+	scene/*.h
 	spindulysCPUBackend.h
 )
 
 file(GLOB BACKEND_CPU_SOURCES
+	bsdf/*.cpp
 	camera/*.cpp
+	geometry/*.cpp
+	integrator/*.cpp
+	render/*.cpp
+	scene/*.cpp
 )
 
 add_library(
 	spindulysCPUBackend
-	${FRONTEND_SOURCES}
-	${FRONTEND_HEADERS}
+	${BACKEND_CPU_SOURCES}
+	${BACKEND_CPU_HEADERS}
 	${PROJECT_SHADERS}
 	${PROJECT_SCENES}
 	${PROJECT_CONFIGS}

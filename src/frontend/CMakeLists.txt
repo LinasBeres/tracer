@@ -1,25 +1,17 @@
 file(GLOB FRONTEND_HEADERS
-	bsdf/*.h
-	camera/*.h
-	integrator/*.h
-	material/*.h
-	render/*.h
-	sampling/*.h
-	scene/*.h
-	shapes/*.h
-	utils/*.h
 	spindulysFrontend.h
+	camera/*.h
+	geometry/*.h
+	render/*.h
+	scene/*.h
+	utils/*.h
 )
 
 file(GLOB FRONTEND_SOURCES
-	bsdf/*.cpp
 	camera/*.cpp
-	integrator/*.cpp
-	material/*.cpp
+	geometry/*.cpp
 	render/*.cpp
-	sampling/*.cpp
 	scene/*.cpp
-	shapes/*.cpp
 	utils/*.cpp
 )
 
@@ -40,7 +32,6 @@ target_include_directories(
 target_link_libraries(
 	spindulysFrontend
 	${Boost_LIBRARIES}
-	${EMBREE_LIBRARY}
 	${TBB_LIBRARIES}
 	${USD_LIBRARIES}
 	spindulysShare

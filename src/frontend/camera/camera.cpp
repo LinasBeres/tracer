@@ -1,11 +1,14 @@
 #include "camera.h"
 
-#include <utility>
-
+#include <spindulys/math/math.h>
 
 FRONTEND_NAMESPACE_OPEN_SCOPE
 
 Camera::Camera()
+{
+}
+
+Camera::~Camera()
 {
 }
 
@@ -29,16 +32,16 @@ void Camera::Init()
 
 void Camera::SetupFOV()
 {
-	_fov.y = (atan(tan(_fov.x * M_PI * M_1_180 * 0.5f)
+	_fov.y = (atan(tan(_fov.x * M_PI * 0.005555555555555555556f * 0.5f)
 				* ((float)_resolution.y / (float)_resolution.x)) * 2.0f)
 		* 180.0f * M_1_PI;
 }
 
 void Camera::Update()
 {
-	Vec3f front(cos(DegToRad(_yaw)) * cos(DegToRad(_pitch)),
-			sin(DegToRad(_pitch)),
-			sin(DegToRad(_yaw)) * cos(DegToRad(_pitch))
+	Vec3f front(cos(deg2rad(_yaw)) * cos(deg2rad(_pitch)),
+			sin(deg2rad(_pitch)),
+			sin(deg2rad(_yaw)) * cos(deg2rad(_pitch))
 			);
 
 	front *= -1.0f;
@@ -85,26 +88,6 @@ void Camera::MouseCallback(const Vec2f& mouseOffset)
 	}
 
 	Update();
-}
-
-bool Camera::SetResolution(const Vec2f& resolution)
-{
-	return _resolution == std::exchange(_resolution, resolution);
-}
-
-bool Camera::SetJitter(bool jitter)
-{
-	return _jitter == std::exchange(_jitter, jitter);
-}
-
-bool Camera::SetFocalDistance(float focalDistance)
-{
-	return _focalDistance == std::exchange(_focalDistance, focalDistance);
-}
-
-bool Camera::SetAperatureRadius(float aperatureRadius)
-{
-	return _apertureRadius == std::exchange(_apertureRadius, aperatureRadius);
 }
 
 FRONTEND_NAMESPACE_CLOSE_SCOPE

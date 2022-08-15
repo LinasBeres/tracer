@@ -1,6 +1,7 @@
 file(GLOB GUI_HEADERS
 	spindulysGUI.h
 	window.h
+	output_helper.h
 	opengl/*.h
 )
 
@@ -33,7 +34,7 @@ target_link_libraries(
 	${TBB_LIBRARIES}
 	${USD_LIBRARIES}
 	spindulysShare
-	spindulysFrontend
+	spindulysCPUBackend
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES

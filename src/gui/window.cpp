@@ -1,6 +1,6 @@
 #include "window.h"
 
-#include <utils/output_helper.h>
+#include "output_helper.h"
 
 
 GUI_NAMESPACE_OPEN_SCOPE
@@ -35,13 +35,10 @@ int Window::RenderWindow()
 	const char* glsl_version = "#version 330";
 	ImGui_ImplOpenGL3_Init(glsl_version);
 
-	sceneManager.LoadScene("/home/lba42/Documents/testRenderers/spindulys/res/scenes/cupandsaucer.usdz");
+	renderManager.LoadScene("/home/lba42/Documents/testRenderers/spindulys/res/scenes/cupandsaucer.usdz");
+	renderManager.mainCamera->SetResolution(Vec2f(renderGlobals.width, renderGlobals.height));
+	renderManager.mainCamera->Init();
 
-	camera.SetResolution(Vec2f(renderGlobals.width, renderGlobals.height));
-	camera.Init();
-
-	frontBuffer.Init(renderGlobals.width, renderGlobals.height);
-	backBuffer.Init(renderGlobals.width, renderGlobals.height);
 
 	SetupScreenQuad(renderGlobals.width, renderGlobals.height);
 
@@ -71,15 +68,9 @@ int Window::RenderWindow()
 			MouseCallback(guiIO, mousePos);
 
 		// TODO: Will make use of Qt's callback system once the GUI will be revamped.
-		if (camera.GetJitter() != renderGlobals.rayJitter)
+		if (renderManager.renderGlobals.integratorID != renderGlobals.integratorID)
 		{
-			camera.SetJitter(renderGlobals.rayJitter);
-
-			renderReset = true;
-		}
-		if (renderManager.integratorID != renderGlobals.integratorID)
-		{
-			renderManager.integratorID = renderGlobals.integratorID;
+			renderManager.renderGlobals.integratorID = renderGlobals.integratorID;
 
 			renderReset = true;
 		}
@@ -93,11 +84,14 @@ int Window::RenderWindow()
 			if (renderReset)
 				ResetRenderer();
 
-			++iterations;
-
 			// Progressive rendering
-			renderManager.Trace(renderGlobals, sceneManager, camera, frontBuffer, iterations);
-			RenderToScreenTexture(renderGlobals.width, renderGlobals.height, frontBuffer);
+			if (iterations++ < 20)
+			{
+				renderManager.Trace(iterations);
+				// std::cerr << renderManager.GetBuffer() << "\n";
+			}
+
+			RenderToScreenTexture(renderGlobals.width, renderGlobals.height, renderManager.GetBuffer());
 		}
 
 		DrawScreenQuad();
@@ -156,34 +150,20 @@ void Window::SetupGUI()
 			{
 				if (ImGui::MenuItem("PPM"))
 				{
-					Buffer outputBuffer;
-					outputBuffer.Init(renderGlobals.width, renderGlobals.height);
-
-					renderManager.Trace(renderGlobals,
-							sceneManager,
-							camera,
-							outputBuffer,
-							1);
+					renderManager.Trace(1);
 
 					toPPM(renderGlobals.width,
 							renderGlobals.height,
-							outputBuffer);
+							renderManager.GetBuffer());
 				}
 
 				if (ImGui::MenuItem("EXR"))
 				{
-					Buffer outputBuffer;
-					outputBuffer.Init(renderGlobals.width, renderGlobals.height);
-
-					renderManager.Trace(renderGlobals,
-							sceneManager,
-							camera,
-							outputBuffer,
-							1);
+					renderManager.Trace(1);
 
 					toEXR(renderGlobals.width,
 							renderGlobals.height,
-							outputBuffer);
+							renderManager.GetBuffer());
 				}
 
 				ImGui::EndMenu();
@@ -195,14 +175,14 @@ void Window::SetupGUI()
 				{
 					toPPM(renderGlobals.width,
 							renderGlobals.height,
-							frontBuffer);
+							renderManager.GetBuffer());
 				}
 
 				if (ImGui::MenuItem("EXR"))
 				{
 					toEXR(renderGlobals.width,
 							renderGlobals.height,
-							frontBuffer);
+							renderManager.GetBuffer());
 				}
 
 				ImGui::EndMenu();
@@ -250,16 +230,14 @@ void Window::SetupGUI()
 			{
 				if (ImGui::MenuItem("Cup and Saucer"))
 				{
-					sceneManager.LoadScene("/home/lba42/Documents/testRenderers/spindulys/res/scenes/cupandsaucer.usdz");
-					camera.Init();
+					renderManager.LoadScene("/home/lba42/Documents/testRenderers/spindulys/res/scenes/cupandsaucer.usdz");
 
 					renderReset = true;
 				}
 
 				if (ImGui::MenuItem("Stormtroopers"))
 				{
-					sceneManager.LoadScene("/home/lba42/Documents/testRenderers/spindulys/res/scenes/stormtroopers.usdc");
-					camera.Init();
+					renderManager.LoadScene("/home/lba42/Documents/testRenderers/spindulys/res/scenes/stormtroopers.usdc");
 
 					renderReset = true;
 				}
@@ -311,7 +289,7 @@ void Window::RenderConfigWindow(bool& guiOpen)
 		if (ImGui::Button("Save To Back Buffer"))
 		{
 			backBuffer.Clean(renderGlobals.width, renderGlobals.height);
-			backBuffer.SwapPixelData(frontBuffer.GetPixelData());
+			backBuffer.Swap(frontBuffer);
 		}
 	}
 	if (ImGui::Button("Swap Buffers"))
@@ -331,7 +309,7 @@ void Window::ProfilingWindow(bool& guiOpen)
 	ImGui::Begin("Profiling", &guiOpen, ImGuiWindowFlags_NoTitleBar |ImGuiWindowFlags_AlwaysAutoResize);
 
 	ImGui::Text("Framerate: %.2f FPS / %.2f ms", ImGui::GetIO().Framerate, 1000.0f / ImGui::GetIO().Framerate);
-	ImGui::Text("Camera Position: (%.2f, %.2f, %.2f)", camera.GetPosition().x, camera.GetPosition().y, camera.GetPosition().z);
+	ImGui::Text("Camera Position: (%.2f, %.2f, %.2f)", renderManager.mainCamera->GetPosition().x, renderManager.mainCamera->GetPosition().y, renderManager.mainCamera->GetPosition().z);
 
 	ImGui::End();
 }
@@ -353,24 +331,24 @@ void Window::KeyboardCallback(ImGuiIO& guiIO)
 	}
 	if (guiIO.KeysDown[GLFW_KEY_W])
 	{
-		camera.KeyboardCallback(Camera::Forward, deltaTime);
+		renderManager.mainCamera->KeyboardCallback(Camera::Forward, deltaTime);
 
 		renderReset = true;
 	}
 	if (guiIO.KeysDown[GLFW_KEY_S])
 	{
-		camera.KeyboardCallback(Camera::Backward, deltaTime);
+		renderManager.mainCamera->KeyboardCallback(Camera::Backward, deltaTime);
 
 		renderReset = true;
 	}
 	if (guiIO.KeysDown[GLFW_KEY_A])
 	{
-		camera.KeyboardCallback(Camera::Left, deltaTime);
+		renderManager.mainCamera->KeyboardCallback(Camera::Left, deltaTime);
 		renderReset = true;
 	}
 	if (guiIO.KeysDown[GLFW_KEY_D])
 	{
-		camera.KeyboardCallback(Camera::Right, deltaTime);
+		renderManager.mainCamera->KeyboardCallback(Camera::Right, deltaTime);
 
 		renderReset = true;
 	}
@@ -378,18 +356,18 @@ void Window::KeyboardCallback(ImGuiIO& guiIO)
 	if (guiIO.KeysDown[GLFW_KEY_KP_ADD])
 	{
 		if (guiIO.KeysDown[GLFW_KEY_LEFT_CONTROL])
-			camera.SetFocalDistance(camera.GetFocalDistance() + 0.1f);
+			renderManager.mainCamera->SetFocalDistance(renderManager.mainCamera->GetFocalDistance() + 0.1f);
 		else
-			camera.SetAperatureRadius(camera.GetAperatureRadius() + 0.005f);
+			renderManager.mainCamera->SetAperatureRadius(renderManager.mainCamera->GetAperatureRadius() + 0.005f);
 
 		renderReset = true;
 	}
 	if (guiIO.KeysDown[GLFW_KEY_KP_SUBTRACT])
 	{
 		if (guiIO.KeysDown[GLFW_KEY_LEFT_CONTROL])
-			camera.SetFocalDistance(camera.GetFocalDistance() - 0.1f);
+			renderManager.mainCamera->SetFocalDistance(renderManager.mainCamera->GetFocalDistance() - 0.1f);
 		else
-			camera.SetAperatureRadius(camera.GetAperatureRadius() - 0.005f);
+			renderManager.mainCamera->SetAperatureRadius(renderManager.mainCamera->GetAperatureRadius() - 0.005f);
 
 		renderReset = true;
 	}
@@ -411,14 +389,14 @@ void Window::MouseCallback(ImGuiIO& guiIO, Vec2f mousePos)
 	{
 		if (mouseOffset != Vec2f())
 		{
-			camera.MouseCallback(mouseOffset);
+			renderManager.mainCamera->MouseCallback(mouseOffset);
 
 			renderReset = true;
 		}
 	}
 }
 
-void Window::RenderToScreenTexture(int width, int height, Buffer& buffer)
+void Window::RenderToScreenTexture(int width, int height, const Buffer3f& buffer)
 {
 	glBindTexture(GL_TEXTURE_2D, screenTextureID);
 
