@@ -6,12 +6,10 @@ FRONTEND_NAMESPACE_OPEN_SCOPE
 
 Camera::Camera()
 {
-	Init();
 }
 
 Camera::~Camera()
 {
-
 }
 
 void Camera::Init()

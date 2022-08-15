@@ -79,20 +79,20 @@ bool Scene::LoadMeshGeometry()
 
 			if (isTriangleMesh)
 			{
-				std::unique_ptr<TriangleMesh> triangleMesh(new TriangleMesh(prim, usdGeom, points, indices));
-				triangleMesh->Create(_device, _scene);
+				TriangleMesh triangleMesh(prim, usdGeom, points, indices);
+				triangleMesh.Create(_device, _scene);
 
 				_sceneMutex.lock();
-				_sceneGeom[triangleMesh->GetGeomInstanceID()] = std::move(triangleMesh);
+				_sceneGeom[triangleMesh.GetGeomInstanceID()] = triangleMesh;
 				_sceneMutex.unlock();
 			}
 			else if (isQuadMesh)
 			{
-				std::unique_ptr<QuadMesh> quadMesh(new QuadMesh(prim, usdGeom, points, indices));
-				quadMesh->Create(_device, _scene);
+				QuadMesh quadMesh(prim, usdGeom, points, indices);
+				quadMesh.Create(_device, _scene);
 
 				_sceneMutex.lock();
-				_sceneGeom[quadMesh->GetGeomInstanceID()] = std::move(quadMesh);
+				_sceneGeom[quadMesh.GetGeomInstanceID()] = quadMesh;
 				_sceneMutex.unlock();
 			}
 			else if (needTriangulate)

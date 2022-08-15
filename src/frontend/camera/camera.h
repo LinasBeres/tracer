@@ -26,10 +26,10 @@ class Camera
 
 		enum CAMERA_MOVEMENTS
 		{
-		    Forward,
-		    Backward,
-		    Left,
-		    Right
+			Forward,
+			Backward,
+			Left,
+			Right
 		};
 
 		Camera();
@@ -38,8 +38,7 @@ class Camera
 		void Init();
 		void Update();
 		void SetupFOV();
-		void KeyboardCallback(CAMERA_MOVEMENTS direction,
-				float deltaTime);
+		void KeyboardCallback(CAMERA_MOVEMENTS direction, float deltaTime);
 		void MouseCallback(const Vec2f& mouseOffset);
 
 
@@ -57,9 +56,9 @@ class Camera
 		// bool SetFStop(float fStop);
 		// bool SetFocusDistance(float focusDistance);
 
-		bool SetResolution(const Vec2f& resolution) { return _resolution == std::exchange(_resolution, resolution); }
-		bool SetJitter(bool jitter) { return _jitter == std::exchange(_jitter, jitter); }
-		bool SetFocalDistance(float focalDistance) { return _focalDistance == std::exchange(_focalDistance, focalDistance); }
+		bool SetResolution(const Vec2f& resolution)    { return _resolution == std::exchange(_resolution, resolution); }
+		bool SetJitter(bool jitter)                    { return _jitter == std::exchange(_jitter, jitter); }
+		bool SetFocalDistance(float focalDistance)     { return _focalDistance == std::exchange(_focalDistance, focalDistance); }
 		bool SetAperatureRadius(float aperatureRadius) { return _apertureRadius == std::exchange(_apertureRadius, aperatureRadius); }
 
 		// Get Methods

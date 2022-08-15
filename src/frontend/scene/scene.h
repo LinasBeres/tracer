@@ -30,7 +30,7 @@ class Scene
 		const std::string& GetFilePath() const { return filepath; }
 		RTCScene GetScene() { return _scene; }
 
-		const Geometry& GetGeometery(unsigned int geomInstanceID) const { return *(_sceneGeom.at(geomInstanceID).get()); }
+		const Geometry& GetGeometery(unsigned int geomInstanceID) const { return _sceneGeom.at(geomInstanceID); }
 
 
 	protected:
@@ -40,7 +40,7 @@ class Scene
 		RTCDevice _device = nullptr;
 		RTCScene _scene = nullptr; // Contains the instanced (single or not) geometry objects. This is the scene we are tracing against.
 															 // std::unordered_map<unsigned int, std::shared_ptr<Material>> _sceneMaterial;
-		std::unordered_map<unsigned int, std::unique_ptr<Geometry>> _sceneGeom;
+		std::unordered_map<unsigned int, Geometry> _sceneGeom;
 
 		std::mutex _sceneMutex;
 	private:
