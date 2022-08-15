@@ -7,7 +7,7 @@ QuadMesh::QuadMesh()
 {
 }
 
-QuadMesh::QuadMesh(const pxr::TfToken& primName,
+QuadMesh::QuadMesh(const std::string& primName,
 		const pxr::GfMatrix4f& transform,
 		const Col3f& displayColor,
 		const pxr::VtArray<pxr::GfVec3f>& points,
@@ -16,7 +16,7 @@ QuadMesh::QuadMesh(const pxr::TfToken& primName,
 	_points = points;
 	_indices = indices;
 
-	_primName = primName;
+	_name = primName;
 
 	_transform = transform;
 

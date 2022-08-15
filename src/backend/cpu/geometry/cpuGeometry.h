@@ -23,9 +23,6 @@ class CPUGeometry : virtual public Geometry
 		virtual bool Create(const RTCDevice& device, const RTCScene& topScene);
 		virtual bool CreatePrototype(const RTCDevice& device) = 0;
 
-		unsigned int GetGeomID() const { return _geomID; }
-		unsigned int GetGeomInstanceID() const { return _geomInstanceID; }
-
 	protected:
 		RTCScene _scene = nullptr;
 		RTCGeometry _geom = nullptr;

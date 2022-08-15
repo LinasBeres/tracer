@@ -31,16 +31,18 @@ class Geometry
 		Geometry();
 		virtual ~Geometry();
 
+		const std::string& GetName() const { return _name; }
 		const Col3f& GetDisplayColor() const { return _displayColor; }
 		const pxr::GfMatrix4f GetTransform() const { return _transform; }
+
+		unsigned int GetGeomID() const { return _geomID; }
 		unsigned int GetGeomInstanceID() const { return _geomInstanceID; }
 
 	protected:
 		unsigned int _geomID         = SPINDULYS_INVALID_GEOMETRY_ID;
 		unsigned int _geomInstanceID = SPINDULYS_INVALID_GEOMETRY_ID;
 
-		pxr::TfToken _primName;
-		pxr::UsdGeomXformCache _usdGeomXformCache;
+		std::string _name;
 		pxr::GfMatrix4f _transform;
 		Col3f _displayColor;
 	private:

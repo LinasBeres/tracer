@@ -12,7 +12,7 @@ class TriangleMesh : virtual public Geometry
 {
 	public:
 		TriangleMesh();
-		TriangleMesh(const pxr::TfToken& primName,
+		TriangleMesh(const std::string& primName,
 				const pxr::GfMatrix4f& transform,
 				const Col3f& displayColor,
 				const pxr::VtArray<pxr::GfVec3f>& points,

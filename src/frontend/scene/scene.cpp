@@ -61,7 +61,6 @@ bool Scene::LoadMeshGeometry(const pxr::UsdStagePtr& stage)
 			{
 			pxr::UsdGeomMesh usdGeom(pxr::UsdGeomMesh::Get(stage, prim.GetPrimPath()));
 
-
 			pxr::VtArray<pxr::GfVec3f> points;
 			pxr::VtArray<int> indicesCounts;
 			pxr::VtArray<int> indices;
@@ -70,7 +69,7 @@ bool Scene::LoadMeshGeometry(const pxr::UsdStagePtr& stage)
 			usdGeom.GetFaceVertexIndicesAttr().Get(&indices);
 			usdGeom.GetFaceVertexCountsAttr().Get(&indicesCounts);
 
-			const pxr::TfToken primName = prim.GetName();
+			const std::string primName = prim.GetName();
 			const pxr::GfMatrix4f transform(usdGeomXformCache.GetLocalToWorldTransform(prim));
 
 			// TODO: Get the display color from the correct time value.

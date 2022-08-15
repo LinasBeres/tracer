@@ -7,7 +7,7 @@ CPUTriangleMesh::CPUTriangleMesh()
 {
 }
 
-CPUTriangleMesh::CPUTriangleMesh(const pxr::TfToken& primName,
+CPUTriangleMesh::CPUTriangleMesh(const std::string& primName,
 		const pxr::GfMatrix4f& transform,
 		const Col3f& displayColor,
 		const pxr::VtArray<pxr::GfVec3f>& points,

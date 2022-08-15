@@ -20,7 +20,7 @@ class CPUScene final : public Scene
 
 		virtual void CommitScene() override { rtcCommitScene(_scene); }
 		virtual bool CreateGeomerty(Geometry::GeometryTypes geometryType,
-				const pxr::TfToken& primName,
+				const std::string& primName,
 				const pxr::GfMatrix4f& transform,
 				const Col3f& displayColor,
 				const pxr::VtArray<pxr::GfVec3f>& points,

@@ -1,7 +1,7 @@
 #ifndef QUADMESH_H
 #define QUADMESH_H
 
-#include "spindulysFrontend.h"
+#include "../spindulysFrontend.h"
 
 #include "geometry.h"
 
@@ -12,7 +12,7 @@ class QuadMesh : virtual public Geometry
 {
 	public:
 		QuadMesh();
-		QuadMesh(const pxr::TfToken& primName,
+		QuadMesh(const std::string& primName,
 				const pxr::GfMatrix4f& transform,
 				const Col3f& displayColor,
 				const pxr::VtArray<pxr::GfVec3f>& points,
