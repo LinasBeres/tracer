@@ -24,8 +24,7 @@ class Scene
 		~Scene() = default;
 
 		bool LoadScene(const std::string& filepath);
-		bool LoadGeometry();
-		bool LoadMeshGeometry();
+		bool LoadMeshGeometry(const pxr::UsdStagePtr& stage);
 
 		const std::string& GetFilePath() const { return filepath; }
 		RTCScene GetScene() { return _scene; }
@@ -36,7 +35,6 @@ class Scene
 	protected:
 		std::string filepath;
 
-		pxr::UsdStageRefPtr _stage = nullptr;
 		RTCDevice _device = nullptr;
 		RTCScene _scene = nullptr; // Contains the instanced (single or not) geometry objects. This is the scene we are tracing against.
 															 // std::unordered_map<unsigned int, std::shared_ptr<Material>> _sceneMaterial;

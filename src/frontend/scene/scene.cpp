@@ -28,40 +28,31 @@ bool Scene::LoadScene(const std::string& filepath)
 		return false;
 	}
 
-	_stage = pxr::UsdStage::Open(filepath);
-
-	if (!_stage)
-		return false;
-
 	_device = rtcNewDevice("");
 	_scene = rtcNewScene(_device);
 
-	LoadGeometry();
+	const pxr::UsdStageRefPtr stage = pxr::UsdStage::Open(filepath);
+	if (!stage)
+		return false;
 
+	LoadMeshGeometry(stage);
 	rtcCommitScene(_scene);
 
 	return true;
 }
 
-bool Scene::LoadGeometry()
-{
-	LoadMeshGeometry();
-
-	return true;
-}
-
-bool Scene::LoadMeshGeometry()
+bool Scene::LoadMeshGeometry(const pxr::UsdStagePtr& stage)
 {
 	std::vector<pxr::UsdPrim> meshPrims;
 
-	GetPrimFromType("Mesh", _stage, pxr::SdfPath("/"), meshPrims);
+	GetPrimFromType("Mesh", stage, pxr::SdfPath("/"), meshPrims);
 
 	tbb::parallel_for_each(meshPrims.begin(), meshPrims.end(), [&](pxr::UsdPrim& prim)
 			{
 			const pxr::TfToken primName(prim.GetName());
 			const pxr::SdfPath primPath(prim.GetPrimPath());
 
-			pxr::UsdGeomMesh usdGeom(pxr::UsdGeomMesh::Get(_stage, primPath));
+			pxr::UsdGeomMesh usdGeom(pxr::UsdGeomMesh::Get(stage, primPath));
 
 			pxr::VtArray<pxr::GfVec3f> points;
 			pxr::VtArray<int> indicesCounts;
